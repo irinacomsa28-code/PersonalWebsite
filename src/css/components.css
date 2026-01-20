@@ -118,15 +118,3 @@
 }
 
 
-.hero_image {
-  width: 100%;      
-  max-width: 360px;  /* But never let it get bigger than 360px */
-  height: auto;
-}
-
-.about_image {
-
-  min-width: 300px;  /* Prevent it from becoming a tiny dot on mobile */
-  height: auto;
-}
-
