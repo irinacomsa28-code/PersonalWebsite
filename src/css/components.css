@@ -1,0 +1,136 @@
+
+.social-links {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  padding: var(--space-lg) 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+
+.social-links img {
+  width: 40px;
+  height: 40px;
+}
+
+/*  SCROLL INDICATOR  */
+.scroll-indicator {
+  background: none;
+  border: none;
+  width: 60px;
+  cursor: pointer;
+  align-self: flex-start;
+}
+
+
+.navbar {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  height: 64px;
+  padding-left: var(--space-lg);
+  padding-right: var(--space-lg);
+  z-index: 1000;
+  background-color: var(--ivory);
+  opacity: 0.8;
+
+}
+
+.navbar_containerr {
+  height: 64px;
+  max-width: var(--max-width);
+  margin-inline: auto; /*align to the center*/
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.navbar_logo {
+  font-family: 'Fugaz One';
+  font-size: 24px;
+  color: var(--hunter-green);
+  text-decoration: none;
+  white-space: nowrap; /*text stays in one line*/
+}
+
+.navbar_logo a:hover {
+  color: var(--hover-gray);
+}
+
+.navbar_nav {
+  display: flex;
+  align-items: center;
+}
+
+.navbar_nav a {
+  font-family: 'FuturaPT-Medium';
+  height: 64px;
+  padding-inline: 36px;
+  display: flex;
+  align-items: center;
+  color: var(--hunter-green);
+  text-decoration: none;
+  white-space: nowrap; /*text stays in one line*/
+  
+}
+
+.navbar_nav a:hover {
+  color: var(--hover-gray);
+}
+
+/*  PIGEON CTA  */
+.navbar_pigeon {
+  position: relative;
+  padding-inline: 24px;
+  height: 43px;
+  width: 226px;
+  padding-left: 24px;
+}
+
+.tooltip {
+  position: absolute;
+  bottom: -28px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 14px;
+  color: var(--hover-gray);
+  opacity: 0;
+  pointer-events: none;
+}
+
+.navbar_pigeon:hover .tooltip {
+  opacity: 1;
+}
+
+
+.hero_attention {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  color: var(--attention-red);
+}
+
+.hero_attention img {
+  height: auto;
+  width: 30px;
+}
+
+
+.hero_image img {
+  max-width: 360px;
+  width: 100%;
+  height: 100%;
+  border-radius: 200px;
+  object-fit: cover;
+  object-position: center;
+}
+
+
+.about_text img{
+  max-width: 40%;
+  height: 100%;
+}
+
+

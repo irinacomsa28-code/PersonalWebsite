@@ -1,0 +1,85 @@
+/*  RESET  */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/*  DESIGN   */
+:root {
+  /* Colors */
+  --hunter-green: #245F34;
+  --ivory: #EBF1E5;
+  --muted-olive: #8CAE68;
+  --white: #ffffff;
+  --black: #000000;
+  --hover-gray: #A4A4A4;
+  --attention-red: #EA0000;
+
+  /* Layout */
+  --max-width: 1280px;
+
+  /* Spacing */
+  --space-xs: 8px;
+  --space-sm: 12px;
+  --space-md: 24px;
+  --space-lg: 64px;
+  --space-xl: 96px;
+}
+
+/*  FONTS  */
+@font-face {
+  font-family: 'FuturaPT-Medium';
+  src: url('/public/fonts/FuturaPT-Medium.woff2') format('woff2');
+  
+}
+
+@font-face {
+  font-family: 'FuturaPT-Book';
+  src: url('/public/fonts/FuturaPT-Book.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'FuturaPT-Light';
+  src: url('/public/fonts/FuturaPT-Light.woff2') format('woff2');
+ 
+}
+
+@font-face {
+  font-family: 'Fugaz One';
+  src: url('/public/fonts/FugazOne-Regular.woff2') format('woff2');
+}
+
+/*  GLOBAL  */
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'FuturaPT-Book', sans-serif;
+  color: var(--black);
+  background-color: var(--ivory);
+  line-height: 1.4;
+}
+
+/*  GLOBAL text styles  */
+h1 {
+  font-family: 'FuturaPT-Medium';
+  font-size: 96px;
+}
+
+h2 {
+  font-size: 36px;
+}
+
+h3 {
+  font-family: 'FuturaPT-Light';
+  font-size: 20px;
+}
+
+p {
+  font-family: 'FuturaPT-Book';
+  font-size: 20px;;
+}
