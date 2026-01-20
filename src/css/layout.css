@@ -65,8 +65,6 @@
   max-width: 60%;
 }
 
-img {
-  max-width: 100%;
-  height: auto;
-  display: block; /* Removes weird gaps at the bottom of images */
+.about_image{
+  max-width: 40%;
 }

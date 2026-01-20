@@ -118,3 +118,27 @@
 }
 
 
+.hero_image{
+  width: 100%;       /* Allows it to shrink on mobile */
+  max-width: 400px;  /* Set your desired maximum size here */
+  height: auto;      /* Let the container height grow with the content */
+  display: block;
+}
+
+.about_image {
+  max-width: 40%;
+  height: auto;      /* Let the container height grow with the content */
+  display: block;
+}
+
+
+.hero_image img, .about_image img {
+  width: 100%;       /* Force image to match the container width */
+  height: auto;      
+  object-fit: cover; /* ESSENTIAL: This stops the squishing by cropping instead of stretching */
+  display: block;
+}
+
+about_text {
+  max-width: 60%;
+}
