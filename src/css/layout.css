@@ -39,10 +39,6 @@
   white-space: nowrap; /*text stays in one line*/
 }
 
-.navbar_logo a:hover {
-  color: var(--hover-gray);
-}
-
 .navbar_nav {
   display: flex;
   align-items: center;
@@ -60,7 +56,7 @@
   
 }
 
-.navbar_nav a:hover {
+.navbar_container a:hover {
   color: var(--hover-gray);
 }
 
@@ -103,22 +99,6 @@
   width: 40px;
   height: 40px;
 }
-
-/* SECTION LAYOUT */
-.section {
-  padding: var(--space-xl) var(--space-lg) var(--space-xl);
-  width: 100%;
-}
-
-.hero_section {
-  padding-top: 120px;
-  padding-left: var(--space-lg);
-  padding-right: var(--space-lg);
-  padding-bottom: var(--space-xl);
-  height: 100%;
-  width: 100%;
-}
-
 
 
 .hero_container {
@@ -166,7 +146,7 @@
 }
 
 
-.hero_image img, .about_image img, .footer_image img, .skills img, .experience img, .education img, .languages img  {
+.hero_image img, .about_image img, .footer_image img, .skills img, .experience img, .education img, .languages img {
   width: 100%;       /* Force image to match the container width */
   height: auto;      
   object-fit: cover; /* ESSENTIAL: This stops the squishing by cropping instead of stretching */
@@ -184,6 +164,64 @@
   max-width:350px;
 }
 
+
+.project_image {
+  position: relative;
+  width: 100%;
+  max-width: 900px;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+}
+
+.project_image img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.color-img{
+  opacity: 0;
+}
+
+.project_image:hover .color-img {
+  opacity: 1;
+}
+
+.project_image:hover .bw-img {
+  opacity: 0;
+}
+
+.download_button {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  width: 106px;
+  height: auto;
+}
+
+.download_button img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 106px;
+  height: auto;
+  object-fit: cover;
+}
+
+.downloadCVButton-hovered{
+  opacity: 0;
+}
+
+.download_button:hover .downloadCVButton-hovered {
+  opacity: 1;
+}
+
+.download_button:hover .downloadCVButton-default {
+  opacity: 0;
+}
 
 
 .about_container {
@@ -246,6 +284,41 @@
   width: 100%;
   max-width: 430px;
 }
+
+.projects_container {
+  display: flex;
+  flex-direction: column;
+  align-items: top center;    
+  justify-content: flex-start; 
+  width: 100%;
+  margin-inline: auto;
+  gap: var(--space-lg);
+  height: auto;
+}
+
+.projects_grid{
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xl);
+}
+
+.project_card {
+  display: flex;
+  flex-direction: row;
+  width: 100%; 
+  justify-content: space-between; /* auto gap */
+
+}
+
+.project_text{
+  min-width: 360px;
+  max-width: 400px;
+}
+
+
+
+
+
 
 
 .footer_section{
