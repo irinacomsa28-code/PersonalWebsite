@@ -63,10 +63,28 @@
 /*  PIGEON CTA  */
 .navbar_pigeon {
   position: relative;
-  padding-inline: 24px;
-  height: 43px;
+  aspect-ratio: 16 / 9;
   width: 226px;
-  padding-left: 24px;
+  height: auto;
+}
+
+.navbar_pigeon img {
+  position: absolute;
+  width: 246px;
+  height: auto;
+  object-fit: cover;
+}
+
+.pigeon-hovered{
+  opacity: 0;
+}
+
+.navbar_pigeon:hover .pigeon-hovered {
+  opacity: 1;
+}
+
+.navbar_pigeon:hover .pigeon-default {
+  opacity: 0;
 }
 
 .tooltip {
@@ -78,26 +96,6 @@
   color: var(--hover-gray);
   opacity: 0;
   pointer-events: none;
-}
-
-.navbar_pigeon:hover .tooltip {
-  opacity: 1;
-}
-
-.social-links {
-  position: fixed;
-  left: 0;
-  bottom: 0;
-  padding: var(--space-lg) 8px;
-  display: flex;
-  flex-direction: column;
-  gap: 24px;
-}
-
-
-.social-links img {
-  width: 40px;
-  height: 40px;
 }
 
 
@@ -220,6 +218,52 @@
 }
 
 .download_button:hover .downloadCVButton-default {
+  opacity: 0;
+}
+
+.social-links {
+  position: fixed;
+  padding: var(--space-xl) 8px;
+  display: flex;
+  left:0;
+  bottom:0;
+  flex-direction: column;
+  gap: 24px;
+  z-index: 1000;
+  height: auto;
+
+}
+
+.social-links a {
+  position: relative; /*anchor images*/
+  display: block;     
+  width: 40px;        
+  height: 40px;
+}
+
+.social-links img {
+  position: absolute;
+  width: 40px;
+  height: 40px;
+}
+
+.buttonLinkedin-hovered, 
+.buttonEmail-hovered {
+  opacity: 0;
+}
+
+.buttonLinkedin-default, 
+.buttonEmail-default {
+  opacity: 1;
+}
+
+.social-links a:hover .buttonLinkedin-hovered, 
+.social-links a:hover .buttonEmail-hovered {
+  opacity: 1;
+}
+
+.social-links a:hover .buttonLinkedin-default, 
+.social-links a:hover .buttonEmail-default {
   opacity: 0;
 }
 
@@ -351,6 +395,10 @@
   white-space: nowrap;
   text-decoration: none;
 }
+
+.footer_container a:hover {
+  color: var(--hover-gray);
+}
   
 
 .footer_content {
@@ -378,14 +426,14 @@
   display: flex;
   align-items: top center;
   flex-direction: column;
-  gap: 16px;
+  gap: 36px;
 }
 
 .navFooter {
   display: flex;
   align-items: top center;
   flex-direction: column;
-  gap: 16px;
+  gap: 36px;
 
 }
 

@@ -64,6 +64,13 @@ body {
   line-height: 1.4;
 }
 
+.main-wrapper {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  height: auto;
+}
+
 /* SECTION LAYOUT */
 .section {
   padding: var(--space-xl) var(--space-lg) var(--space-xl);
