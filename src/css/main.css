@@ -62,6 +62,7 @@ body {
   color: var(--black);
   background-color: var(--ivory);
   line-height: 1.4;
+  
 }
 
 .main-wrapper {
@@ -69,6 +70,9 @@ body {
   display: flex;
   flex-direction: column;
   height: auto;
+  width: 100%;
+  flex: 1;
+  min-height: 100vh;
 }
 
 /* SECTION LAYOUT */
@@ -90,6 +94,18 @@ body {
 #about {
 background-color: var(--white);
 }
+
+.footer_section{
+  margin-top: auto;
+  padding-top: 36px;
+  padding-left: var(--space-lg);
+  padding-right: var(--space-lg);
+  padding-bottom: 36px;
+  height: 100%;
+  width: 100%;
+  background-color: var(--hunter-green);
+}
+
 
 /*  GLOBAL text styles  */
 .introductionText{

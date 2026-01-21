@@ -1,0 +1,3 @@
+- drop down menu projects
+- storytelling motion scroll
+- smoother when hovered, gains color
