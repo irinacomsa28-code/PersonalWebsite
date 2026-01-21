@@ -38,11 +38,12 @@
 
 }
 
-.navbar_containerr {
+.navbar_container {
   height: 64px;
   max-width: var(--max-width);
   margin-inline: auto; /*align to the center*/
   display: flex;
+  flex-direction: row;
   justify-content: space-between;
   align-items: center;
 }
@@ -132,13 +133,14 @@
 }
 
 
-.hero_image img, .about_image img {
+.hero_image img, .about_image img, .footer_image img{
   width: 100%;       /* Force image to match the container width */
   height: auto;      
   object-fit: cover; /* ESSENTIAL: This stops the squishing by cropping instead of stretching */
   display: block;
 }
 
-about_text {
+.about_text {
   max-width: 60%;
 }
+
