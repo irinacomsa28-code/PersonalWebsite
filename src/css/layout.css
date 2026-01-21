@@ -1,3 +1,109 @@
+/*  SCROLL INDICATOR  */
+.scroll-indicator {
+  background: none;
+  border: none;
+  width: 60px;
+  cursor: pointer;
+  align-self: flex-start;
+}
+
+
+.navbar {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  height: 64px;
+  padding-left: var(--space-lg);
+  padding-right: var(--space-lg);
+  z-index: 1000;
+  background-color: var(--ivory);
+  opacity: 0.8;
+
+}
+
+.navbar_container {
+  height: 64px;
+  max-width: var(--max-width);
+  margin-inline: auto; /*align to the center*/
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.navbar_logo {
+  font-family: 'Fugaz One';
+  font-size: 24px;
+  color: var(--hunter-green);
+  text-decoration: none;
+  white-space: nowrap; /*text stays in one line*/
+}
+
+.navbar_logo a:hover {
+  color: var(--hover-gray);
+}
+
+.navbar_nav {
+  display: flex;
+  align-items: center;
+}
+
+.navbar_nav a {
+  font-family: 'FuturaPT-Medium';
+  height: 64px;
+  padding-inline: 36px;
+  display: flex;
+  align-items: center;
+  color: var(--hunter-green);
+  text-decoration: none;
+  white-space: nowrap; /*text stays in one line*/
+  
+}
+
+.navbar_nav a:hover {
+  color: var(--hover-gray);
+}
+
+/*  PIGEON CTA  */
+.navbar_pigeon {
+  position: relative;
+  padding-inline: 24px;
+  height: 43px;
+  width: 226px;
+  padding-left: 24px;
+}
+
+.tooltip {
+  position: absolute;
+  bottom: -28px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 14px;
+  color: var(--hover-gray);
+  opacity: 0;
+  pointer-events: none;
+}
+
+.navbar_pigeon:hover .tooltip {
+  opacity: 1;
+}
+
+.social-links {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  padding: var(--space-lg) 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+
+.social-links img {
+  width: 40px;
+  height: 40px;
+}
+
 /* SECTION LAYOUT */
 .section {
   padding: var(--space-xl) var(--space-lg) var(--space-xl);
@@ -39,13 +145,56 @@
   gap: var(--space-sm);
 }
 
+.hero_attention {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  color: var(--attention-red);
+}
+
+.hero_attention img {
+  height: auto;
+  width: 30px;
+}
+
+
+.hero_image{
+  width: 100%;       /* Allows it to shrink on mobile */
+  max-width: 400px;  /* Set your desired maximum size here */
+  height: auto;      /* Let the container height grow with the content */
+  display: block;
+}
+
+
+.hero_image img, .about_image img, .footer_image img, .skills img, .experience img, .education img, .languages img  {
+  width: 100%;       /* Force image to match the container width */
+  height: auto;      
+  object-fit: cover; /* ESSENTIAL: This stops the squishing by cropping instead of stretching */
+  display: block;
+}
+
+.skills img{
+  max-width:300px;
+}
+
+.education img{
+  max-width:395px;
+}
+.languages img{
+  max-width:350px;
+}
+
+
+
 .about_container {
   max-width: var(--max-width);
   margin-inline: auto; /*align to the center*/
-  align-items: top center;
+  justify-content: center;
+  align-items: center;
   display: flex;
   flex-direction: column;
   gap: var(--space-lg);
+  height: auto;
 } 
 
 .about_content {
@@ -62,6 +211,42 @@
   flex-direction: row;
   gap: var(--space-md);
 }
+
+.about_image {
+  max-width: 40%;
+  height: auto;      /* Let the container height grow with the content */
+  display: block;
+}
+
+.about_text {
+  max-width: 60%;
+}
+
+.about_skills  {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 900px;
+  gap:36px;
+}
+
+.skillsAndExperience, .educationAndLanguages{
+  display: flex;
+  flex-direction: row;
+  align-items: top;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.skills, .experience, .education, .languages {
+  display: flex;
+  flex-direction: column;
+  align-items: top left;
+  gap: var(--space-md);
+  width: 100%;
+  max-width: 430px;
+}
+
 
 .footer_section{
   height: 400px;
