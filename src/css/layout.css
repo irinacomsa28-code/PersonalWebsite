@@ -144,24 +144,12 @@
 }
 
 
-.hero_image img, .about_image img, .footer_image img, .skills img, .experience img, .education img, .languages img {
-  width: 100%;       /* Force image to match the container width */
+.hero_image img,  .footer_image img, .skills img, .experience img, .education img, .languages img {
+  width: 100%;       
   height: auto;      
-  object-fit: cover; /* ESSENTIAL: This stops the squishing by cropping instead of stretching */
+  object-fit: cover; 
   display: block;
 }
-
-.skills img{
-  max-width:300px;
-}
-
-.education img{
-  max-width:395px;
-}
-.languages img{
-  max-width:350px;
-}
-
 
 .project_image {
   display: block;
@@ -177,7 +165,7 @@
   top: 0;
   left: 0;
   width: 100%;
-  height: auto%;
+  height: auto;
   object-fit: cover;
 }
 
@@ -296,21 +284,54 @@
 }
 
 .about_image {
-  max-width: 40%;
-  height: auto;      /* Let the container height grow with the content */
+  position: relative;
+  width: 40%;
+  height: fit-content;      
   display: block;
+  aspect-ratio: 4 / 3;
 }
 
+.about_image img{
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;       
+  height: auto;      
+  object-fit: cover; 
+  display: block;
+  transition: opacity 3s ease-in-out;
+}
+
+.imageAbout{
+  animation: imageSwap 14s infinite; 
+  z-index: 2;
+}
+
+.imageAbout-other{
+  position: relative;
+  z-index: 1;
+}
+
+@keyframes imageSwap {
+  0%, 45% { opacity: 1; }  
+  55%, 95% { opacity: 0; } 
+  100% { opacity: 1; }     
+}
+
+
 .about_text {
+  display: flex;
+  flex-direction: column;
   max-width: 60%;
+  gap: 20px;
 }
 
 .about_skills  {
   display: flex;
   flex-direction: column;
   width: 100%;
-  max-width: 900px;
-  gap:36px;
+  max-width: 1000px;
+  gap: 96px;
 }
 
 .skillsAndExperience, .educationAndLanguages{
@@ -327,8 +348,23 @@
   align-items: top left;
   gap: var(--space-md);
   width: 100%;
-  max-width: 430px;
+
 }
+
+.skills img{
+  max-width:360px;
+}
+.experience img{
+  max-width:460spx;
+}
+
+.education img{
+  max-width:460spx;
+}
+.languages img{
+  max-width:460spx;
+}
+
 
 .projects_container {
   display: flex;
