@@ -1,4 +1,5 @@
 - drop down menu projects
+- change gnome intoo foot
 - experience etc coded instead of images
 - storytelling motion scroll
 - smoother when hovered, gains color
