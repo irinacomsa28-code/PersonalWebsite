@@ -90,9 +90,12 @@ body {
   width: 100%;
 }
 
-
 #about {
 background-color: var(--white);
+}
+
+#projects{
+  padding-right: 0;
 }
 
 .footer_section{
