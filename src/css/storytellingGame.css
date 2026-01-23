@@ -1,0 +1,125 @@
+.hero_projectcontainer {
+  display: flex;
+  flex-direction: row;
+  max-width: var(--max-width);
+  margin-inline: auto; /*align to the center*/
+  justify-content: space-between;
+  width: 100%;
+} 
+
+/*Hero*/
+.project_hero_image {
+  max-width: 900px;  
+  height: auto;
+  width: fit-content;
+  display: block;   
+}
+
+.project_hero_image img{
+  width: 100%;   
+  height: auto;      
+  display: block;
+}
+
+.projects_button {
+  height: 226px;
+  width: fit-content;
+}
+
+.projects_button img{
+  height: 100%;
+  width: auto;      
+  display: block;
+}
+
+/*About Project Section*/
+
+.project_container {
+  display: flex;
+  flex-direction: column;
+  margin-inline: auto; /*align to the center*/
+  max-width: var(--max-width);
+  width: 100%;
+  gap: var(--space-lg);
+
+}
+
+
+.project_content{
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-lg);
+    top: 0px;
+    left: 0px;
+}
+
+.project_description{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.keypoints{
+    display: flex;
+    flex-direction: column;
+    width: 400px;
+    height: auto;
+    gap: var(--space-md);
+}
+
+
+
+.keypoints ul{
+  list-style-position: inside;
+  padding-left: 0;
+  font-family: 'FuturaPT-Light';
+  font-size: 16px; 
+}
+
+.keypoints p{
+  font-family: 'FuturaPT-Medium';
+  font-size: 16px;
+}
+
+
+
+
+.keypoint{
+    display:flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.descriptionAndphoto{
+    display: flex;
+    flex-direction: column;
+    width: 640px;
+    gap: var(--space-lg);
+}
+
+.descriptionAndphoto img{
+    width: 100%;
+    height: auto;
+}
+
+.photos{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    justify-content: space-between;
+    gap: 20px;
+    
+}
+
+.photos img{
+    width: 100%;
+    max-width: 554px;
+    min-width: 0;
+    height: auto;
+    object-fit: cover;
+    flex: 1 1 calc(50% - 10px);/*to make them responsive*/
+}
+
+
+
+

@@ -22,13 +22,18 @@
 }
 
 .navbar_container {
-  height: 64px;
-  max-width: var(--max-width);
-  margin-inline: auto; /*align to the center*/
   display: flex;
   flex-direction: row;
+  height: 64px;
+  width: 100%;
+  max-width: var(--max-width);
+  margin: auto;
   justify-content: space-between;
   align-items: center;
+}
+
+.navbar_container a:hover {
+  color: var(--hover-gray);
 }
 
 .navbar_logo {
@@ -41,14 +46,16 @@
 
 .navbar_nav {
   display: flex;
-  align-items: center;
+  flex-direction: row;
+  height: auto;
+  width: auto;
 }
 
 .navbar_nav a {
+  display: flex;
   font-family: 'FuturaPT-Medium';
   height: 64px;
   padding-inline: 36px;
-  display: flex;
   align-items: center;
   color: var(--hunter-green);
   text-decoration: none;
@@ -56,23 +63,23 @@
   
 }
 
-.navbar_container a:hover {
-  color: var(--hover-gray);
-}
-
 /*  PIGEON CTA  */
 .navbar_pigeon {
+  display: inline-block;
   position: relative;
   aspect-ratio: 16 / 9;
-  width: 226px;
+  width: 236px;
   height: auto;
+  padding-right: 0;
 }
 
 .navbar_pigeon img {
   position: absolute;
-  width: 246px;
-  height: auto;
-  object-fit: cover;
+  top: 0;
+  right: 0;             
+  width: 100%;         
+  height: 100%;        
+  object-fit: contain;
 }
 
 .pigeon-hovered{
@@ -144,7 +151,7 @@
 }
 
 
-.hero_image img, .skills img, .experience img, .education img, .languages img {
+.hero_image img, .skills img, .experience img, .education img, .languages img{
   width: 100%;       
   height: auto;      
   object-fit: cover; 
