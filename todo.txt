@@ -3,6 +3,7 @@
 - experience etc coded instead of images
 - storytelling motion scroll
 - smoother when hovered, gains color
+-create animation inside-out for the unerlining
 
 - accesibility plugin
 
