@@ -3,3 +3,9 @@
 - experience etc coded instead of images
 - storytelling motion scroll
 - smoother when hovered, gains color
+
+- accesibility plugin
+
+-responsive
+
+- contct form - CTA
