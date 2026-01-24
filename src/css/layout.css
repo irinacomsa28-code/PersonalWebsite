@@ -105,6 +105,85 @@
   pointer-events: none;
 }
 
+/*NAVIGATE THROGH PROJECT*/
+.side-nav a {
+  position: fixed;
+  top: 50%; /* Moves top edge to center of screen */
+  transform: translateY(-50%); /* Pulls button back up by half its height */
+  z-index: 1000;
+  width: 56px; /*same as social links with padding*/
+  height: 226px;
+  display: block;
+}
+
+.backButton {
+  left: 0;
+}
+
+.nextButton {
+  right: 0;
+}
+
+.side-nav img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+/*Social Links bottom left*/
+.social-links {
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  padding: 0px 8px 64px;
+  gap: 24px;
+  z-index: 1000;
+}
+
+.social-links a {
+  position: relative;
+  display: block;
+  width: 40px;
+  height: 40px;
+}
+
+.social-links img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 40px;
+  height: 40px;}
+
+/* --- Hover Logic (Unchanged but cleaned) --- */
+.buttonLinkedin-hovered, 
+.buttonEmail-hovered { 
+  opacity: 0; 
+}
+
+.social-links a:hover .buttonLinkedin-hovered, 
+.social-links a:hover .buttonEmail-hovered {
+  opacity: 1;
+}
+
+.social-links a:hover .buttonLinkedin-default, 
+.social-links a:hover .buttonEmail-default {
+  opacity: 0;
+}
+/*end NAVIGATE THROGH PROJECT*/
+
+
+
+
+
+
+
+
+
+
+
+
 
 .hero_container {
   max-width: var(--max-width);
@@ -216,53 +295,6 @@
 .download_button:hover .downloadCVButton-default {
   opacity: 0;
 }
-
-.social-links {
-  position: fixed;
-  padding: var(--space-xl) 8px;
-  display: flex;
-  left:0;
-  bottom:0;
-  flex-direction: column;
-  gap: 24px;
-  z-index: 1000;
-  height: auto;
-
-}
-
-.social-links a {
-  position: relative; /*anchor images*/
-  display: block;     
-  width: 40px;        
-  height: 40px;
-}
-
-.social-links img {
-  position: absolute;
-  width: 40px;
-  height: 40px;
-}
-
-.buttonLinkedin-hovered, 
-.buttonEmail-hovered {
-  opacity: 0;
-}
-
-.buttonLinkedin-default, 
-.buttonEmail-default {
-  opacity: 1;
-}
-
-.social-links a:hover .buttonLinkedin-hovered, 
-.social-links a:hover .buttonEmail-hovered {
-  opacity: 1;
-}
-
-.social-links a:hover .buttonLinkedin-default, 
-.social-links a:hover .buttonEmail-default {
-  opacity: 0;
-}
-
 
 .about_container {
   max-width: var(--max-width);

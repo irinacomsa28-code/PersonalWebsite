@@ -23,17 +23,19 @@
         <a href="index.html" class="navbar_logo">Irina Comsa</a>
 
         <div class="navbar_nav">
-          <a href="#about">About Me</a>
-          <a href="#projects">Projects</a>
+          <a href="#about" role="button">About Me</a>
+          <a href="#projects" role="button">Projects</a>
           <a
             href="public/assets/documents/irina_comsa_lebenslauf.pdf"
             target="_blank"
+            role="button"
             >CV</a
           >
           <a
             href="https://mail.google.com/mail/?view=cm&fs=1&to=irinacomsa28@gmail.com"
             target="_blank"
             class="navbar_pigeon"
+            role="button"
             aria-label="Contact"
           >
             <img src="public/assets/images/pigeon-default.png" class="pigeon-default" alt = "Contact me via Email"/>
@@ -46,37 +48,41 @@
     </nav>
 
   <div class="main_wrapper"> <!-- MAIN WRAPPER contains everything except footer -->
+    
+    
+    
+    <nav class="side-nav">
+    <a class="backButton" role="button">
+      <img src="public/assets/images/backButton.png" alt="Previous Project" />
+    </a>
+    <a class="nextButton" role="button">
+    <img src="public/assets/images/nextButton.png" alt="Next Project" />
+    </a>
+    </nav>
+
     <!--  SOCIAL LINKS  -->
-    <aside class="social-links">
-      <a href="https://www.linkedin.com/in/irina-comsa-901251205/" target="_blank">
+    <aside class="social-links" aria-label="Social media links">
+      <a href="https://www.linkedin.com/in/irina-comsa-901251205/" target="_blank" role="button">
         <img src="public/assets/images/buttonLinkedin-default.png" class="buttonLinkedin-default" alt="LinkedIn" />
         <img src="public/assets/images/buttonLinkedin-hovered.png" class="buttonLinkedin-hovered" alt="LinkedIn" />
-    
       </a>
-      <a href="https://mail.google.com/mail/?view=cm&fs=1&to=irinacomsa28@gmail.com" target="_blank">
-        <img src="public/assets/images/buttonEmail-default.png" class="buttonEmail-default" alt="Contact me via Email" />
-        <img src="public/assets/images/buttonEmail-hovered.png" class="buttonEmail-hovered" alt="Contact me via Email" />
+      <a href="https://mail.google.com/mail/?view=cm&fs=1&to=irinacomsa28@gmail.com" target="_blank" role="button">
+        <img src="public/assets/images/buttonEmail-default.png" class="buttonEmail-default" alt="Email" />
+        <img src="public/assets/images/buttonEmail-hovered.png" class="buttonEmail-hovered" alt="Email" />
       </a>
     </aside>
 
     <!--hero-->
-    <section id="hero" class="hero_section">
+    <section id="hero" class="hero_section_project">
       <div class="hero_projectcontainer">
-        <div class="projects_button">
-            <img src="public/assets/images/backButton.png" alt="Image of the game"/>
-          </div>
           <div class="project_hero_image">
             <img src="public/assets/images/project1_hero_image.png" alt="Image of the game"/>
-          </div>
-          
-          <div class="projects_button">
-            <img src="public/assets/images/nextButton.png" alt="Image of the game"/>
           </div>
       </div>
     </section>
 
     <!--about the project-->
-    <section class="section">
+    <section class="section_project">
       <div class="project_container">
 
         <div class="project_content">
@@ -132,8 +138,6 @@
               <img src="public/assets/images/project1_img1.png" alt="Project1 image 1"/>
             </div>
               
-            
-
           </div> <!--end description-->
         </div><!--end content-->
 

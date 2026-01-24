@@ -90,6 +90,21 @@ body {
   width: 100%;
 }
 
+.hero_section_project{
+  padding-top: 120px;
+  padding-left: var(--space-lg);
+  padding-right: var(--space-lg);
+  padding-bottom: 0px;
+  height: 100%;
+  width: 100%;
+}
+
+.section_project {
+  padding:  var(--space-lg) var(--space-lg) var(--space-xl);
+  width: 100%;
+}
+
+
 #about {
 background-color: var(--white);
 }
@@ -134,3 +149,5 @@ p {
   font-family: 'FuturaPT-Book';
   font-size: 20px;;
 }
+
+
