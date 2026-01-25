@@ -36,15 +36,11 @@ html {
   align-items: center;
 }
 
-.navbar_container a:hover {
-  color: var(--hover-gray);
-}
-
 .navbar_logo {
   font-family: 'Fugaz One';
   font-size: 24px;
   color: var(--hunter-green);
-  text-decoration: none;
+  
   white-space: nowrap; /*text stays in one line*/
 }
 
@@ -62,7 +58,7 @@ html {
   padding-inline: 36px;
   align-items: center;
   color: var(--hunter-green);
-  text-decoration: none;
+  
   white-space: nowrap; /*text stays in one line*/
   
 }
@@ -80,8 +76,7 @@ html {
 .navbar_pigeon img {
   position: absolute;
   top: 0;
-  right: 0;             
-  width: 100%;         
+  right: 0;                       
   height: 100%;        
   object-fit: contain;
 }
@@ -147,7 +142,6 @@ html {
 }
 
 .side-nav img {
-  width: 100%;
   height: 100%;
   object-fit: contain;
 }
@@ -176,7 +170,8 @@ html {
   top: 0;
   left: 0;
   width: 32px;
-  height: 32px;}
+  height: 32px;
+}
 
 /* --- Hover Logic (Unchanged but cleaned) --- */
 .buttonLinkedin-hovered, 
@@ -244,7 +239,6 @@ html {
 }
 
 .hero_attention img {
-  height: auto;
   width: 24px;
 }
 
@@ -253,14 +247,6 @@ html {
   width: 100%;       /* Allows it to shrink on mobile */
   max-width: 380px;  /* Set your desired maximum size here */
   height: auto;      /* Let the container height grow with the content */
-  display: block;
-}
-
-
-.hero_image img, .skills img, .experience img, .education img, .languages img{
-  width: 100%;       
-  height: auto;      
-  object-fit: cover; 
   display: block;
 }
 
@@ -278,7 +264,6 @@ html {
   top: 0;
   left: 0;
   width: 106px;
-  height: auto;
   object-fit: cover;
 }
 
@@ -332,9 +317,9 @@ html {
   position: absolute;
   top: 0;
   left: 0;
-  width: 100%;       
-  height: auto;      
-  object-fit: cover; 
+         
+        
+   
   display: block;
   transition: opacity 3s ease-in-out;
 }
@@ -445,7 +430,6 @@ html {
   position: absolute;
   top: 0;
   right: 0;
-  width: 100%;
   height: 100%; 
   object-fit: fill; 
 }
@@ -480,7 +464,7 @@ html {
   font-family: 'FuturaPT-Medium';
   color: var(--white);
   white-space: nowrap;
-  text-decoration: none;
+  
 }
 
 .footer_container a:hover {

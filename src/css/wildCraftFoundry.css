@@ -1,0 +1,22 @@
+/*in common css elements to be found in storytellingGame.css*/
+.just_project_description{
+  display: flex;
+  flex-direction: column;
+  top:0;
+  left:0;
+  width: 600px;
+  gap: 8px; /*between title ("What I Did") and the rest*/
+}
+
+.just_project_description ul{
+  list-style-position: inside;
+  padding-left: 0;
+  font-family: 'FuturaPT-Light';
+  font-size: 20px; 
+}
+
+.just_project_description p{
+  font-family: 'FuturaPT-Medium';
+  font-size: 20px;
+}
+

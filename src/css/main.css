@@ -58,11 +58,8 @@ html {
 }
 
 body {
-  font-family: 'FuturaPT-Book', sans-serif;
-  color: var(--black);
   background-color: var(--ivory);
   line-height: 1.4;
-  
 }
 
 .main-wrapper {
@@ -91,7 +88,7 @@ body {
 }
 
 .hero_section_project{
-  padding-top: 120px;
+  padding-top: var(--space-lg);
   padding-left: var(--space-lg);
   padding-right: var(--space-lg);
   padding-bottom: 0px;
@@ -130,6 +127,16 @@ background-color: var(--white);
   font-family: 'FuturaPT-Medium';
   font-size: 96px;
 }
+
+h1, h2, h3, p, a{
+  text-decoration: none;
+  color: var(--black);
+}
+
+a:hover {
+  color: var(--hover-gray);
+}
+
 h1 {
   font-family: 'FuturaPT-Medium';
   font-size: 48px;
@@ -147,7 +154,16 @@ h3 {
 
 p {
   font-family: 'FuturaPT-Book';
-  font-size: 20px;;
+  font-size: 20px;
 }
 
-
+/*common attributes for all images from ALL sections of all pages *except nav, side-nav and footer*/
+.section img, .hero_section img, .hero_section_project img, .section_project img{
+  min-width: 0;
+  width: 100%;
+  max-width: 100%; /*preventing pixelation on large screens*/
+  height: auto;
+  object-fit: cover; 
+  object-position: center; /*if cropped, focus on center*/
+  display: block; /*image behaves like a div*/
+}

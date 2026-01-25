@@ -7,6 +7,12 @@
 
 - accesibility plugin
 
+-EN-German
+
+-dark mode
+
+- a "let s talk" but creative OR piegon there?
+
 -responsive
 
 - contct form - CTA
