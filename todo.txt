@@ -16,3 +16,7 @@
 -responsive
 
 - contct form - CTA
+
+
+---done for performance:
+webp format images + fetchpriority="high" for certain images
