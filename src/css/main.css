@@ -133,6 +133,11 @@ a:hover {
   color: var(--hover-gray);
 }
 
+.navbar_nav a:hover { /*global a doesn t work for hover nav buttons*/
+  color: var(--hover-gray);
+}
+
+
 h1 {
   font-family: 'FuturaPT-Medium';
   font-size: 96px;
