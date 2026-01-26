@@ -123,10 +123,6 @@ background-color: var(--white);
 
 
 /*  GLOBAL text styles  */
-.introductionText{
-  font-family: 'FuturaPT-Medium';
-  font-size: 96px;
-}
 
 h1, h2, h3, p, a{
   text-decoration: none;
@@ -139,15 +135,20 @@ a:hover {
 
 h1 {
   font-family: 'FuturaPT-Medium';
-  font-size: 48px;
+  font-size: 96px;
 }
 
 h2 {
+  font-family: 'FuturaPT-Medium';
+  font-size: 48px;
+}
+
+h3 {
   font-family: 'FuturaPT-Book';
   font-size: 36px;
 }
 
-h3 {
+h4 {
   font-family: 'FuturaPT-Light';
   font-size: 20px;
 }
