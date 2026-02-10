@@ -123,14 +123,15 @@ html {
 
 
 /*NAVIGATE THROGH PROJECT*/
+
 .side-nav a {
   position: fixed;
-  top: 50%; /* Moves top edge to center of screen */
-  transform: translateY(-50%); /* Pulls button back up by half its height */
+  display: block;
+  top: 50%; /*Moves top edge to center of screen*/
+  transform: translateY(-50%); /*Pulls button back up by half its height*/
   z-index: 1000;
   width: 48px; /*same as social links with padding*/
   height: 226px;
-  display: block;
 }
 
 .backButton {
@@ -142,9 +143,46 @@ html {
 }
 
 .side-nav img {
-  height: 100%;
-  object-fit: contain;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 56px;
+  height: 226px;
 }
+
+
+.backButton {
+  left: 0;
+}
+
+.nextButton {
+  right: 0;
+}
+
+.backButton-hovered, .nextButton-hovered{ 
+  opacity: 0; 
+}
+
+.side-nav a:hover .backButton-hovered, 
+.side-nav a:hover .nextButton-hovered{
+  opacity: 1;
+}
+
+.side-nav a:hover .backButton, 
+.side-nav a:hover .nextButton {
+  opacity: 0;
+}
+
+
+
+
+
+
+
+
+
+
+
 
 /*Social Links bottom left*/
 .social-links {
@@ -173,7 +211,7 @@ html {
   height: 32px;
 }
 
-/* --- Hover Logic (Unchanged but cleaned) --- */
+
 .buttonLinkedin-hovered, 
 .buttonEmail-hovered { 
   opacity: 0; 
@@ -188,7 +226,7 @@ html {
 .social-links a:hover .buttonEmail-default {
   opacity: 0;
 }
-/*end NAVIGATE THROGH PROJECT*/
+
 
 
 

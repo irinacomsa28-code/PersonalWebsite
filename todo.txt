@@ -15,7 +15,9 @@
 
 -responsive
 
-- contct form - CTA
+- contact form - CTA
+
+!!!!! -projectsL drop down menu
 
 
 ---done for performance:
