@@ -52,11 +52,13 @@ observer.observe(document.querySelector('.about_imageAndText'));
 
 
 //blocking chrome feature
-if (history.scrollRestoration) {
+if ('scrollRestoration' in history) {
     history.scrollRestoration = 'manual';
 }
+window.scrollTo(0, 0);
 
-// Erzwingt den Scroll nach oben beim Laden
-window.addEventListener('beforeunload', () => {
-    window.scrollTo(0, 0);
+window.addEventListener('load', () => {
+    setTimeout(() => {
+        window.scrollTo(0, 0);
+    }, 0);
 });
