@@ -49,3 +49,14 @@ const observer = new IntersectionObserver((entries) => {
 }, { threshold: 0.2 }); // Löst aus, wenn 20% des Bereichs sichtbar sind
 
 observer.observe(document.querySelector('.about_imageAndText'));
+
+
+//blocking chrome feature
+if (history.scrollRestoration) {
+    history.scrollRestoration = 'manual';
+}
+
+// Erzwingt den Scroll nach oben beim Laden
+window.addEventListener('beforeunload', () => {
+    window.scrollTo(0, 0);
+});
