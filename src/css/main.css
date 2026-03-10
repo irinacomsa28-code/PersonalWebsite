@@ -169,23 +169,14 @@ p {
 .hero_headlines h1, 
 .hero_headlines h3, 
 .hero_text h4, 
-.hero_attention {
+.hero_attention,
+.hero_image{
     opacity: 0;
     transform: translateY(20px);
     transition: opacity 0.8s ease-out, transform 0.8s ease-out;
 }
 
-/* Diese Klasse fügen wir mit JS hinzu */
-.hero_headlines h1, 
-.hero_headlines h3, 
-.hero_text h4, 
-.hero_attention {
-    opacity: 0;
-    transform: translateY(20px);
-    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
-}
-
-.appear {
+.appear{
     opacity: 1 !important;
     transform: translateY(0) !important;
 }

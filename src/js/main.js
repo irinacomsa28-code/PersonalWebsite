@@ -23,15 +23,16 @@ window.addEventListener('DOMContentLoaded', () => {
     const sections = [
         document.querySelector('.hero_headlines h1'),
         document.querySelector('.hero_headlines h3'),
+        document.querySelector('.hero_image'),
         document.querySelector('.hero_text h4'),
-        document.querySelector('.hero_attention')
+        document.querySelector('.hero_attention'),
     ];
 
     sections.forEach((el, index) => {
         if(el) {
             setTimeout(() => {
                 el.classList.add('appear');
-            }, 600 * index); // Jedes Element erscheint 200ms nach dem vorherigen
+            }, 600 * index); 
         }
     });
 });

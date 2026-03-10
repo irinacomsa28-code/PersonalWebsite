@@ -21,8 +21,6 @@ html {
   padding-right: var(--space-lg);
   z-index: 1000;
   background-color: var(--ivory);
-  opacity: 0.8;
-
 }
 
 .navbar_container {
