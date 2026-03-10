@@ -163,6 +163,34 @@ p {
   font-size: 20px;
 }
 
+
+/*animating intro text on page load*/
+/* Die Elemente starten leicht nach unten versetzt und transparent */
+.hero_headlines h1, 
+.hero_headlines h3, 
+.hero_text h4, 
+.hero_attention {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+/* Diese Klasse fügen wir mit JS hinzu */
+.hero_headlines h1, 
+.hero_headlines h3, 
+.hero_text h4, 
+.hero_attention {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+.appear {
+    opacity: 1 !important;
+    transform: translateY(0) !important;
+}
+/*END animating intro text on pgae load*/
+
 /*common attributes for all images from ALL sections of all pages *except nav, side-nav and footer*/
 .section img, .hero_section img, .hero_section_project img, .section_project img{
   min-width: 0;

@@ -341,6 +341,15 @@ html {
   align-items: top left;
   flex-direction: row;
   gap: var(--space-md);
+  /*animation on scroll:*/
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 1.2s ease-out, transform 1.2s ease-out;
+}
+/*animation on scroll:*/
+.about_imageAndText.is-visible {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 .about_image {
@@ -355,9 +364,6 @@ html {
   position: absolute;
   top: 0;
   left: 0;
-         
-        
-   
   display: block;
   transition: opacity 3s ease-in-out;
 }

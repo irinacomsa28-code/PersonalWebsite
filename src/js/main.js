@@ -16,3 +16,35 @@ window.addEventListener("scroll", () => {
     link.classList.toggle("active", link.getAttribute("href") === `#${current}`);
   });
 }, { passive: true });
+
+
+//animating headlines on page load
+window.addEventListener('DOMContentLoaded', () => {
+    const sections = [
+        document.querySelector('.hero_headlines h1'),
+        document.querySelector('.hero_headlines h3'),
+        document.querySelector('.hero_text h4'),
+        document.querySelector('.hero_attention')
+    ];
+
+    sections.forEach((el, index) => {
+        if(el) {
+            setTimeout(() => {
+                el.classList.add('appear');
+            }, 600 * index); // Jedes Element erscheint 200ms nach dem vorherigen
+        }
+    });
+});
+
+
+
+//animating about_imageAndtext on scroll into about section
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('is-visible');
+    }
+  });
+}, { threshold: 0.2 }); // Löst aus, wenn 20% des Bereichs sichtbar sind
+
+observer.observe(document.querySelector('.about_imageAndText'));
