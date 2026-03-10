@@ -1,3 +1,7 @@
+#main_wrapper {
+    position: relative; 
+}
+
 .navbar {
   position: fixed;
   top: 0;
@@ -103,18 +107,13 @@
 
 
 
-
-
-
-/*NAVIGATE THROGH PROJECT*/
-
 .side-nav a {
   position: fixed;
   display: block;
-  top: 50%; /*Moves top edge to center of screen*/
+  top: 36%; /*of screen*/
   transform: translateY(-50%); /*Pulls button back up by half its height*/
   z-index: 1000;
-  width: 48px; /*same as social links with padding*/
+  width: 60px; /*same as social links with padding*/
   height: 226px;
 }
 
@@ -130,17 +129,8 @@
   position: absolute;
   top: 0;
   left: 0;
-  width: 56px;
-  height: 226px;
-}
-
-
-.backButton {
-  left: 0;
-}
-
-.nextButton {
-  right: 0;
+  width: 100%;
+  height: auto;
 }
 
 .backButton-hovered, .nextButton-hovered{ 
