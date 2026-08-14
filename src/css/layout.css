@@ -442,6 +442,7 @@
   max-width: 900px;
   aspect-ratio: 16 / 9;
   overflow: hidden;
+  border-radius: 48px 0 0 48px;
 }
 
 .project_image img {
