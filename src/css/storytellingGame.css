@@ -80,11 +80,6 @@
     gap: 8px; /*between title ("What I Did") and the rest*/
 }
 
-.highlight-bullet{
-  font-family: 'FuturaPT-Medium';
-  gap: 4px; 
-}
-
 .descriptionAndphoto{
     display: flex;
     flex-direction: column;
@@ -123,6 +118,36 @@
     width: 100%;
     height: auto;
     flex: 1 1 calc(50% - 10px);/*to make them responsive*/
+}
+
+/*stacked titled blocks, e.g. "What I Did" / "The Challenge" / "The Solution"*/
+.titled_description {
+  display: flex;
+  flex-direction: column;
+  width: 600px;
+  gap: var(--space-lg);
+}
+
+.titled_keypoint {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.titled_keypoint .title {
+  font-family: 'FuturaPT-Medium';
+  font-size: 20px;
+}
+
+.titled_keypoint .body,
+.titled_keypoint ul {
+  font-family: 'FuturaPT-Light';
+  font-size: 20px;
+}
+
+.titled_keypoint ul {
+  list-style-position: inside;
+  padding-left: 0;
 }
 
 

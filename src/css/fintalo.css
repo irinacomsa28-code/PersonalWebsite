@@ -1,0 +1,34 @@
+/*in common css elements to be found in storytellingGame.css*/
+
+/*teaser card on index.html reuses one image for both hover states*/
+.fintalo-bw {
+  filter: grayscale(1);
+}
+
+/*text column, group photo and Challenge/Solution laid out in a 2-column grid,
+  so Challenge (col 1) and Solution (col 2) land on the same row automatically*/
+.fintalo_content_row {
+  display: grid;
+  grid-template-columns: 600px 1fr;
+  column-gap: 36px;
+  row-gap: 16px;
+}
+
+.fintalo_content_row .fintalo_group_photo {
+  width: 100%;
+  max-width: none; /*override the sitewide .section_project img max-width:100% cap*/
+  height: auto;
+}
+
+/*prototype video, full width, between the description and the photos below*/
+.video_project_section {
+  width: 100%;
+  margin-top: var(--space-xl);
+  margin-bottom: var(--space-xl);
+}
+
+.video_project {
+  display: block;
+  width: 100%;
+  height: auto;
+}

@@ -28,10 +28,11 @@
     <!-- NAVBAR -->
     <nav class="navbar">
       <div class="navbar_container">
-        
+
         <a href="index.html" class="navbar_logo">Irina Comsa</a>
 
         <div class="navbar_nav">
+          <a class="nav_link" href="index.html" data-target="home" role="button">Home</a>
           <a class="nav_link" href="#about" data-target="about" role="button">About Me</a>
           <a class = "nav_link" href="#projects" data-target="projects" role="button">Projects</a>
           <a
@@ -57,15 +58,15 @@
     </nav>
 
   <div class="main_wrapper"> <!-- MAIN WRAPPER contains everything except footer -->
-    
-    
-    
+
+
+
     <nav class="side-nav">
-    <a class="backButton" role="button" href="muntum.html">
+    <a class="backButton" role="button" href="wildCraftFoundry.html">
       <img src="public/assets/images/backButton.png" alt="Previous Project" class="backButton"/>
       <img src="public/assets/images/backButton_hovered.png" alt="Previous Project" class="backButton-hovered" />
     </a>
-    <a class="nextButton" role="button" href="fintalo.html">
+    <a class="nextButton" role="button" href="storytellingGame.html">
     <img src="public/assets/images/nextButton.png" alt="Next Project" class = "nextButton">
     <img src="public/assets/images/nextButton_hovered.png" alt="Next Project" class="nextButton-hovered"/>
     </a>
@@ -87,7 +88,7 @@
     <section id="hero" class="hero_section_project">
       <div class="hero_projectcontainer">
           <div class="project_hero_image">
-            <img src="public/assets/images/project3_hero_image.webp" alt="Image of wildCraft Foundry website" fetchpriority="high"/>
+            <img src="public/assets/images/fintalo/heroImage.webp" alt="Image of the Fintalo deal management dashboard" fetchpriority="high"/>
           </div>
       </div>
     </section>
@@ -97,40 +98,69 @@
       <div class="project_container">
 
         <div class="project_content">
-          <h2>WildCraft Foundry <br> | e-commerce platform for 3D models</h2>
-          <div class="titled_description">
-            <div class="titled_keypoint">
-              <p class="title">What I Did</p>
-              <ul>
-              <li>Created an e-commerce platform for 3D models for a 3D artist</li>
-              <li>Implementation in Shopify for secure payment</li>
-              </ul>
+          <h2>Fintalo <br> | Redesigning an AI-Native M&A Platform</h2>
+          <div class="fintalo_content_row">
+            <div class="titled_description">
+              <div class="titled_keypoint">
+                <p class="title">What I Did</p>
+                <ul>
+                <li>Redesigned the UX/UI of Fintalo, an AI-native M&A deal management platform, together with my team from TUDesign student club</li>
+                <li>Conducted a competitor analysis of AI-native CRM tools to define principles for how AI should surface within the product</li>
+                <li>Iterated the design across several structured feedback rounds with the Fintalo team</li>
+                </ul>
+              </div>
+
+              <div class="titled_keypoint">
+                <p class="title">Visit Fintalo's Website</p>
+                <ul>
+                  <a href="https://www.fintalo.com/" target="_blank" role="link to website"><li>https://www.fintalo.com/</li></a>
+                </ul>
+              </div>
             </div>
+
+            <img src="public/assets/images/fintalo/group_photo.webp" alt="The TUDesign SS26 team at the Design Showcase" class="fintalo_group_photo"/>
 
             <div class="titled_keypoint">
               <p class="title">The Challenge</p>
-              <p class="body">The artist needed a way to turn casual visitors into dedicated Patreon supporters. The site had to bridge two very different worlds: the medieval fantasy of Dungeons & Dragons and the high-tech of 3D modeling and printing.</p>
+              <p class="body">M&A advisors manage complex, multi-stage deals that move from pitching through closing, often spread across email, spreadsheets and disconnected tools. Fintalo needed an interface that could hold all of this activity clearly, and that introduced AI support in a way that felt integrated rather than like a separate chatbot.</p>
             </div>
 
             <div class="titled_keypoint">
               <p class="title">The Solution</p>
-              <p class="body">I designed a digital space where 'Tech meets Medieval'. By highlighting the artist's dedication and personality through custom layouts, the site feels like a personal workshop rather than just a store, making users more likely to donate.</p>
+              <p class="body">We structured the platform around the Dashboard, Cockpit, Documents, Investors, Tasks and Outreach views, giving advisors a clear, stage-based way to navigate each deal. AI surfaces contextually within these views through suggestions, one-click enrichment and accept, edit or discard controls, supporting advisors without demanding their attention.</p>
             </div>
           </div> <!--end description-->
         </div><!--end content-->
 
-        <div class="photos_project">
-              <div class="Img1And2Project">
-                <img src="public/assets/images/project3_img1.webp" alt="Project wildCraftFoundry Image 1"/>
-                <img src="public/assets/images/project3_img2.webp" alt="Project wildCraftFoundry Image 2"/>
-              </div>
-              <img src="public/assets/images/project3_img3.webp" alt="Project wildCraftFoundry Image 3"/>
-        </div>
-      
-
       </div><!--end container-->
     </section>
+
+    <!--prototype video-->
+    <section class="video_project_section">
+      <video
+        class="video_project"
+        src="public/assets/images/fintalo/video_prototype.mp4"
+        autoplay
+        muted
+        loop
+        playsinline
+        disablepictureinpicture
+        aria-label="Fintalo prototype walkthrough video"
+      ></video>
+    </section>
     
+    <section class="section_project">
+      <div class="project_container">
+        <div class="photos_project">
+          <div class="Img1And2Project">
+            <img src="public/assets/images/fintalo/figma1_competitorAnalysis.webp" alt="Fintalo competitor analysis board comparing AI-native CRM tools"/>
+            <img src="public/assets/images/fintalo/figma2_userFlow.webp" alt="Fintalo Figma feedback board iterating on the Dashboard, Cockpit, Documents, Investors, Tasks and Outreach flows"/>
+          </div>
+          <img src="public/assets/images/fintalo/designScreenshot.webp" alt="Overview of the final Fintalo design file in Figma"/>
+        </div>
+      </div>
+    </section>
+
   </div> <!-- END OF MAIN WRAPPER -->
 
 
@@ -153,21 +183,19 @@
 
           <div class="CTA">
             <p>
-              Let's get in touch! <br />
               <a
                 href="https://mail.google.com/mail/?view=cm&fs=1&to=irinacomsa28@gmail.com"
                 target="_blank"
-                >irinacomsa28@gmail.com</a
-              >
+                >Let's get in touch! <br /> irinacomsa28@gmail.com</a>
             </p>
-  
+
               <a class="download_button"
                 href="public/assets/documents/irina_comsa_lebenslauf.pdf"
                 download="Irina_Comsa_CV.pdf"
               >
                 <img src="public/assets/images/downloadCVButton-default.png" class="downloadCVButton-default" />
                 <img src="public/assets/images/downloadCVButton-hovered.png" class="downloadCVButton-hovered" />
-               
+
               </a>
             </a>
           </div>
