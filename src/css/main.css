@@ -10,12 +10,13 @@
 /*  DESIGN   */
 :root {
   /* Colors */
-  --hunter-green: #245F34;
-  --ivory: #EBF1E5;
+  --secondary-color: #004D0C;
+  --primary-color: #F4F7F1;
+  --primary-color-rgb: 244, 247, 241;
   --muted-olive: #8CAE68;
   --white: #ffffff;
   --black: #000000;
-  --hover-gray: #A4A4A4;
+  --hover-color: #96B6A1;
   --attention-red: #EA0000;
 
   /* Layout */
@@ -58,11 +59,11 @@ html {
 }
 
 body {
-  background-color: var(--ivory);
+  background-color: var(--primary-color);
   line-height: 1.4;
 }
 
-.main-wrapper {
+.main_wrapper {
   position: relative;
   display: flex;
   flex-direction: column;
@@ -87,6 +88,26 @@ body {
   width: 100%;
 }
 
+/*stacking-cards effect: About covers the hero on scroll*/
+.hero_section {
+  position: sticky;
+  top: 0;
+  min-height: 100vh;
+  z-index: 1;
+  background-color: var(--primary-color);
+}
+
+#about {
+  position: sticky;
+  top: 0;
+  min-height: 100vh;
+  z-index: 2;
+}
+
+.hero_about_spacer {
+  height: 0; /*set in px by main.js, see hero_about_spacer comment there*/
+}
+
 .hero_section_project{
   padding-top: var(--space-lg);
   padding-left: var(--space-lg);
@@ -103,11 +124,7 @@ body {
 
 
 #about {
-background-color: var(--white);
-}
-
-#projects{
-  padding-right: 0;
+  background-color: var(--white);
 }
 
 .footer_section{
@@ -118,7 +135,7 @@ background-color: var(--white);
   padding-bottom: 36px;
   height: 100%;
   width: 100%;
-  background-color: var(--hunter-green);
+  background-color: var(--secondary-color);
 }
 
 
@@ -130,11 +147,45 @@ h1, h2, h3, p, a{
 }
 
 a:hover {
-  color: var(--hover-gray);
+  color: var(--hover-color);
 }
 
 .navbar_nav a:hover { /*global a doesn t work for hover nav buttons*/
-  color: var(--hover-gray);
+  color: var(--hover-color);
+}
+
+/*  BUTTONS  */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-xs);
+  padding: var(--space-xs) var(--space-sm);
+  border-radius: 100px;
+  font-family: 'FuturaPT-Medium';
+  white-space: nowrap;
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+
+.btn-primary {
+  background-color: var(--secondary-color);
+  color: var(--white);
+}
+
+.btn-primary:hover {
+  background-color: var(--hover-color);
+  color: var(--white);
+}
+
+.btn-secondary {
+  background-color: transparent;
+  border: 1px solid var(--secondary-color);
+  color: var(--secondary-color);
+}
+
+.btn-secondary:hover {
+  border-color: var(--hover-color);
+  color: var(--hover-color);
 }
 
 
@@ -164,23 +215,17 @@ p {
 }
 
 
-/*animating intro text on page load*/
-/* Die Elemente starten leicht nach unten versetzt und transparent */
-.hero_headlines h1, 
-.hero_headlines h3, 
-.hero_text h4, 
-.hero_attention,
-.hero_image{
+/*animating intro elements on page load: every direct hero element to animate gets .hero_animate in the markup, JS staggers .appear onto them*/
+.hero_animate {
     opacity: 0;
     transform: translateY(20px);
     transition: opacity 0.8s ease-out, transform 0.8s ease-out;
 }
 
-.appear{
-    opacity: 1 !important;
-    transform: translateY(0) !important;
+.hero_animate.appear {
+    opacity: 1;
+    transform: translateY(0);
 }
-/*END animating intro text on pgae load*/
 
 /*common attributes for all images from ALL sections of all pages *except nav, side-nav and footer*/
 .section img, .hero_section img, .hero_section_project img, .section_project img{

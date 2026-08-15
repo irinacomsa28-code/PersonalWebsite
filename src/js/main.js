@@ -1,9 +1,10 @@
 const navLinks = document.querySelectorAll(".nav_link");
 const sections = document.querySelectorAll(".section");
+const navbar = document.querySelector(".navbar");
 
 window.addEventListener("scroll", () => {
   let current = "";
-  
+
   // Find which section is in view
   sections.forEach(section => {
     if (window.scrollY >= section.offsetTop - 150) {
@@ -15,25 +16,22 @@ window.addEventListener("scroll", () => {
   navLinks.forEach(link => {
     link.classList.toggle("active", link.getAttribute("href") === `#${current}`);
   });
+
+  // Fade the navbar's background/blur in once the page has scrolled past the hero
+  if (navbar) {
+    navbar.classList.toggle("scrolled", window.scrollY > 20);
+  }
 }, { passive: true });
 
 
-//animating headlines on page load
+//staggering the .appear animation onto every hero element marked .hero_animate, in document order
 window.addEventListener('DOMContentLoaded', () => {
-    const sections = [
-        document.querySelector('.hero_headlines h1'),
-        document.querySelector('.hero_headlines h3'),
-        document.querySelector('.hero_image'),
-        document.querySelector('.hero_text h4'),
-        document.querySelector('.hero_attention'),
-    ];
+    const heroElements = document.querySelectorAll('.hero_animate');
 
-    sections.forEach((el, index) => {
-        if(el) {
-            setTimeout(() => {
-                el.classList.add('appear');
-            }, 600 * index); 
-        }
+    heroElements.forEach((el, index) => {
+        setTimeout(() => {
+            el.classList.add('appear');
+        }, 600 * index);
     });
 });
 
@@ -51,17 +49,35 @@ const observer = new IntersectionObserver((entries) => {
 observer.observe(document.querySelector('.about_imageAndText'));
 
 
+//gives #about a "stuck" range long enough to reveal its own overflow before releasing
+function sizeHeroAboutSpacer() {
+    const about = document.querySelector('#about');
+    const spacer = document.querySelector('.hero_about_spacer');
+    if (!about || !spacer) return;
+    spacer.style.height = '0px'; // reset before measuring
+    const overflow = about.scrollHeight - window.innerHeight;
+    spacer.style.height = Math.max(0, overflow) + 'px';
+}
+window.addEventListener('DOMContentLoaded', sizeHeroAboutSpacer);
+window.addEventListener('load', sizeHeroAboutSpacer);
+window.addEventListener('resize', sizeHeroAboutSpacer);
+
+
 //blocking chrome feature
 if ('scrollRestoration' in history) {
     history.scrollRestoration = 'manual';
 }
-window.scrollTo(0, 0);
 
-window.addEventListener('load', () => {
-    setTimeout(() => {
-        window.scrollTo(0, 0);
-    }, 0);
-});
+//don't fight an intentional #about / #projects link (e.g. from another page's nav) with a forced scroll-to-top
+if (!window.location.hash) {
+    window.scrollTo(0, 0);
+
+    window.addEventListener('load', () => {
+        setTimeout(() => {
+            window.scrollTo(0, 0);
+        }, 0);
+    });
+}
 
 
 

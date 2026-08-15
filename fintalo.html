@@ -18,6 +18,7 @@
     <link rel="stylesheet" href="src/css/fintalo.css" />
 
     <!-- Scripts -->
+    <script src="src/js/navbar.js" defer></script>
     <script src="src/js/main.js" defer></script>
 
     <!--logo-->
@@ -26,36 +27,7 @@
 
   <body>
     <!-- NAVBAR -->
-    <nav class="navbar">
-      <div class="navbar_container">
-
-        <a href="index.html" class="navbar_logo">Irina Comsa</a>
-
-        <div class="navbar_nav">
-          <a class="nav_link" href="index.html" data-target="home" role="button">Home</a>
-          <a class="nav_link" href="#about" data-target="about" role="button">About Me</a>
-          <a class = "nav_link" href="#projects" data-target="projects" role="button">Projects</a>
-          <a
-            href="public/assets/documents/irina_comsa_lebenslauf.pdf"
-            target="_blank"
-            role="button"
-            >CV</a
-          >
-          <a
-            href="https://mail.google.com/mail/?view=cm&fs=1&to=irinacomsa28@gmail.com"
-            target="_blank"
-            class="navbar_pigeon"
-            role="button"
-            aria-label="Contact"
-          >
-            <img src="public/assets/images/pigeon-default.png" class="pigeon-default" alt = "Contact me via Email"/>
-            <img src="public/assets/images/pigeon-hovered.png" class="pigeon-hovered" alt="Contact via Email" />
-            <span class="tooltip">Contact</span>
-          </a>
-        </div>
-      </div>
-
-    </nav>
+    <div data-navbar data-home-href="index.html"></div>
 
   <div class="main_wrapper"> <!-- MAIN WRAPPER contains everything except footer -->
 
@@ -200,8 +172,8 @@
             </a>
           </div>
           <div class="navFooter">
-            <a href="#about" data-target="about" role="button">About Me</a>
-            <a href="#projects" data-target="projects" role="button">Projects</a>
+            <a href="index.html#about" data-target="about" role="button">About</a>
+            <a href="index.html#projects" data-target="projects" role="button">Projects</a>
             <a href="#hero" data-target="hero" role="button">Back to Top</a>
           </div>
         </div>
