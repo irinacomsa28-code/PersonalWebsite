@@ -3,8 +3,14 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="description" content="Portfolio of Irina Comsa, a Software Engineer and UX Designer student in Munich, Germany.Portfolio von Irina Comsa, einer Student Studentin der Softwareentwicklung und des UX-Designs in München, Deutschland. Werkstudent Working Student">
-    <meta name="google-site-verification" content="HTfGTt3uIeofMBIrG480G_uW8pSm6BpFvpTYmr-GXTo" />
+    <meta
+      name="description"
+      content="Portfolio of Irina Comsa, a Software Engineer and UX Designer student in Munich, Germany.Portfolio von Irina Comsa, einer Student Studentin der Softwareentwicklung und des UX-Designs in München, Deutschland. Werkstudent Working Student"
+    />
+    <meta
+      name="google-site-verification"
+      content="HTfGTt3uIeofMBIrG480G_uW8pSm6BpFvpTYmr-GXTo"
+    />
 
     <title>Irina Comsa Portfolio — UX & Software Engineering</title>
 
@@ -18,284 +24,312 @@
 
     <!-- Scripts -->
     <script src="src/js/navbar.js" defer></script>
+    <script src="src/js/footer.js" defer></script>
     <script src="src/js/main.js" defer></script>
 
     <!--logo-->
-    <link rel="icon" type="image/x-icon" href="public/assets/images/favicon.png">
-
+    <link
+      rel="icon"
+      type="image/x-icon"
+      href="public/assets/images/favicon.png"
+    />
   </head>
 
   <body>
-   <!-- NAVBAR -->
+    <!-- NAVBAR -->
     <div data-navbar data-home-href="#hero"></div>
 
-  <div class="main_wrapper"> <!-- MAIN WRAPPER contains everything except footer -->
-    
-    <!--  SOCIAL LINKS  -->
-    <aside class="social-links" aria-label="Social media links"> 
-      <a href="https://www.linkedin.com/in/irina-c-901251205/" target="_blank" role="button">
-        <img src="public/assets/images/buttonLinkedin-default.png" class="buttonLinkedin-default" alt="LinkedIn" />
-        <img src="public/assets/images/buttonLinkedin-hovered.png" class="buttonLinkedin-hovered" alt="LinkedIn" />
-      </a>
-      <a href="https://mail.google.com/mail/?view=cm&fs=1&to=irinacomsa28@gmail.com" target="_blank" role="button">
-        <img src="public/assets/images/buttonEmail-default.png" class="buttonEmail-default" alt="Email" />
-        <img src="public/assets/images/buttonEmail-hovered.png" class="buttonEmail-hovered" alt="Email" />
-      </a>
-    </aside>
+    <div class="main_wrapper">
+      <!-- MAIN WRAPPER contains everything except footer -->
 
-    <!-- wrapped so About's sticky cover-hero effect doesn't extend into Projects -->
-    <div class="hero_about_stack">
-    <section id="hero" class="hero_section">
-      <div class="hero_container">
-        <div class="hero_content">
-          <div class="hero_text">
-            <h2 class="hero_animate">Hello, I'm Irina. I design thoughtful digital experiences and bring them to life
-                with code.
-            </h2>
-            <h4 class="hero_animate">
-              Master's student in Informatics, working across UX & Software Engineering
-            </h4>
+      <!--  SOCIAL LINKS  -->
+      <aside class="social-links" aria-label="Social media links">
+        <a
+          href="https://www.linkedin.com/in/irina-c-901251205/"
+          target="_blank"
+          role="button"
+        >
+          <img
+            src="public/assets/images/buttonLinkedin-default.png"
+            class="buttonLinkedin-default"
+            alt="LinkedIn"
+          />
+          <img
+            src="public/assets/images/buttonLinkedin-hovered.png"
+            class="buttonLinkedin-hovered"
+            alt="LinkedIn"
+          />
+        </a>
+        <a
+          href="https://mail.google.com/mail/?view=cm&fs=1&to=irinacomsa28@gmail.com"
+          target="_blank"
+          role="button"
+        >
+          <img
+            src="public/assets/images/buttonEmail-default.png"
+            class="buttonEmail-default"
+            alt="Email"
+          />
+          <img
+            src="public/assets/images/buttonEmail-hovered.png"
+            class="buttonEmail-hovered"
+            alt="Email"
+          />
+        </a>
+      </aside>
 
-            <div class="hero_buttons hero_animate">
-              <a
-                href="public/assets/documents/irina_comsa_lebenslauf.pdf"
-                download="Irina_Comsa_CV.pdf"
-                class="btn btn-primary"
-                >Download CV</a
-              >
-              <a
-                href="https://mail.google.com/mail/?view=cm&fs=1&to=irinacomsa28@gmail.com"
-                target="_blank"
-                role="button"
-                aria-label="Contact"
-                class="btn btn-secondary"
-                >Send a Messenger Pigeon
-                <img src="public/assets/icons/pigeon_icon.svg" alt="" /></a
-              >
-            </div>
+      <!-- wrapped so About's sticky cover-hero effect doesn't extend into Projects -->
+      <div class="hero_about_stack">
+        <section id="hero" class="hero_section">
+          <div class="hero_container">
+            <div class="hero_content">
+              <div class="hero_text">
+                <h2 class="hero_animate" data-animate-step="0">
+                  Hello, I'm Irina. I design thoughtful digital experiences and
+                  bring them to life with code.
+                </h2>
+                <h4 class="hero_animate" data-animate-step="1">
+                  Master's student in Informatics, working across UX & Software
+                  Engineering
+                </h4>
 
-            <!--<div class="hero_attention hero_animate">
+                <div class="hero_buttons hero_animate" data-animate-step="2">
+                  <a
+                    href="public/assets/documents/irina_comsa_lebenslauf.pdf"
+                    download="Irina_Comsa_CV.pdf"
+                    class="btn btn-primary"
+                    >Download CV</a
+                  >
+                  <a
+                    href="https://mail.google.com/mail/?view=cm&fs=1&to=irinacomsa28@gmail.com"
+                    target="_blank"
+                    role="button"
+                    aria-label="Contact"
+                    class="btn btn-secondary"
+                    >Send a Messenger Pigeon
+                    <svg
+                      width="18"
+                      height="18"
+                      viewBox="0 0 18 18"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                      aria-hidden="true"
+                    ><path d="M7.16519 10.9908C3.20715 11.5755 1.08883 8.58996 0.545796 7.68778C0.534681 7.66912 0.529297 7.6476 0.530314 7.6259C0.531331 7.6042 0.538703 7.58328 0.551515 7.56573C0.564327 7.54819 0.582013 7.5348 0.602373 7.52723C0.622734 7.51966 0.644873 7.51824 0.666035 7.52314C1.21379 7.65085 1.84956 7.51489 1.84956 7.51489C0.243235 6.28147 0.0188691 3.9211 0.000401122 2.89907C-0.000144178 2.85187 0.011646 2.80533 0.0346067 2.76408C0.0575675 2.72283 0.0909024 2.68829 0.131312 2.66388C0.171721 2.63947 0.217805 2.62603 0.265003 2.62489C0.3122 2.62376 0.358875 2.63497 0.400409 2.65742C1.81616 3.43347 4.96868 4.17729 8.99313 5.79108C10.9582 6.57931 11.8042 7.89211 12.1578 9.01512C12.7079 9.08978 13.2624 9.07131 13.7052 8.81158C14.0196 8.62729 14.3547 8.35067 14.7603 8.27208C16.0444 8.02296 16.9713 8.55814 17.9587 9.92948C17.9801 9.95974 17.9937 9.99486 17.9981 10.0317C18.0025 10.0684 17.9976 10.1058 17.984 10.1402C17.9703 10.1747 17.9483 10.2052 17.9199 10.229C17.8914 10.2527 17.8575 10.2691 17.8212 10.2764C14.6927 10.8886 14.3854 12.3975 13.3382 13.2396C9.8293 16.0589 4.43783 15.8164 1.03186 14.0832C0.989412 14.0619 0.955076 14.0273 0.934069 13.9848C0.913062 13.9422 0.906531 13.8939 0.915467 13.8472C0.924404 13.8006 0.948321 13.7582 0.983583 13.7263C1.01885 13.6945 1.06353 13.6751 1.11084 13.671C3.40283 13.4577 5.52508 12.9429 7.16519 10.9908ZM15.6664 9.3224C15.6732 9.39451 15.7085 9.46094 15.7643 9.50707C15.8202 9.5532 15.8921 9.57525 15.9642 9.56837C16.0363 9.5615 16.1028 9.52625 16.1489 9.4704C16.195 9.41454 16.2171 9.34264 16.2102 9.27053C16.2033 9.19841 16.1681 9.13198 16.1122 9.08585C16.0563 9.03972 15.9845 9.01767 15.9123 9.02455C15.8402 9.03143 15.7738 9.06667 15.7277 9.12253C15.6815 9.17839 15.6595 9.25028 15.6664 9.3224Z" fill="currentColor"/></svg
+                  /></a>
+                </div>
+
+                <!--<div class="hero_attention hero_animate">
               <img
                 src="public/assets/images/construction-worker.png"
                 alt="construction worker icon"
               /><p>Attention! This webpage is currently under renovation. Feel free to explore nevertheless! <br> Thank you for your understanding <3</p>
             </div>-->
-          </div>
+              </div>
 
-          <div class="hero_image hero_animate">
-            <img
-              src="public/assets/images/profile.png"
-              alt="A profile picture of Irina Comsa"
-              fetchpriority="high"
-            />
+              <div class="hero_image hero_animate" data-animate-step="0">
+                <img
+                  src="public/assets/images/profile.png"
+                  alt="A profile picture of Irina Comsa"
+                  fetchpriority="high"
+                />
+              </div>
+            </div>
           </div>
-        </div>
+        </section>
+
+        <!-- ABOUT SECTION -->
+        <section id="about" class="section">
+          <div class="about_container">
+            <div class="about_content">
+              <div class="about_imageAndText">
+                <div class="about_image">
+                  <img
+                    src="public/assets/images/imageAbout.png"
+                    class="imageAbout"
+                    alt="Image for about section. Me presenting in front of other students."
+                  />
+                  <img
+                    src="public/assets/images/imageAbout-other.png"
+                    class="imageAbout-other"
+                  />
+                </div>
+
+                <div class="about_text">
+                  <h2>About Me</h2>
+                  <p>
+                    While my master's degree in informatics provides a good
+                    foundation in computer science, I thrive at the intersection
+                    of design and technical implementation.
+                  </p>
+
+                  <p>
+                    I am seeking collaborative environments, where I can learn
+                    from experts.   I am drawn to high-stakes sectors such as
+                    HealthTech, Security, and Fintech. Regarding the current AI
+                    wave, I am particularly interested in the ethics and
+                    security behind it. I view AI as a tool meant to support
+                    humans, rather than replace the essential human touch.
+                  </p>
+
+                  <p>
+                    I am grateful for the hands-on experience I gained at <a
+                      href="https://www.usaneers.de/"
+                      target="_blank"
+                      ><u>Usaneers</u></a
+                    >
+                    as well as the time spent refining my UX skills with the
+                    <a
+                      href="https://de.linkedin.com/company/tudesign-student-club"
+                      target="_blank"
+                      ><u>TUDesign</u></a
+                    >
+                    student club. Currently, I am extending my UX and web
+                    programming skills as a working student at
+                    <a href="https://monacofriends.com/" target="_blank"
+                      ><u>Monaco Friends</u></a
+                    >.
+                  </p>
+
+                  <p>
+                    My priority is continuous growth and open communication. I
+                    am seeking collaborative environments where I can learn from
+                    experts and contribute to building technology with a genuine
+                    human impact.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div class="about_skills">
+              <div class="skillsAndExperience">
+                <div class="skills">
+                  <h3>Skills & Tools</h3>
+                  <img src="public/assets/images/skills.png" alt="My skills" />
+                </div>
+
+                <div class="experience">
+                  <h3>Experience</h3>
+                  <img
+                    src="public/assets/images/experience.png"
+                    alt="My experience"
+                  />
+                </div>
+              </div>
+
+              <div class="educationAndLanguages">
+                <div class="education">
+                  <h3>Education</h3>
+                  <img
+                    src="public/assets/images/education.png"
+                    alt="My education"
+                  />
+                </div>
+
+                <div class="languages">
+                  <h3>Languages</h3>
+                  <img
+                    src="public/assets/images/languages.png"
+                    alt="My language skills"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+        <!-- height set by JS: gives #about a "stuck" range so it can stick at all -->
+        <div class="hero_about_spacer"></div>
       </div>
-    </section>
+      <!-- END OF hero_about_stack -->
 
-    <!-- ABOUT SECTION -->
-    <section id="about" class="section">
-      <div class="about_container">
-        <div class="about_content">
-          <h2>About</h2>
-
-          <div class="about_imageAndText">
-            <div class="about_image">
-              <img
-                src="public/assets/images/imageAbout.png" class="imageAbout"
-                alt="Image for about section. Me presenting in front of other students."
-              />
-              <img
-                src="public/assets/images/imageAbout-other.png" class="imageAbout-other"
-              />
-            </div>
-
-            <div class="about_text">
-              <p>
-                While my master's degree in informatics provides a good
-                foundation in computer science, I thrive at the intersection of design and technical implementation.
-              </p>
-              
-              <p>
-                I am seeking collaborative environments, where I can learn from experts.  
-                I am drawn to high-stakes sectors such as HealthTech, Security, and Fintech. 
-                Regarding the current AI wave, I am particularly interested in the ethics and security behind it. 
-                I view AI as a tool meant to support humans, rather than replace the essential human touch.         
-              </p>
-
-              <p>
-                I am grateful for the hands-on experience I gained at <a href="https://www.usaneers.de/" target="_blank"><u>Usaneers</u></a> as well as the time spent 
-                refining my UX skills with the <a href="https://de.linkedin.com/company/tudesign-student-club" target="_blank"><u>TUDesign</u></a> student club. 
-                Currently, I am extending my UX and web programming skills as a working student at <a href="https://monacofriends.com/" target="_blank"><u>Monaco Friends</u></a>.
-              </p>
-
-              <p>
-                My priority is continuous growth and open communication. 
-                I am seeking collaborative environments where I can learn from experts and 
-                contribute to building technology with a genuine human impact.
-              </p>
-
-
-            </div>
-          </div>
-        </div>
-
-        <div class="about_skills">
-          
-          <div class="skillsAndExperience"> 
-            <div class="skills">
-              <h3>Skills & Tools</h3>
-              <img
-                src="public/assets/images/skills.png"
-                alt="My skills"
-              />
-            </div>
-         
-            <div class="experience">
-              <h3>Experience</h3>
-              <img
-                src="public/assets/images/experience.png"
-                alt="My experience"
-              />
-            </div>
-          </div>
-          
-          <div class="educationAndLanguages">
-            <div class="education">
-              <h3>Education</h3> 
-              <img
-              src="public/assets/images/education.png"
-              alt="My education"
-              />
-            </div>
-
-            <div class="languages">
-              <h3>Languages</h3> 
-              <img
-              src="public/assets/images/languages.png"
-              alt="My language skills"
-              />
-            </div>
-              
-          </div>
-              
-        </div>
-      </div>
-    </section>
-    <!-- height set by JS: gives #about a "stuck" range so it can stick at all -->
-    <div class="hero_about_spacer"></div>
-    </div> <!-- END OF hero_about_stack -->
-
-<!-- PROJECT -->
-    <section id="projects" class="section">
-      <div class="projects_container">
-          <h1>Latest Projects</h1> 
+      <!-- PROJECT -->
+      <section id="projects" class="section">
+        <div class="projects_container">
+          <h1>Latest Projects</h1>
           <div class="projects_grid">
             <!-- Project 1 -->
             <div class="project_card">
-
               <div class="project_text">
-                <h2>Fintalo </h2>
-                <h4>redesigning Fintalo's AI-native Fintech Platform along with my team from TUDesign</h4>
+                <h2>Fintalo</h2>
+                <h4>
+                  redesigning Fintalo's AI-native Fintech Platform along with my
+                  team from TUDesign
+                </h4>
               </div>
 
               <a href="fintalo.html" class="project_image">
-                <img src="public/assets/images/fintalo/teaser.webp" class="bw-img fintalo-bw"  />
-                <img src="public/assets/images/fintalo/teaser.webp" class="color-img" />
+                <img
+                  src="public/assets/images/fintalo/teaser.webp"
+                  class="bw-img fintalo-bw"
+                />
+                <img
+                  src="public/assets/images/fintalo/teaser.webp"
+                  class="color-img"
+                />
               </a>
             </div>
 
             <div class="project_card">
-
               <div class="project_text">
                 <h2>Combating Biases through Play</h2>
-                <h4>bachelor thesis in collaboration with LMU and Universita della Svizzera italiana <br> | designing & implementing an educational game for primary school children</h4>
+                <h4>
+                  bachelor thesis in collaboration with LMU and Universita della
+                  Svizzera italiana <br />
+                  | designing & implementing an educational game for primary
+                  school children
+                </h4>
               </div>
 
               <a href="storytellingGame.html" class="project_image">
-                <img src="public/assets/images/project1.png" class="bw-img"  />
-                <img src="public/assets/images/project1-color.png" class="color-img" />
+                <img src="public/assets/images/project1.png" class="bw-img" />
+                <img
+                  src="public/assets/images/project1-color.png"
+                  class="color-img"
+                />
               </a>
             </div>
 
             <div class="project_card">
-
               <div class="project_text">
                 <h2>MUTUM Debate Club</h2>
-                <h4>website designed and prototyped in Figma along with my team from TUDesign student club</h4>
+                <h4>
+                  website designed and prototyped in Figma along with my team
+                  from TUDesign student club
+                </h4>
               </div>
 
               <a href="muntum.html" class="project_image">
-                <img src="public/assets/images/project2.png" class="bw-img"  />
-                <img src="public/assets/images/project2-color.png" class="color-img" />
+                <img src="public/assets/images/project2.png" class="bw-img" />
+                <img
+                  src="public/assets/images/project2-color.png"
+                  class="color-img"
+                />
               </a>
             </div>
 
             <div class="project_card">
-
               <div class="project_text">
                 <h2>WildCraft Foundry</h2>
-                <h4>e-commerce platform for 3D models, designed and prototyped in Figma</h4>
+                <h4>
+                  e-commerce platform for 3D models, designed and prototyped in
+                  Figma
+                </h4>
               </div>
 
               <a href="wildCraftFoundry.html" class="project_image">
-                <img src="public/assets/images/project3.png" class="bw-img"  />
-                <img src="public/assets/images/project3-color.png" class="color-img" />
+                <img src="public/assets/images/project3.png" class="bw-img" />
+                <img
+                  src="public/assets/images/project3-color.png"
+                  class="color-img"
+                />
               </a>
             </div>
-
-
-          </div>
-
-      </div>
-    </section>
-  </div> <!-- END OF MAIN WRAPPER -->
-
-
-    <!-- FOOTER -->
-    <section id="footer" class="footer_section">
-      <div class="footer_container">
-        <div class="footer_content">
-          <div class="reachedFootertext">
-            <p>
-              You've hit the footer, <br />
-              thanks for stopping by!
-            </p>
-            <div class="footer_image">
-              <img
-                src="public/assets/images/gnome.png"
-                alt="Picture of a gnome"
-              />
-            </div>
-          </div>
-
-          <div class="CTA">
-            <p> 
-              <a
-                href="https://mail.google.com/mail/?view=cm&fs=1&to=irinacomsa28@gmail.com"
-                target="_blank"
-                >Let's get in touch! <br /> irinacomsa28@gmail.com</a>
-            </p>
-  
-              <a class="download_button"
-                href="public/assets/documents/irina_comsa_lebenslauf.pdf"
-                download="Irina_Comsa_CV.pdf"
-              >
-                <img src="public/assets/images/downloadCVButton-default.png" class="downloadCVButton-default" />
-                <img src="public/assets/images/downloadCVButton-hovered.png" class="downloadCVButton-hovered" />
-               
-              </a>
-            </a>
-          </div>
-          <div class="navFooter">
-            <a href="#hero" data-target="hero" role="button">Back to Top</a>
           </div>
         </div>
+      </section>
+    </div>
+    <!-- END OF MAIN WRAPPER -->
 
-        <p class="copyright">
-          Copyright 2026 Irina Comsa. All rights reserved.
-        </p>
-      </div>
-    </section>
+    <!-- FOOTER -->
+    <div data-footer></div>
   </body>
 </html>

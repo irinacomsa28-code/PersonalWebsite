@@ -19,6 +19,7 @@
 
     <!-- Scripts -->
     <script src="src/js/navbar.js" defer></script>
+    <script src="src/js/footer.js" defer></script>
     <script src="src/js/main.js" defer></script>
 
     <!--logo-->
@@ -109,16 +110,18 @@
 
     <!--prototype video-->
     <section class="video_project_section">
-      <video
-        class="video_project"
-        src="public/assets/images/fintalo/video_prototype.mp4"
-        autoplay
-        muted
-        loop
-        playsinline
-        disablepictureinpicture
-        aria-label="Fintalo prototype walkthrough video"
-      ></video>
+      <div class="project_container">
+        <video
+          class="video_project"
+          src="public/assets/images/fintalo/video_prototype.mp4"
+          autoplay
+          muted
+          loop
+          playsinline
+          disablepictureinpicture
+          aria-label="Fintalo prototype walkthrough video"
+        ></video>
+      </div>
     </section>
     
     <section class="section_project">
@@ -137,51 +140,6 @@
 
 
     <!-- FOOTER -->
-    <section id="footer" class="footer_section">
-      <div class="footer_container">
-        <div class="footer_content">
-          <div class="reachedFootertext">
-            <p>
-              You've hit the footer, <br />
-              thanks for stopping by!
-            </p>
-            <div class="footer_image">
-              <img
-                src="public/assets/images/gnome.png"
-                alt="Picture of a gnome"
-              />
-            </div>
-          </div>
-
-          <div class="CTA">
-            <p>
-              <a
-                href="https://mail.google.com/mail/?view=cm&fs=1&to=irinacomsa28@gmail.com"
-                target="_blank"
-                >Let's get in touch! <br /> irinacomsa28@gmail.com</a>
-            </p>
-
-              <a class="download_button"
-                href="public/assets/documents/irina_comsa_lebenslauf.pdf"
-                download="Irina_Comsa_CV.pdf"
-              >
-                <img src="public/assets/images/downloadCVButton-default.png" class="downloadCVButton-default" />
-                <img src="public/assets/images/downloadCVButton-hovered.png" class="downloadCVButton-hovered" />
-
-              </a>
-            </a>
-          </div>
-          <div class="navFooter">
-            <a href="index.html#about" data-target="about" role="button">About</a>
-            <a href="index.html#projects" data-target="projects" role="button">Projects</a>
-            <a href="#hero" data-target="hero" role="button">Back to Top</a>
-          </div>
-        </div>
-
-        <p class="copyright">
-          Copyright 2026 Irina Comsa. All rights reserved.
-        </p>
-      </div>
-    </section>
+    <div data-footer></div>
   </body>
 </html>

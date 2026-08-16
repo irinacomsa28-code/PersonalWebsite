@@ -129,11 +129,11 @@ body {
 
 .footer_section{
   margin-top: auto;
-  padding-top: 36px;
+  padding-top: 94px;
   padding-left: var(--space-lg);
   padding-right: var(--space-lg);
-  padding-bottom: 36px;
-  height: 100%;
+  padding-bottom: 48px;
+  height: 380px;
   width: 100%;
   background-color: var(--secondary-color);
 }

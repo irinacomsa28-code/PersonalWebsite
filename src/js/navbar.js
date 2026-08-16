@@ -13,12 +13,6 @@
           <a class="nav_link" href="${sectionPrefix}#about" data-target="about" role="button">About</a>
           <a class="nav_link" href="${sectionPrefix}#projects" data-target="projects" role="button">Projects</a>
           <a
-            href="public/assets/documents/irina_comsa_lebenslauf.pdf"
-            target="_blank"
-            role="button"
-            >CV</a
-          >
-          <a
             href="https://mail.google.com/mail/?view=cm&fs=1&to=irinacomsa28@gmail.com"
             target="_blank"
             role="button"

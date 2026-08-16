@@ -24,14 +24,16 @@ window.addEventListener("scroll", () => {
 }, { passive: true });
 
 
-//staggering the .appear animation onto every hero element marked .hero_animate, in document order
+//staggering the .appear animation onto every hero element marked .hero_animate,
+//grouped by data-animate-step so elements sharing a step animate together
 window.addEventListener('DOMContentLoaded', () => {
     const heroElements = document.querySelectorAll('.hero_animate');
 
-    heroElements.forEach((el, index) => {
+    heroElements.forEach((el) => {
+        const step = Number(el.dataset.animateStep || 0);
         setTimeout(() => {
             el.classList.add('appear');
-        }, 600 * index);
+        }, 600 * step);
     });
 });
 
@@ -46,7 +48,8 @@ const observer = new IntersectionObserver((entries) => {
   });
 }, { threshold: 0.2 }); // Löst aus, wenn 20% des Bereichs sichtbar sind
 
-observer.observe(document.querySelector('.about_imageAndText'));
+const aboutImageAndText = document.querySelector('.about_imageAndText');
+if (aboutImageAndText) observer.observe(aboutImageAndText);
 
 
 //gives #about a "stuck" range long enough to reveal its own overflow before releasing
@@ -61,6 +64,35 @@ function sizeHeroAboutSpacer() {
 window.addEventListener('DOMContentLoaded', sizeHeroAboutSpacer);
 window.addEventListener('load', sizeHeroAboutSpacer);
 window.addEventListener('resize', sizeHeroAboutSpacer);
+
+
+//native #hash anchor jumps miscalculate against our sticky sections, so scroll manually.
+//sticky elements can also misreport their own rect while "stuck", so unstick before measuring
+function trueOffsetTop(el) {
+    const prevPosition = el.style.position;
+    el.style.position = 'static';
+    const top = el.getBoundingClientRect().top + window.scrollY;
+    el.style.position = prevPosition;
+    return top;
+}
+
+document.addEventListener('click', (e) => {
+    const link = e.target.closest('a[href^="#"]');
+    if (!link) return;
+    const target = document.getElementById(link.getAttribute('href').slice(1));
+    if (!target) return;
+    e.preventDefault();
+    window.scrollTo({ top: trueOffsetTop(target), behavior: 'smooth' });
+    history.pushState(null, '', link.getAttribute('href'));
+});
+
+//same native-jump bug applies when a page loads directly with a #hash (e.g. a cross-page nav link)
+window.addEventListener('load', () => {
+    if (!window.location.hash) return;
+    sizeHeroAboutSpacer();
+    const target = document.getElementById(window.location.hash.slice(1));
+    if (target) window.scrollTo({ top: trueOffsetTop(target) });
+});
 
 
 //blocking chrome feature
