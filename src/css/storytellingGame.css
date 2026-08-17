@@ -150,6 +150,19 @@
   padding-left: 0;
 }
 
+/*full-width autoplay/loop video showcase, between description and photo sections*/
+.video_project_section {
+  padding-inline: var(--space-lg);
+  margin-top: var(--space-xl);
+  margin-bottom: var(--space-xl);
+}
+
+.video_project {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
 
 
 

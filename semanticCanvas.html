@@ -1,0 +1,173 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Portfolio of Irina Comsa, a Software Engineer and UX Designer student in Munich, Germany.Portfolio von Irina Comsa, einer Student Studentin der Softwareentwicklung und des UX-Designs in München, Deutschland. Werkstudent Working Student">
+    <meta name="google-site-verification" content="HTfGTt3uIeofMBIrG480G_uW8pSm6BpFvpTYmr-GXTo" />
+
+
+    <title>Irina Comsa Portfolio — UX & Software Engineering</title>
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="src/css/main.css" />
+    <link rel="stylesheet" href="src/css/layout.css" />
+    <link rel="stylesheet" href="src/css/storytellingGame.css" />
+    <link rel="stylesheet" href="src/css/muntum.css" />
+    <link rel="stylesheet" href="src/css/wildCraftFoundry.css" />
+    <link rel="stylesheet" href="src/css/fintalo.css" />
+    <link rel="stylesheet" href="src/css/semanticCanvas.css" />
+
+    <!-- Scripts -->
+    <script src="src/js/navbar.js" defer></script>
+    <script src="src/js/footer.js" defer></script>
+    <script src="src/js/main.js" defer></script>
+
+    <!--logo-->
+    <link rel="icon" type="image/x-icon" href="public/assets/images/favicon.png">
+  </head>
+
+  <body>
+    <!-- NAVBAR -->
+    <div data-navbar data-home-href="index.html"></div>
+
+  <div class="main_wrapper"> <!-- MAIN WRAPPER contains everything except footer -->
+
+
+
+    <nav class="side-nav">
+    <a class="backButton" role="button" href="fintalo.html">
+      <img src="public/assets/images/backButton.png" alt="Previous Project" class="backButton"/>
+      <img src="public/assets/images/backButton_hovered.png" alt="Previous Project" class="backButton-hovered" />
+    </a>
+    <a class="nextButton" role="button" href="storytellingGame.html">
+    <img src="public/assets/images/nextButton.png" alt="Next Project" class = "nextButton">
+    <img src="public/assets/images/nextButton_hovered.png" alt="Next Project" class="nextButton-hovered"/>
+    </a>
+    </nav>
+
+    <!--  SOCIAL LINKS  -->
+    <aside class="social-links" aria-label="Social media links">
+      <a href="https://www.linkedin.com/in/irina-c-901251205/" target="_blank" role="button">
+        <img src="public/assets/images/buttonLinkedin-default.png" class="buttonLinkedin-default" alt="LinkedIn" />
+        <img src="public/assets/images/buttonLinkedin-hovered.png" class="buttonLinkedin-hovered" alt="LinkedIn" />
+      </a>
+      <a href="https://mail.google.com/mail/?view=cm&fs=1&to=irinacomsa28@gmail.com" target="_blank" role="button">
+        <img src="public/assets/images/buttonEmail-default.png" class="buttonEmail-default" alt="Email" />
+        <img src="public/assets/images/buttonEmail-hovered.png" class="buttonEmail-hovered" alt="Email" />
+      </a>
+    </aside>
+
+    <!--hero-->
+    <section id="hero" class="hero_section_project">
+      <div class="hero_projectcontainer">
+          <div class="project_hero_image">
+            <img src="public/assets/images/semanticSearch/hero_image.png" alt="Image of the Semantic Canvas notebook extension" fetchpriority="high"/>
+          </div>
+      </div>
+    </section>
+
+    <!--about the project-->
+    <section class="section_project">
+      <div class="project_container">
+
+        <div class="project_content">
+          <h2>Semantic Canvas <br> | computational notebook extension</h2>
+
+          <div class="titled_keypoint">
+            <p class="title">What I Did</p>
+            <ul>
+            <li>Built Semantic Canvas, a VS Code extension for computational notebooks, together with 2 teammates for the "Intelligent Systems" university practical</li>
+            <li>Designed it as a toolbox that speeds up navigating, documenting and maintaining notebooks, built around search as the core feature</li>
+            </ul>
+          </div>
+
+          <div class="challenge_solution_row">
+            <div class="titled_keypoint">
+              <p class="title">The Challenge</p>
+              <p class="body">Long notebooks are hard to navigate, documentation is often skipped because it slows down coding, and notebooks quietly accumulate dead, stale or duplicate cells over time.</p>
+            </div>
+
+            <div class="titled_keypoint">
+              <p class="title">The Solution</p>
+              <p class="body">Semantic Canvas adds a sidebar code overview, semantic and keyword search, AI-assisted (and human-editable) cell documentation, a sidebar/inline view toggle, code health flags, and configurable AI settings. Users can navigate, document and maintain notebooks without leaving their flow.</p>
+            </div>
+          </div>
+
+          <div class="Img1And2Project">
+            <img src="public/assets/images/semanticSearch/technical architecture.png" alt="Technical architecture of the Semantic Canvas extension"/>
+            <img src="public/assets/images/semanticSearch/user workflow.png" alt="Sidebar and inline view workflow in Semantic Canvas"/>
+          </div>
+        </div><!--end content-->
+
+      </div><!--end container-->
+    </section>
+
+    <!--all 5 features, laid out in a 2-column grid-->
+    <section class="section_project">
+      <div class="project_container">
+        <div class="features_grid">
+
+          <div class="feature_card">
+            <div class="titled_keypoint">
+              <p class="title">1. Navigate & Search</p>
+              <p class="body">A sidebar gives a clear overview of the notebook's structure, so users can jump to any cell in one click. Two search modes cover both cases: semantic search for top matches by meaning, and a keyword search with VS Code-native features like replace, replace all and match case.</p>
+            </div>
+            <video
+              class="video_project sc_video_uniform"
+              src="public/assets/images/semanticSearch/search and navigate video.mov"
+              autoplay
+              muted
+              loop
+              playsinline
+              disablepictureinpicture
+              aria-label="Navigate and search feature walkthrough"
+            ></video>
+          </div>
+
+          <div class="feature_card">
+            <div class="titled_keypoint">
+              <p class="title">2. Work on Documentation</p>
+              <p class="body">Each cell gets an automatically generated label and summary, which users can edit or regenerate with AI. AI-written content is marked with a yellow icon and human-edited content with a green one, so it's always clear how much of the documentation is AI vs. human.</p>
+            </div>
+            <video
+              class="video_project sc_video_uniform"
+              src="public/assets/images/semanticSearch/document video.mov"
+              autoplay
+              muted
+              loop
+              playsinline
+              disablepictureinpicture
+              aria-label="Documentation feature walkthrough"
+            ></video>
+          </div>
+
+          <div class="feature_card">
+            <div class="titled_keypoint">
+              <p class="title">3. Receive Feedback</p>
+              <p class="body">The extension flags dead, stale and duplicate cells, helping users keep notebooks clean and maintainable over time.</p>
+            </div>
+            <img src="public/assets/images/semanticSearch/clean code feature.png" alt="Code health feedback flagging dead, stale and duplicate cells"/>
+          </div>
+
+          <div class="feature_card">
+            <div class="titled_keypoint">
+              <p class="title">4. Switch Views</p>
+              <p class="body">Users can toggle between a sidebar view, best for seeing the whole notebook structure at a glance, and an inline view, which places documentation directly above the code for easier debugging, editing and a lower learning curve.</p>
+            </div>
+            <div class="titled_keypoint">
+              <p class="title">5. AI Settings</p>
+              <p class="body">Users control their own API key, choice of model, and which code health checks run — balancing cost, privacy and personal preference.</p>
+            </div>
+
+        </div><!--end features_grid-->
+      </div><!--end container-->
+    </section>
+
+  </div> <!-- END OF MAIN WRAPPER -->
+
+
+    <!-- FOOTER -->
+    <div data-footer></div>
+  </body>
+</html>

@@ -1,0 +1,42 @@
+/*teaser card on index.html reuses one image for both hover states, same approach as fintalo*/
+.semanticCanvas-bw {
+  filter: grayscale(1);
+}
+
+/*Challenge and Solution side by side, top-aligned so both titles sit at the same level*/
+.challenge_solution_row {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  gap: 36px;
+}
+
+.challenge_solution_row .titled_keypoint {
+  flex: 1;
+}
+
+/*5 features, 2 per row*/
+.features_grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  column-gap: var(--space-lg);
+  row-gap: var(--space-xl);
+}
+
+.feature_card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.feature_card img {
+  width: 100%;
+  height: auto;
+}
+
+/*both feature videos share one uniform size regardless of their native aspect ratio, sized to their grid column*/
+.sc_video_uniform {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: contain;
+}

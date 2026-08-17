@@ -19,16 +19,3 @@
   max-width: none; /*override the sitewide .section_project img max-width:100% cap*/
   height: auto;
 }
-
-/*prototype video, between the description and the photos below*/
-.video_project_section {
-  padding-inline: var(--space-lg);
-  margin-top: var(--space-xl);
-  margin-bottom: var(--space-xl);
-}
-
-.video_project {
-  display: block;
-  width: 100%;
-  height: auto;
-}
