@@ -282,9 +282,9 @@
   align-items: center;
   display: flex;
   flex-direction: column;
-  gap: var(--space-lg);
+  gap: var(--space-xl);
   height: auto;
-} 
+}
 
 .about_content {
   display: flex;
@@ -354,37 +354,123 @@
   margin-top: -12px; /*tops down the 20px flex gap to 8px*/
 }
 
-.about_skills  {
-  display: flex;
-  flex-direction: column;
+/*2-column grid holding skills/experience/education/languages as 4 cells — the wrapper
+  divs below are display:contents so these become direct grid items in reading order*/
+.about_skills {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: start;
   width: 100%;
-  max-width: 1000px;
-  gap: 96px;
+  max-width: 1200px;
+  column-gap: var(--space-lg);
+  row-gap: 96px;
 }
 
-.skillsAndExperience, .educationAndLanguages{
-  display: flex;
-  flex-direction: row;
-  align-items: top;
-  justify-content: space-between;
-  width: 100%;
+.skillsAndExperience, .educationAndLanguages {
+  display: contents;
 }
 
 .skills, .experience, .education, .languages {
   display: flex;
   flex-direction: column;
-  align-items: top left;
+  align-items: flex-start;
+  justify-self: start;
   gap: var(--space-md);
   width: 100%;
-
 }
 
-.skills img{
-  max-width:360px;
+/*coded skills grid replacing what used to be skills.png — icon above, label below.
+  Columns are content-sized (not 1fr) so the gap is the actual visual gap instead of
+  leftover space in an oversized track; every icon sits in a fixed-size box so square
+  logos and wide wordmark logos (n8n, Strapi) read as the same visual weight.*/
+.skillsGrid {
+  display: grid;
+  grid-template-columns: repeat(3, auto);
+  justify-content: start;
+  column-gap: var(--space-lg);
+  row-gap: var(--space-md);
+  list-style: none;
+  width: 100%;
 }
 
-.languages img{
-  max-width:460px;
+.skill_item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  gap: var(--space-xs);
+  text-align: center;
+}
+
+.skill_icon_box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+}
+
+.skill_icon_box--wide {
+  height: 42px;
+  width: auto;
+}
+
+.skills .skill_icon {
+  max-width: 100%;
+  max-height: 100%;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+}
+
+.skill_name {
+  font-family: 'FuturaPT-Light';
+  font-size: 14px;
+  line-height: 1.3;
+  min-height: 2.6em;
+}
+
+/*coded language list replacing what used to be languages.png — name/level on the left,
+  a 5-dot proficiency scale on the right*/
+.languageList {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.language_item {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: var(--space-lg);
+}
+
+.language_name {
+  font-family: 'FuturaPT-Book';
+  font-size: 18px;
+}
+
+.language_level {
+  font-family: 'FuturaPT-Light';
+  font-size: 14px;
+}
+
+.language_dots {
+  display: flex;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+.dot {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: var(--muted-olive);
+}
+
+.dot_filled {
+  background: var(--secondary-color);
 }
 
 /*coded timeline replacing what used to be experience.png — a 3-column grid (date, marker,
@@ -777,19 +863,17 @@ html.touch .project_image img {
     max-width: 100%;
   }
 
-  .skillsAndExperience,
-  .educationAndLanguages {
-    flex-direction: column;
-    gap: var(--space-lg);
-  }
-
   .about_skills {
-    gap: var(--space-lg);
+    grid-template-columns: 1fr;
+    row-gap: var(--space-lg);
   }
 
-  .skills img,
-  .languages img {
-    max-width: 100%;
+  .skillsGrid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .language_item {
+    flex-wrap: wrap;
   }
 
   .timeline_date {

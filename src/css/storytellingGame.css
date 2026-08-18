@@ -80,6 +80,10 @@
     gap: 8px; /*between title ("What I Did") and the rest*/
 }
 
+.collaborator_link {
+  text-decoration: underline;
+}
+
 .descriptionAndphoto{
     display: flex;
     flex-direction: column;
