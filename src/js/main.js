@@ -24,17 +24,64 @@ window.addEventListener("scroll", () => {
 }, { passive: true });
 
 
-//staggering the .appear animation onto every hero element marked .hero_animate,
-//grouped by data-animate-step so elements sharing a step animate together
-window.addEventListener('DOMContentLoaded', () => {
-    const heroElements = document.querySelectorAll('.hero_animate');
-
-    heroElements.forEach((el) => {
-        const step = Number(el.dataset.animateStep || 0);
-        setTimeout(() => {
-            el.classList.add('appear');
-        }, 600 * step);
+//pre-allocates the heading's height to its tallest phrase, so cycling text doesn't reflow the page
+function reserveHeroHeadingHeight(heading, target, phrases) {
+    const heights = phrases.map((phrase) => {
+        target.textContent = phrase;
+        return heading.getBoundingClientRect().height;
     });
+    target.textContent = '';
+    heading.style.minHeight = Math.max(...heights) + 'px';
+}
+
+//cycles the hero heading's tail through phrases: type, pause, delete, next phrase, repeat
+window.addEventListener('DOMContentLoaded', () => {
+    const target = document.querySelector('[data-typewriter-phrases]');
+    if (!target) return;
+
+    const heading = target.closest('h2');
+    const phrases = JSON.parse(target.dataset.typewriterPhrases);
+    reserveHeroHeadingHeight(heading, target, phrases);
+    window.addEventListener('resize', () => reserveHeroHeadingHeight(heading, target, phrases));
+
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    if (prefersReducedMotion) {
+        target.textContent = phrases[0];
+        target.classList.add('typewriter-done');
+        return;
+    }
+
+    const typeSpeedMs = 55;
+    const deleteSpeedMs = 30;
+    const pauseAfterTypeMs = 1800;
+    const pauseAfterDeleteMs = 400;
+
+    let phraseIndex = 0;
+    let charIndex = 0;
+
+    function typeNextChar() {
+        charIndex++;
+        target.textContent = phrases[phraseIndex].slice(0, charIndex);
+        if (charIndex < phrases[phraseIndex].length) {
+            setTimeout(typeNextChar, typeSpeedMs);
+        } else {
+            setTimeout(deletePhrase, pauseAfterTypeMs);
+        }
+    }
+
+    function deletePhrase() {
+        charIndex--;
+        target.textContent = phrases[phraseIndex].slice(0, charIndex);
+        if (charIndex > 0) {
+            setTimeout(deletePhrase, deleteSpeedMs);
+        } else {
+            phraseIndex = (phraseIndex + 1) % phrases.length;
+            setTimeout(typeNextChar, pauseAfterDeleteMs);
+        }
+    }
+
+    typeNextChar();
 });
 
 

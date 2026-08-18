@@ -224,16 +224,44 @@ p {
 }
 
 
-/*animating intro elements on page load: every direct hero element to animate gets .hero_animate in the markup, JS staggers .appear onto them*/
-.hero_animate {
-    opacity: 0;
-    transform: translateY(20px);
-    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+/*hides visually, keeps for screen readers*/
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
 }
 
-.hero_animate.appear {
-    opacity: 1;
-    transform: translateY(0);
+/*blinking caret for the typewriter effect*/
+.typewriter::after {
+  content: '';
+  display: inline-block;
+  width: 2px;
+  height: 1em;
+  margin-left: 2px;
+  background: currentColor;
+  vertical-align: text-bottom;
+  animation: typewriterBlink 0.8s step-end infinite;
+}
+
+.typewriter.typewriter-done::after {
+  display: none;
+}
+
+@keyframes typewriterBlink {
+  0%, 50% { opacity: 1; }
+  50.01%, 100% { opacity: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .typewriter::after {
+    animation: none;
+  }
 }
 
 /*common attributes for all images from ALL sections of all pages *except nav, side-nav and footer*/
