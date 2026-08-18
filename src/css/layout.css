@@ -382,15 +382,94 @@
 .skills img{
   max-width:360px;
 }
-.experience img{
+
+.languages img{
   max-width:460px;
 }
 
-.education img{
-  max-width:460px;
+/*coded timeline replacing what used to be experience.png — a 3-column grid (date, marker,
+  content) shared across every row via display:contents on each <li>, so the date and dot
+  columns line up regardless of how long each row's text is*/
+.timeline {
+  display: grid;
+  grid-template-columns: auto auto 1fr;
+  column-gap: var(--space-sm);
+  list-style: none;
+  width: 100%;
 }
-.languages img{
-  max-width:460px;
+
+.timeline_item {
+  display: contents;
+}
+
+.timeline_date {
+  grid-column: 1;
+  padding-top: 3px;
+  text-align: right;
+  white-space: nowrap;
+  font-family: 'FuturaPT-Light';
+  font-size: 14px;
+}
+
+.timeline_marker {
+  grid-column: 2;
+  position: relative;
+  width: 16px;
+}
+
+/*the dot*/
+.timeline_marker::before {
+  content: '';
+  position: absolute;
+  top: 6px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--secondary-color);
+  z-index: 1;
+}
+
+/*the connecting line down to the next item — the marker cell stretches to the full row
+  height by default, so this reaches exactly to where the next dot begins*/
+.timeline_marker::after {
+  content: '';
+  position: absolute;
+  top: 6px;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 2px;
+  background: var(--muted-olive);
+}
+
+.timeline_item:last-child .timeline_marker::after {
+  content: none;
+}
+
+.timeline_content {
+  grid-column: 3;
+  padding-bottom: var(--space-md);
+}
+
+.timeline_role {
+  font-family: 'FuturaPT-Book';
+  font-size: 18px;
+}
+
+.timeline_content ul {
+  margin-top: 4px;
+  padding-left: 18px;
+  font-family: 'FuturaPT-Light';
+  font-size: 14px;
+}
+
+/*plain detail lines for timelines without a bulleted list, e.g. education*/
+.timeline_detail {
+  margin-top: 4px;
+  font-family: 'FuturaPT-Light';
+  font-size: 14px;
 }
 
 
@@ -709,10 +788,12 @@ html.touch .project_image img {
   }
 
   .skills img,
-  .experience img,
-  .education img,
   .languages img {
     max-width: 100%;
+  }
+
+  .timeline_date {
+    font-size: 12px;
   }
 
   /*PROJECTS GRID*/
