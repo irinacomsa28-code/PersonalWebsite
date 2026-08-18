@@ -39,7 +39,8 @@ window.addEventListener('DOMContentLoaded', () => {
 
 
 
-//animating about_imageAndtext on scroll into about section
+//animating about_imageAndtext on scroll into about section, and standing in for :hover on
+//touch devices for the project teaser images (see the "hover: none" rules in layout.css)
 const observer = new IntersectionObserver((entries) => {
   entries.forEach(entry => {
     if (entry.isIntersecting) {
@@ -50,6 +51,8 @@ const observer = new IntersectionObserver((entries) => {
 
 const aboutImageAndText = document.querySelector('.about_imageAndText');
 if (aboutImageAndText) observer.observe(aboutImageAndText);
+
+document.querySelectorAll('.project_card').forEach((card) => observer.observe(card));
 
 
 //gives #about a "stuck" range long enough to reveal its own overflow before releasing
