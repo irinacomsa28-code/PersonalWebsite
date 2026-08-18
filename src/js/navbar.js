@@ -33,9 +33,9 @@
           <a class="nav_link" href="${sectionPrefix}#about" data-target="about">${t.about}</a>
           <a class="nav_link" href="${sectionPrefix}#projects" data-target="projects">${t.projects}</a>
           <div class="lang_switch" role="group" aria-label="Language">
-            <a href="${enHref}" class="lang_link${lang === 'en' ? ' active' : ''}"${lang === 'en' ? ' aria-current="true"' : ''}>EN</a>
+            <a href="${enHref}" class="lang_link${lang === 'en' ? ' active' : ''}"${lang === 'en' ? ' aria-current="page"' : ''}>EN</a>
             <span class="lang_divider" aria-hidden="true">|</span>
-            <a href="${deHref}" class="lang_link${lang === 'de' ? ' active' : ''}"${lang === 'de' ? ' aria-current="true"' : ''}>DE</a>
+            <a href="${deHref}" class="lang_link${lang === 'de' ? ' active' : ''}"${lang === 'de' ? ' aria-current="page"' : ''}>DE</a>
           </div>
           <a
             href="https://mail.google.com/mail/?view=cm&fs=1&to=irinacomsa28@gmail.com"

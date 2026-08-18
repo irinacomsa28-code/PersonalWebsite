@@ -39,23 +39,27 @@
 }
 
 /*  FONTS  */
+/*Jost is a variable font (weight axis 100-900), so one file covers all three
+  weights below — unlike Futura PT, it also has full German umlaut/ß coverage*/
 @font-face {
-  font-family: 'FuturaPT-Medium';
-  src: url('../../public/fonts/FuturaPT-Medium.woff2') format('woff2');
-  
+  font-family: 'Jost-Medium';
+  src: url('../../public/fonts/Jost-Variable.woff2') format('woff2');
+  font-weight: 500;
 }
 
 @font-face {
-  font-family: 'FuturaPT-Book';
-  src: url('../../public/fonts/FuturaPT-Book.woff2') format('woff2');
+  font-family: 'Jost-Regular';
+  src: url('../../public/fonts/Jost-Variable.woff2') format('woff2');
+  font-weight: 400;
 }
 
 @font-face {
-  font-family: 'FuturaPT-Light';
-  src: url('../../public/fonts/FuturaPT-Light.woff2') format('woff2');
- 
+  font-family: 'Jost-Light';
+  src: url('../../public/fonts/Jost-Variable.woff2') format('woff2');
+  font-weight: 300;
 }
 
+/*logo wordmark only — kept distinct from the Jost body/nav text on purpose*/
 @font-face {
   font-family: 'Fugaz One';
   src: url('../../public/fonts/FugazOne-Regular.woff2') format('woff2');
@@ -164,7 +168,7 @@ a:hover {
   gap: var(--space-xs);
   padding: var(--space-xs) var(--space-sm);
   border-radius: 100px;
-  font-family: 'FuturaPT-Medium';
+  font-family: 'Jost-Medium';
   white-space: nowrap;
   transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
 }
@@ -192,27 +196,27 @@ a:hover {
 
 
 h1 {
-  font-family: 'FuturaPT-Medium';
+  font-family: 'Jost-Medium';
   font-size: var(--fs-h1);
 }
 
 h2 {
-  font-family: 'FuturaPT-Medium';
+  font-family: 'Jost-Medium';
   font-size: var(--fs-h2);
 }
 
 h3 {
-  font-family: 'FuturaPT-Book';
+  font-family: 'Jost-Regular';
   font-size: var(--fs-h3);
 }
 
 h4 {
-  font-family: 'FuturaPT-Light';
+  font-family: 'Jost-Light';
   font-size: var(--fs-h4);
 }
 
 p {
-  font-family: 'FuturaPT-Book';
+  font-family: 'Jost-Regular';
   font-size: var(--fs-body);
 }
 

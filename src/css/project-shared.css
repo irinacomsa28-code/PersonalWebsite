@@ -1,7 +1,7 @@
 /*project page's main heading is an <h1> for correct document structure, styled at the
   same size as the sitewide h2 scale (project pages have no bigger heading to reserve h1 for)*/
 .project_title {
-  font-family: 'FuturaPT-Medium';
+  font-family: 'Jost-Medium';
   font-size: var(--fs-h2);
 }
 
@@ -77,12 +77,12 @@
 .keypoints ul{
   list-style-position: inside;
   padding-left: 0;
-  font-family: 'FuturaPT-Light';
+  font-family: 'Jost-Light';
   font-size: var(--fs-body); /*matches the sitewide fluid <p> scale so this text shrinks on mobile too*/ 
 }
 
 .keypoints p{
-  font-family: 'FuturaPT-Medium';
+  font-family: 'Jost-Medium';
   font-size: var(--fs-body); /*matches the sitewide fluid <p> scale so this text shrinks on mobile too*/
 }
 
@@ -147,13 +147,13 @@
 }
 
 .titled_keypoint .title {
-  font-family: 'FuturaPT-Medium';
+  font-family: 'Jost-Medium';
   font-size: var(--fs-body); /*matches the sitewide fluid <p> scale so this text shrinks on mobile too*/
 }
 
 .titled_keypoint .body,
 .titled_keypoint ul {
-  font-family: 'FuturaPT-Light';
+  font-family: 'Jost-Light';
   font-size: var(--fs-body); /*matches the sitewide fluid <p> scale so this text shrinks on mobile too*/
 }
 
