@@ -440,20 +440,40 @@
   position: absolute;
   top: 0;
   right: 0;
-  height: 100%; 
-  object-fit: fill; 
+  height: 100%;
+  object-fit: fill;
+  /*zoom starts immediately; the color crossfade is delayed so it reads as "zoom, then color"
+    instead of both happening at once, and runs slower than the zoom for a gradual fade*/
+  transition: transform 0.45s ease, opacity 0.8s ease-in-out 0.25s;
 }
 
 .color-img{
   opacity: 0;
 }
 
+/*both images zoom together so the crossfade reads as one photo, not two swapping sizes.
+  bw-img stays fully opaque throughout — only color-img fades in on top of it — otherwise
+  fading both independently briefly lets the page background flash through underneath them*/
+.project_card:hover .bw-img,
+.project_card:hover .color-img {
+  transform: scale(1.06);
+}
+
 .project_card:hover .color-img {
   opacity: 1;
 }
 
-.project_card:hover .bw-img {
-  opacity: 0;
+/*touch devices have no real :hover, so trigger the same reveal off scroll-visibility
+  (.is-visible is added by the IntersectionObserver in main.js) instead of a tap*/
+@media (hover: none) {
+  .project_card.is-visible .bw-img,
+  .project_card.is-visible .color-img {
+    transform: scale(1.06);
+  }
+
+  .project_card.is-visible .color-img {
+    opacity: 1;
+  }
 }
 
 
