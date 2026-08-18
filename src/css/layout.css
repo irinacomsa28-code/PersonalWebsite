@@ -477,6 +477,12 @@ html.touch .project_card.is-visible .color-img {
   opacity: 1;
 }
 
+/*a tap or a scroll-past is much briefer than a lingering desktop hover, so touch gets a
+  quicker, snappier version of the same zoom-then-color reveal instead of the slower one*/
+html.touch .project_image img {
+  transition: transform 0.3s ease, opacity 0.35s ease-in-out 0.1s;
+}
+
 
 .footer_home_container {
   display: flex;

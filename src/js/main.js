@@ -52,8 +52,19 @@ const observer = new IntersectionObserver((entries) => {
 const aboutImageAndText = document.querySelector('.about_imageAndText');
 if (aboutImageAndText) observer.observe(aboutImageAndText);
 
+//project cards get their own, more sensitive observer: a lower threshold (barely a sliver
+//needs to show) plus a rootMargin that extends the trigger zone below the viewport, so the
+//reveal fires just before a card is scrolled fully into view instead of only once it's there
 const projectCards = document.querySelectorAll('.project_card');
-projectCards.forEach((card) => observer.observe(card));
+const projectObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('is-visible');
+    }
+  });
+}, { threshold: 0.05, rootMargin: '0px 0px 150px 0px' });
+
+projectCards.forEach((card) => projectObserver.observe(card));
 
 //"hover: none" misfires on hybrid devices (e.g. a touchscreen laptop with a mouse also
 //attached), so a real touchstart is a more reliable signal that this is a touch interaction
