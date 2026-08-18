@@ -66,12 +66,12 @@
   list-style-position: inside;
   padding-left: 0;
   font-family: 'FuturaPT-Light';
-  font-size: 20px; 
+  font-size: var(--fs-body); /*matches the sitewide fluid <p> scale so this text shrinks on mobile too*/ 
 }
 
 .keypoints p{
   font-family: 'FuturaPT-Medium';
-  font-size: 20px;
+  font-size: var(--fs-body); /*matches the sitewide fluid <p> scale so this text shrinks on mobile too*/
 }
 
 .keypoint{
@@ -100,24 +100,16 @@
     gap: 36px;
 }
 
+/*grid (not flex) so the mobile override can just drop to one column —
+  no per-image sizing hack needed, the sitewide img rule already handles width/height*/
 .Img1And2Project{
-    display: flex;
-    flex-direction: row;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    /*without this, the grid's default row-stretch forces the shorter image to match its
+      taller sibling's height, which object-fit:cover then crops to fill*/
+    align-items: start;
     width: 100%;
-    justify-content: space-between;
     gap: 20px;
-}
-
-.photos_project img{
-    width: 100%;
-    height: auto;
-    flex: 1 1 calc(50% - 10px);/*to make them responsive*/
-}
-
-.Img1And2Project img{
-    width: 100%;
-    height: auto;
-    flex: 1 1 calc(50% - 10px);/*to make them responsive*/
 }
 
 /*stacked titled blocks, e.g. "What I Did" / "The Challenge" / "The Solution"*/
@@ -136,13 +128,13 @@
 
 .titled_keypoint .title {
   font-family: 'FuturaPT-Medium';
-  font-size: 20px;
+  font-size: var(--fs-body); /*matches the sitewide fluid <p> scale so this text shrinks on mobile too*/
 }
 
 .titled_keypoint .body,
 .titled_keypoint ul {
   font-family: 'FuturaPT-Light';
-  font-size: 20px;
+  font-size: var(--fs-body); /*matches the sitewide fluid <p> scale so this text shrinks on mobile too*/
 }
 
 .titled_keypoint ul {

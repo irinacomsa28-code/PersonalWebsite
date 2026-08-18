@@ -40,3 +40,13 @@
   aspect-ratio: 16 / 9;
   object-fit: contain;
 }
+
+@media (max-width: 768px) {
+  .challenge_solution_row {
+    flex-direction: column;
+  }
+
+  .features_grid {
+    grid-template-columns: 1fr;
+  }
+}

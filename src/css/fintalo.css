@@ -6,10 +6,15 @@
 }
 
 /*text column, group photo and Challenge/Solution laid out in a 2-column grid,
-  so Challenge (col 1) and Solution (col 2) land on the same row automatically*/
+  so Challenge (col 1) and Solution (col 2) land on the same row automatically.
+  minmax() lets column 1 shrink below 600px on tablet instead of forcing column 2 (which
+  holds the group photo) down to a sliver — grid tracks don't shrink on their own like flex does.
+  align-items:start stops the default grid stretch from forcing the photo taller than its own
+  aspect ratio, which is what was cropping it via object-fit:cover.*/
 .fintalo_content_row {
   display: grid;
-  grid-template-columns: 600px 1fr;
+  grid-template-columns: minmax(0, 600px) minmax(240px, 1fr);
+  align-items: start;
   column-gap: 36px;
   row-gap: 16px;
 }
@@ -18,4 +23,10 @@
   width: 100%;
   max-width: none; /*override the sitewide .section_project img max-width:100% cap*/
   height: auto;
+}
+
+@media (max-width: 768px) {
+  .fintalo_content_row {
+    grid-template-columns: 1fr;
+  }
 }

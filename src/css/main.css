@@ -28,6 +28,15 @@
   --space-md: 24px;
   --space-lg: 64px;
   --space-xl: 96px;
+
+  /* Fluid type scale: scales continuously between a 375px phone and the 1280px design width
+     instead of jumping at breakpoints. clamp(min, preferred, max) — the vw term is what scales.
+     Shared via variables so project-page CSS can match the same scale instead of hardcoding sizes. */
+  --fs-h1: clamp(32px, 7vw + 7px, 96px);
+  --fs-h2: clamp(22px, 2.8vw + 12px, 48px);
+  --fs-h3: clamp(20px, 1.7vw + 14px, 36px);
+  --fs-h4: clamp(16px, 0.45vw + 14px, 20px);
+  --fs-body: clamp(15px, 0.54vw + 13px, 20px);
 }
 
 /*  FONTS  */
@@ -191,27 +200,27 @@ a:hover {
 
 h1 {
   font-family: 'FuturaPT-Medium';
-  font-size: 96px;
+  font-size: var(--fs-h1);
 }
 
 h2 {
   font-family: 'FuturaPT-Medium';
-  font-size: 48px;
+  font-size: var(--fs-h2);
 }
 
 h3 {
   font-family: 'FuturaPT-Book';
-  font-size: 36px;
+  font-size: var(--fs-h3);
 }
 
 h4 {
   font-family: 'FuturaPT-Light';
-  font-size: 20px;
+  font-size: var(--fs-h4);
 }
 
 p {
   font-family: 'FuturaPT-Book';
-  font-size: 20px;
+  font-size: var(--fs-body);
 }
 
 
@@ -233,7 +242,29 @@ p {
   width: 100%;
   max-width: 100%; /*preventing pixelation on large screens*/
   height: auto;
-  object-fit: cover; 
+  object-fit: cover;
   object-position: center; /*if cropped, focus on center*/
   display: block; /*image behaves like a div*/
 }
+
+/*  RESPONSIVE  */
+
+/*shrinking the spacing scale cascades through every section/nav/footer padding that
+  already reads from these variables, so tablet/mobile don't need padding overrides everywhere*/
+@media (max-width: 1024px) {
+  :root {
+    --space-lg: 40px;
+    --space-xl: 64px;
+  }
+}
+
+@media (max-width: 640px) {
+  :root {
+    --space-md: 16px;
+    /*kept wider than the fixed side-nav/social-links footprint (see layout.css) so they
+      never sit on top of body text*/
+    --space-lg: 36px;
+    --space-xl: 48px;
+  }
+}
+

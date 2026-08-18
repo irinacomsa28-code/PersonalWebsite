@@ -5,7 +5,8 @@
   height: 64px;
   padding-left: var(--space-lg);
   padding-right: var(--space-lg);
-  z-index: 1000;
+  /*higher than side-nav/social-links (both 1000) so the open mobile dropdown fully covers them*/
+  z-index: 1100;
   background-color: rgba(var(--primary-color-rgb), 0);
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0);
   backdrop-filter: blur(0px);
@@ -54,10 +55,45 @@
   padding-inline: 36px;
   align-items: center;
   color: var(--secondary-color);
-  
+
   white-space: nowrap; /*text stays in one line*/
-  
+
 }
+
+/*hamburger button: hidden on desktop, shown once the nav links collapse (see media query below)*/
+.navbar_toggle {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  width: 24px;
+  height: 32px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  z-index: 1001;
+  -webkit-tap-highlight-color: transparent; /*avoids the bright default tap flash on mobile*/
+}
+
+.navbar_toggle:focus-visible {
+  outline: 2px solid var(--secondary-color);
+  outline-offset: 4px;
+}
+
+.navbar_toggle span {
+  display: block;
+  width: 100%;
+  height: 2px;
+  border-radius: 2px;
+  background-color: var(--secondary-color);
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+/*morphs the 3 bars into an X once open*/
+.navbar_toggle.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.navbar_toggle.open span:nth-child(2) { opacity: 0; }
+.navbar_toggle.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
 
 .nav_link {
   transition: text-decoration 0.8s ease-in-out, color 0.8s ease;
@@ -481,6 +517,9 @@
   width: 84px;
   height: 84px;
   flex-shrink: 0;
+  /*pins it to the row's right edge even if it wraps onto its own line on narrow screens —
+    justify-content:space-between alone only works while both items share one line*/
+  margin-left: auto;
   border-radius: 100px;
   background-color: var(--muted-olive);
   color: var(--white);
@@ -492,6 +531,255 @@
 .footer_home_backtotop:hover {
   color: var(--white);
   background-color: var(--hover-color);
+}
+
+
+/*  RESPONSIVE  */
+
+@media (max-width: 1024px) {
+  /*HERO: at desktop, hero_text (705px) + hero_image (380px) only fit side by side above ~1150px
+    of content width; let them wrap/shrink instead of overflowing on tablet*/
+  .hero_content {
+    flex-wrap: wrap;
+  }
+
+  .hero_text {
+    max-width: 100%;
+    flex: 1 1 320px;
+  }
+
+  .hero_image {
+    flex: 0 1 260px;
+    max-width: 260px;
+  }
+}
+
+@media (max-width: 1024px) {
+  /*SIDE-NAV and SOCIAL-LINKS are position:fixed to the viewport edge, independent of the
+    container's own padding — shrink their footprint below var(--space-lg) at each tier below
+    so they never sit on top of section content*/
+  .side-nav a {
+    width: 32px;
+    height: 130px;
+  }
+
+  .social-links {
+    gap: 20px;
+    padding: 0 8px 48px;
+  }
+
+  .social-links a,
+  .social-links img {
+    width: 24px;
+    height: 24px;
+  }
+}
+
+@media (max-width: 768px) {
+  /*NAVBAR: collapse the inline links behind a hamburger + dropdown*/
+  .navbar_toggle {
+    display: flex;
+  }
+
+  .navbar_logo {
+    font-size: 18px;
+  }
+
+  .navbar_nav {
+    position: fixed;
+    top: 64px;
+    left: 0;
+    width: 100%;
+    flex-direction: column;
+    height: 0;
+    overflow: hidden;
+    background-color: var(--primary-color);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    transition: height 0.3s ease;
+  }
+
+  .navbar_nav.open {
+    height: calc(100vh - 64px);
+  }
+
+  .navbar_nav a {
+    height: auto;
+    padding: var(--space-md) var(--space-lg);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+  }
+
+  /*keeps the page from scrolling behind the open dropdown*/
+  body.nav-open {
+    overflow: hidden;
+  }
+
+  /*SIDE-NAV (project prev/next buttons): shrink so they don't sit on top of text*/
+  .side-nav a {
+    width: 28px;
+    height: 110px;
+  }
+
+  /*SOCIAL LINKS*/
+  .social-links {
+    gap: 16px;
+    padding: 0 8px 32px;
+  }
+
+  .social-links a,
+  .social-links img {
+    width: 24px;
+    height: 24px;
+  }
+
+  /*HERO*/
+  .hero_content {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .hero_text {
+    max-width: 100%;
+    align-items: center;
+  }
+
+  .hero_image {
+    order: -1;
+    max-width: 220px;
+  }
+
+  .hero_buttons {
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: var(--space-md);
+  }
+
+  .hero_attention {
+    justify-content: center;
+    text-align: left;
+  }
+
+  /*ABOUT*/
+  .about_imageAndText {
+    flex-direction: column;
+  }
+
+  .about_image {
+    width: 100%;
+  }
+
+  .about_text {
+    max-width: 100%;
+  }
+
+  .skillsAndExperience,
+  .educationAndLanguages {
+    flex-direction: column;
+    gap: var(--space-lg);
+  }
+
+  .about_skills {
+    gap: var(--space-lg);
+  }
+
+  .skills img,
+  .experience img,
+  .education img,
+  .languages img {
+    max-width: 100%;
+  }
+
+  /*PROJECTS GRID*/
+  .project_card {
+    flex-direction: column;
+    gap: var(--space-md);
+  }
+
+  .project_text {
+    min-width: 0;
+    max-width: 100%;
+  }
+
+  .project_image {
+    order: -1;
+    max-width: 100%;
+    border-radius: 24px;
+    margin-right: 0;
+  }
+
+  /*FOOTER*/
+  .footer_section {
+    height: auto;
+    padding-top: var(--space-xl);
+    padding-bottom: var(--space-lg);
+  }
+
+  .footer_home_container {
+    gap: var(--space-lg);
+  }
+
+  .footer_home_content {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .footer_home_icon {
+    height: 96px;
+  }
+
+  /*stays a row (not stacked) so Back to Top keeps sitting on the right, next to the copyright text*/
+  .footer_home_bottom {
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--space-md);
+  }
+
+  .footer_home_backtotop {
+    width: 64px;
+    height: 64px;
+    font-size: 14px;
+  }
+
+  /*PROJECT DETAIL PAGES (shared across fintalo/muntum/wildCraftFoundry/semanticCanvas/storytellingGame)*/
+  .project_hero_image {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .project_description {
+    flex-direction: column;
+  }
+
+  .keypoints,
+  .descriptionAndphoto,
+  .titled_description {
+    width: 100%;
+  }
+
+  /*stack the 2-across image grid underneath each other — screen is too narrow for a real grid*/
+  .Img1And2Project {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 480px) {
+  .side-nav a {
+    width: 22px;
+    height: 88px;
+  }
+
+  .social-links a,
+  .social-links img {
+    width: 20px;
+    height: 20px;
+  }
+
+  .hero_image {
+    max-width: 160px;
+  }
+
+  .footer_home_icon {
+    height: 72px;
+  }
 }
 
 
