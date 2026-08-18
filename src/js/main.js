@@ -40,7 +40,7 @@ window.addEventListener('DOMContentLoaded', () => {
 
 
 //animating about_imageAndtext on scroll into about section, and standing in for :hover on
-//touch devices for the project teaser images (see the "hover: none" rules in layout.css)
+//touch devices for the project teaser images (see the "html.touch" rules in layout.css)
 const observer = new IntersectionObserver((entries) => {
   entries.forEach(entry => {
     if (entry.isIntersecting) {
@@ -52,7 +52,18 @@ const observer = new IntersectionObserver((entries) => {
 const aboutImageAndText = document.querySelector('.about_imageAndText');
 if (aboutImageAndText) observer.observe(aboutImageAndText);
 
-document.querySelectorAll('.project_card').forEach((card) => observer.observe(card));
+const projectCards = document.querySelectorAll('.project_card');
+projectCards.forEach((card) => observer.observe(card));
+
+//"hover: none" misfires on hybrid devices (e.g. a touchscreen laptop with a mouse also
+//attached), so a real touchstart is a more reliable signal that this is a touch interaction
+document.addEventListener('touchstart', function onFirstTouch() {
+  document.documentElement.classList.add('touch');
+  document.removeEventListener('touchstart', onFirstTouch);
+}, { passive: true });
+
+//tapping a card reveals it immediately instead of waiting on scroll position
+projectCards.forEach((card) => card.addEventListener('touchstart', () => card.classList.add('is-visible'), { passive: true }));
 
 
 //gives #about a "stuck" range long enough to reveal its own overflow before releasing

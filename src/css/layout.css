@@ -463,17 +463,18 @@
   opacity: 1;
 }
 
-/*touch devices have no real :hover, so trigger the same reveal off scroll-visibility
-  (.is-visible is added by the IntersectionObserver in main.js) instead of a tap*/
-@media (hover: none) {
-  .project_card.is-visible .bw-img,
-  .project_card.is-visible .color-img {
-    transform: scale(1.06);
-  }
+/*touch devices have no real :hover, so trigger the same reveal off touch/scroll-visibility
+  instead (.is-visible is added on scroll-into-view and on tap, see main.js). Gated by
+  html.touch (set on the first real touchstart) rather than "@media (hover: none)" — that
+  media feature misfires on hybrid devices, e.g. a touchscreen laptop with a mouse attached,
+  where the primary input reports as hover-capable even though the screen is also touched*/
+html.touch .project_card.is-visible .bw-img,
+html.touch .project_card.is-visible .color-img {
+  transform: scale(1.06);
+}
 
-  .project_card.is-visible .color-img {
-    opacity: 1;
-  }
+html.touch .project_card.is-visible .color-img {
+  opacity: 1;
 }
 
 
