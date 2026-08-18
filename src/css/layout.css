@@ -48,7 +48,8 @@
   width: auto;
 }
 
-.navbar_nav a {
+/*direct child only, so this doesn't also pad the EN/DE links nested inside .lang_switch*/
+.navbar_nav > a {
   display: flex;
   font-family: 'FuturaPT-Medium';
   height: 64px;
@@ -103,6 +104,29 @@
   text-decoration: underline;
   text-underline-offset: 6px;
   text-decoration-thickness: 2px;
+}
+
+/*EN/DE switch, sits between Projects and Contact in .navbar_nav*/
+.lang_switch {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  height: 64px;
+  font-family: 'FuturaPT-Medium';
+}
+
+.lang_link {
+  color: var(--secondary-color);
+}
+
+.lang_link.active {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+.lang_divider {
+  color: var(--secondary-color);
+  opacity: 0.5;
 }
 
 
@@ -794,7 +818,13 @@ html.touch .project_image img {
     height: calc(100vh - 64px);
   }
 
-  .navbar_nav a {
+  .navbar_nav > a {
+    height: auto;
+    padding: var(--space-md) var(--space-lg);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+  }
+
+  .lang_switch {
     height: auto;
     padding: var(--space-md) var(--space-lg);
     border-bottom: 1px solid rgba(0, 0, 0, 0.08);
