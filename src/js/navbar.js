@@ -13,13 +13,12 @@
         </button>
 
         <div class="navbar_nav">
-          <a class="nav_link" href="${homeHref}" data-target="home" role="button">Home</a>
-          <a class="nav_link" href="${sectionPrefix}#about" data-target="about" role="button">About</a>
-          <a class="nav_link" href="${sectionPrefix}#projects" data-target="projects" role="button">Projects</a>
+          <a class="nav_link" href="${homeHref}" data-target="home">Home</a>
+          <a class="nav_link" href="${sectionPrefix}#about" data-target="about">About</a>
+          <a class="nav_link" href="${sectionPrefix}#projects" data-target="projects">Projects</a>
           <a
             href="https://mail.google.com/mail/?view=cm&fs=1&to=irinacomsa28@gmail.com"
             target="_blank"
-            role="button"
             aria-label="Contact"
             >Contact</a
           >

@@ -1,3 +1,10 @@
+/*project page's main heading is an <h1> for correct document structure, styled at the
+  same size as the sitewide h2 scale (project pages have no bigger heading to reserve h1 for)*/
+.project_title {
+  font-family: 'FuturaPT-Medium';
+  font-size: var(--fs-h2);
+}
+
 .hero_projectcontainer {
   display: flex;
   flex-direction: row;
@@ -54,10 +61,15 @@
   left:0;
 }
 
+/*flex-basis + min-width:0 (not a fixed width) so this shrinks gracefully alongside
+  .descriptionAndphoto on tablet instead of relying on the two of them overflowing until
+  the 768px breakpoint forces width:100%*/
 .keypoints{
     display: flex;
     flex-direction: column;
-    width: 400px;
+    flex: 1 1 360px;
+    min-width: 0;
+    max-width: 400px;
     height: auto;
     gap: var(--space-md);
 }
@@ -87,9 +99,10 @@
 .descriptionAndphoto{
     display: flex;
     flex-direction: column;
-    width: 640px;
-        justify-content: space-between;
-
+    flex: 2 1 480px;
+    min-width: 0;
+    max-width: 640px;
+    justify-content: space-between;
     gap: 20px;
 }
 
@@ -116,11 +129,14 @@
     gap: 20px;
 }
 
-/*stacked titled blocks, e.g. "What I Did" / "The Challenge" / "The Solution"*/
+/*stacked titled blocks, e.g. "What I Did" / "The Challenge" / "The Solution".
+  width:100%/max-width (not a fixed width) so it also fills fintalo_content_row's
+  minmax(0, 600px) grid track instead of overflowing it once that track shrinks below 600px*/
 .titled_description {
   display: flex;
   flex-direction: column;
-  width: 600px;
+  width: 100%;
+  max-width: 600px;
   gap: var(--space-lg);
 }
 

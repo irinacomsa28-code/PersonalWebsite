@@ -17,7 +17,6 @@
   --white: #ffffff;
   --black: #000000;
   --hover-color: #96B6A1;
-  --attention-red: #EA0000;
 
   /* Layout */
   --max-width: 1280px;
@@ -88,6 +87,7 @@ body {
   width: 100%;
 }
 
+/*stacking-cards effect: About covers the hero on scroll*/
 .hero_section {
   padding-top: var(--space-xl);
   padding-left: var(--space-lg);
@@ -95,10 +95,6 @@ body {
   padding-bottom: var(--space-xl);
   height: 100%;
   width: 100%;
-}
-
-/*stacking-cards effect: About covers the hero on scroll*/
-.hero_section {
   position: sticky;
   top: 0;
   min-height: 100vh;
@@ -111,6 +107,7 @@ body {
   top: 0;
   min-height: 100vh;
   z-index: 2;
+  background-color: var(--white);
 }
 
 .hero_about_spacer {
@@ -131,10 +128,6 @@ body {
   width: 100%;
 }
 
-
-#about {
-  background-color: var(--white);
-}
 
 .footer_section{
   margin-top: auto;
