@@ -1,27 +1,9 @@
-/*floating rounded "capsule" bar (the Apple-style treatment) instead of a full-bleed strip:
-  inset from the top and sides, capped at the site's own content width so its edges line up
-  with everything else on the page rather than floating at an arbitrary width.
-  At rest it's barely-there glass, so it doesn't compete with the hero image, but still isn't
-  the "flat zero-effect" it would be with no blur/tint/border at all — a hint of the same
-  glass language the scrolled state uses, rather than an on/off switch between the two.
-  A dark (not white) hairline outlines the capsule rather than a light rim: this bar floats
-  above whatever scrolls beneath it — hero photo, light sections, project imagery — and a
-  subtle dark edge reads consistently against all of them, where a light highlight only
-  would against darker content. It's a full border (not just border-bottom) since a bottom-
-  only line would cut across the capsule's rounded corners instead of following them.
-
-  Content alignment: hero_container/about_container/etc. all get their edge position from
-  "var(--space-lg) padding on a full-width parent, then max-width:var(--max-width) that
-  centers once the viewport is wide enough" — a two-step formula, not just a single
-  max-width. A pill that's simply inset by a flat margin (e.g. calc(100% - 32px)) only
-  matches that by coincidence in the narrow band around max-width itself; on wider screens
-  the two formulas cross over to "centered" at different viewport widths and drift apart
-  (by ~49px in testing). So the pill below uses the *same shape* of formula — fixed inset,
-  then a max-width that's widened by exactly the padding on each side — just uniformly
-  shifted inward by --space-md (the pill's own decorative gap from the content edge). That
-  keeps the crossover point identical to the content sections', so navbar content (after
-  its own --space-md padding) lands on the exact same edge as the page content below it at
-  every viewport width, not just near 1280px.*/
+/*floating rounded capsule bar, kept a hint of glass at rest so it doesn't compete with the hero
+  image; a dark hairline (not a light rim) reads consistently over both light and dark content
+  below it, and it's a full border (not border-bottom) so it follows the rounded corners.
+  Left/right inset uses the same two-step formula as .hero_container etc (fixed inset + widened
+  max-width), shifted in by --space-md, so it stays aligned with page content at every viewport
+  width instead of a flat-margin pill drifting apart from it above ~1280px.*/
 .navbar {
   position: fixed;
   top: 12px;
@@ -35,7 +17,7 @@
   /*higher than side-nav/social-links (both 1000) so the open mobile dropdown fully covers them*/
   z-index: 1100;
   border-radius: 999px;
-  background-color: rgba(var(--primary-color-rgb), 0.06);
+  background-color: rgba(var(--bg-page-rgb), 0.06);
   border: 1px solid rgba(0, 0, 0, 0);
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0);
   backdrop-filter: blur(3px);
@@ -43,11 +25,9 @@
   transition: background-color 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease, backdrop-filter 0.4s ease, -webkit-backdrop-filter 0.4s ease;
 }
 
-/*fades into a fuller frosted-glass capsule once the page has scrolled past the hero — the
-  saturate boost alongside the blur keeps colors showing through from looking washed out,
-  and the inset top highlight adds a touch of glass sheen along the capsule's top edge*/
+/*frosted glass once scrolled past the hero — saturate keeps colors from washing out, inset top highlight adds sheen*/
 .navbar.scrolled {
-  background-color: rgba(var(--primary-color-rgb), 0.55);
+  background-color: rgba(var(--bg-page-rgb), 0.55);
   border: 1px solid rgba(0, 0, 0, 0.06);
   box-shadow: 0 4px 24px rgba(0, 0, 0, 0.06), inset 0 1px 0 rgba(255, 255, 255, 0.5);
   backdrop-filter: blur(16px) saturate(160%);
@@ -65,22 +45,62 @@
   align-items: center;
 }
 
+.navbar_brand {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
 .navbar_logo {
   font-family: 'Fugaz One';
   font-size: calc(24px * var(--fs-scale));
-  color: var(--secondary-color);
+  color: var(--accent-color);
 
   white-space: nowrap; /*text stays in one line*/
+}
+
+.theme_toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  padding: 0;
+  background: none;
+  border: none;
+  border-radius: 50%;
+  color: var(--accent-color);
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  transition: color 0.3s ease, transform 0.2s ease;
+}
+
+.theme_toggle:hover {
+  color: var(--hover-color);
+  transform: scale(1.06);
+}
+
+.theme_toggle svg {
+  width: 20px;
+  height: 20px;
+}
+
+.theme_toggle svg.icon-sun {
+  width: 26px;
+  height: 26px;
+}
+
+.theme_toggle:focus-visible {
+  outline: 2px solid var(--accent-color);
+  outline-offset: 2px;
+  border-radius: 50%;
 }
 
 .navbar_nav {
   display: flex;
   flex-direction: row;
-  /*default align-items:stretch left in place — every item is already an explicit 64px tall,
-    so it's a no-op at desktop, but the mobile column layout below relies on stretch to make
-    each row span the full width instead of shrinking to its own content*/
-  /*single source of truth for the rhythm between nav items — including .lang_switch,
-    which isn't an <a> and so can't get spacing from the same padding trick as the links*/
+  /*default align-items:stretch is a no-op at desktop (items are already 64px tall) but lets mobile rows span full width*/
+  /*shared spacing for nav items incl. .lang_switch, which isn't an <a> so can't use the link padding trick*/
   gap: 4px;
   height: auto;
   width: auto;
@@ -93,14 +113,14 @@
   height: 64px;
   padding-inline: 20px;
   align-items: center;
-  color: var(--secondary-color);
+  color: var(--accent-color);
 
   white-space: nowrap; /*text stays in one line*/
 
 }
 
 .navbar_nav > a:focus-visible {
-  outline: 2px solid var(--secondary-color);
+  outline: 2px solid var(--accent-color);
   outline-offset: -3px;
 }
 
@@ -121,7 +141,7 @@
 }
 
 .navbar_toggle:focus-visible {
-  outline: 2px solid var(--secondary-color);
+  outline: 2px solid var(--accent-color);
   outline-offset: 4px;
 }
 
@@ -130,7 +150,7 @@
   width: 100%;
   height: 2px;
   border-radius: 2px;
-  background-color: var(--secondary-color);
+  background-color: var(--accent-color);
   transition: transform 0.3s ease, opacity 0.3s ease;
 }
 
@@ -149,8 +169,7 @@
   text-decoration-thickness: 2px;
 }
 
-/*EN/DE switch, sits between Projects and Contact in .navbar_nav — padding-inline matches
-  .navbar_nav > a so it keeps the same rhythm as the links either side of it*/
+/*EN/DE switch between Projects and Contact; padding-inline matches the nav links either side*/
 .lang_switch {
   display: flex;
   align-items: center;
@@ -165,11 +184,11 @@
   align-items: center;
   height: 100%;
   padding-inline: 4px;
-  color: var(--secondary-color);
+  color: var(--accent-color);
 }
 
 .lang_link:focus-visible {
-  outline: 2px solid var(--secondary-color);
+  outline: 2px solid var(--accent-color);
   outline-offset: -3px;
 }
 
@@ -179,7 +198,7 @@
 }
 
 .lang_divider {
-  color: var(--secondary-color);
+  color: var(--accent-color);
   opacity: 0.5;
 }
 
@@ -298,8 +317,7 @@
 
 .accessibility_button:hover,
 .accessibility_button:focus-visible {
-  /*36/34 — grows the button visually without resizing its flex box, so the
-    LinkedIn/Email icons above it don't shift*/
+  /*36/34 scale grows the button without resizing its flex box, so icons above don't shift*/
   transform: scale(1.0588);
 }
 
@@ -318,16 +336,13 @@
   -webkit-mask-size: contain;
 }
 
-/*  ACCESSIBILITY MENU  —  <dialog>.showModal() renders this in the browser's top layer,
-  so it's always above everything else without a manual z-index, and its own ::backdrop
-  replaces what used to be a separate dimming div.  */
+/*  ACCESSIBILITY MENU — <dialog>.showModal() gives top-layer stacking for free; its ::backdrop replaces a manual dimming div  */
 .a11y_panel::backdrop {
   background-color: rgba(0, 0, 0, 0.45);
 }
 
-/*anchored bottom-left near the trigger, but shifted clear of the social-links icon
-  column (34px wide, 8px from the edge) so the open panel never covers its own trigger.
-  Overrides the UA stylesheet's centered dialog[open] positioning (inset:0; margin:auto).*/
+/*anchored near the trigger but shifted clear of the social-links column so the panel never covers it;
+  overrides the UA's default centered dialog[open] positioning*/
 .a11y_panel {
   position: fixed;
   left: 56px;
@@ -398,8 +413,7 @@
   cursor: default;
 }
 
-/*negative margin cancels the padding out, so the hover highlight reaches past the row's
-  text/control edges without shifting anything or changing the panel's overall spacing*/
+/*negative margin cancels the padding so the hover highlight reaches full row width without shifting layout*/
 .a11y_toggle_row {
   cursor: pointer;
   padding: 4px 8px;
@@ -492,9 +506,7 @@ html.a11y-underline-links a {
   text-decoration: underline !important;
 }
 
-/*contrast and grayscale both need the `filter` property — combining them in CSS via two
-  separate classes would silently drop one, so accessibility.js composes both into a
-  single inline style on <html> instead of using classes here (see applyFilters())*/
+/*contrast+grayscale both need `filter`; two classes would silently drop one, so accessibility.js composes them into one inline style (see applyFilters())*/
 
 html.a11y-highlight-titles h1,
 html.a11y-highlight-titles h2,
@@ -506,29 +518,20 @@ html.a11y-highlight-titles h4 {
   -webkit-box-decoration-break: clone;
 }
 
-/*OpenDyslexic: bottom-weighted letterforms designed to stop letters "flipping"
-  (b/d, p/q) for dyslexic readers — self-hosted in public/fonts, SIL OFL licensed.
-  Falls back to a plain sans-serif if the font ever fails to load.
-  Excludes the accessibility panel itself (:not(.a11y_panel, .a11y_panel *)) — the panel
-  has a fixed width, and the wider letterforms/spacing this rule adds were overflowing its
-  own rows and hiding controls, which defeats the point of a control that's meant to stay
-  usable regardless of what it's currently switching on.*/
+/*OpenDyslexic: bottom-weighted letterforms to stop b/d, p/q flipping for dyslexic readers;
+  self-hosted, SIL OFL, falls back to sans-serif if it fails to load. Excludes the a11y panel
+  itself — its fixed width was overflowing under the added letterform/spacing.*/
 html.a11y-dyslexia-font :not(.a11y_panel, .a11y_panel *) {
   font-family: 'OpenDyslexic', Arial, sans-serif !important;
   letter-spacing: 0.04em !important;
   word-spacing: 0.12em !important;
   line-height: 1.6 !important;
-  /*a CSS grid/flex item's implicit min-width:auto is its MIN-CONTENT size — normally
-    bounded by the longest unbreakable word, which the wider spacing above pushes past
-    what several of the site's fixed-track layouts (skills grid, timeline) have room for.
-    Letting words break shrinks that min-content contribution back down, which resolves
-    the overflow without having to chase and patch every nested grid/flex container.*/
+  /*min-width:auto is bounded by the longest unbreakable word, which the wider spacing pushes past
+    fixed-track layouts' (skills grid, timeline) room; letting words break avoids patching each one*/
   overflow-wrap: break-word !important;
 }
 
-/*the wider spacing above needs somewhere to go: .btn and .skill_name both set
-  white-space/sizing that assumes the site's own tighter Jost metrics, and can overflow
-  small screens once OpenDyslexic's extra spacing is added to a nowrap label*/
+/*.btn/.logo_hover_link assume tighter Jost metrics, so OpenDyslexic's extra spacing can overflow small screens on a nowrap label*/
 html.a11y-dyslexia-font .btn,
 html.a11y-dyslexia-font .logo_hover_link {
   white-space: normal !important;
@@ -536,10 +539,8 @@ html.a11y-dyslexia-font .logo_hover_link {
 }
 
 html.a11y-dyslexia-font .skill_name {
-  /*.skill_item uses align-items:center (not the flex default stretch), so without an
-    explicit width this still renders at its own content-based size and pokes out past its
-    parent regardless of min-width/overflow-wrap — those only cap how far it CAN shrink,
-    they don't make it try to in the first place*/
+  /*.skill_item uses align-items:center (not stretch), so without an explicit width this still
+    pokes past its parent — min-width/overflow-wrap only cap how far it CAN shrink*/
   width: 100%;
   min-width: 0;
   overflow-wrap: break-word;
@@ -550,16 +551,12 @@ html.a11y-big-cursor * {
   cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40' viewBox='0 0 24 24'%3E%3Cpath d='M3 2 L3 20 L8 16 L11 22 L14 21 L11 15 L17 15 Z' fill='black' stroke='white' stroke-width='1.5' stroke-linejoin='round'/%3E%3C/svg%3E") 4 4, auto !important;
 }
 
-/*the color-vision correction filters (url(#a11y...Filter), defined inline in index.html)
-  join the same composed `filter` on <html> as contrast/grayscale — see applyFilters()*/
+/*color-vision correction filters join the same composed `filter` on <html> as contrast/grayscale — see applyFilters()*/
 
-/*two masks that track the mouse to keep a horizontal reading band clear while dimming
-  and blurring everything else, for people who lose their place easily while reading.
-  z-index sits just under the navbar/side-nav/social-links band (all 1000+) rather than
-  above it: .social-links' own position:fixed makes it a stacking context, so no z-index
-  on the accessibility button alone could ever lift it above a mask that outranks its
-  ancestor — putting the mask below that whole persistent-chrome band keeps the button
-  (and the rest of that chrome) visible and usable while reading focus is on.*/
+/*tracks the mouse to keep a horizontal reading band clear while dimming the rest. z-index sits
+  just under the navbar/side-nav/social-links band (1000+) since .social-links' own stacking
+  context means no z-index on the button could ever outrank it anyway — keeping the mask below
+  that whole chrome band is the only way to leave it usable while reading focus is on.*/
 .a11y_focus_mask {
   position: fixed;
   left: 0;
@@ -592,10 +589,7 @@ html.a11y-reduce-motion *::after {
   scroll-behavior: auto !important;
 }
 
-/*rescales every fluid type-scale variable (headings included, not just body copy), plus
-  --fs-scale for the fixed-px sizes (nav logo, skill/language labels, timeline, footer)
-  that reference it via calc() — see --fs-scale's definition in main.css for why those
-  need a separate mechanism from the clamp()-based --fs-* variables above.*/
+/*rescales every fluid type var plus --fs-scale for the fixed-px sizes that reference it via calc() — see --fs-scale in main.css*/
 html.a11y-text-1 {
   --fs-h1: clamp(40px, 8.75vw + 9px, 120px);
   --fs-h2: clamp(28px, 3.5vw + 15px, 60px);
@@ -614,9 +608,7 @@ html.a11y-text-2 {
   --fs-scale: 1.5;
 }
 
-/*OS-level preferences, respected automatically regardless of the panel — these are the
-  real baseline; the panel's toggles above are an explicit, sitewide-persisted override
-  for anyone who wants the same effect without an OS-level setting.*/
+/*OS-level prefs are the real baseline; the panel's toggles are an explicit, sitewide-persisted override for the same effect*/
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
@@ -689,7 +681,7 @@ html.a11y-text-2 {
 
 .hero_attention p{
   font-size: 18px;
-  color: var(--secondary-color);
+  color: var(--accent-color);
 }
 
 .hero_attention img {
@@ -698,9 +690,9 @@ html.a11y-text-2 {
 
 
 .hero_image{
-  width: 100%;       /* Allows it to shrink on mobile */
-  max-width: 380px;  /* Set your desired maximum size here */
-  height: auto;      /* Let the container height grow with the content */
+  width: 100%;       /* shrinks on mobile */
+  max-width: 380px;
+  height: auto;
   display: block;
 }
 
@@ -826,8 +818,7 @@ html.a11y-text-2 {
   background-image: url('../../public/assets/images/logos/monaco_friends.jpg');
 }
 
-/*2-column grid holding skills/experience/education/languages as 4 cells — the wrapper
-  divs below are display:contents so these become direct grid items in reading order*/
+/*2-col grid holding skills/experience/education/languages; wrapper divs use display:contents to become direct grid items*/
 .about_skills {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -849,16 +840,12 @@ html.a11y-text-2 {
   justify-self: start;
   gap: var(--space-md);
   width: 100%;
-  /*grid items default to min-width:auto (content-based) regardless of width:100% above,
-    so a wide enough descendant (e.g. text widened by the dyslexia-friendly font toggle)
-    can still force this track past its 1fr share and overflow the grid*/
+  /*min-width:0 lets this track shrink instead of a wide descendant (e.g. dyslexia font) overflowing the grid*/
   min-width: 0;
 }
 
-/*coded skills grid replacing what used to be skills.png — icon above, label below.
-  Columns are content-sized (not 1fr) so the gap is the actual visual gap instead of
-  leftover space in an oversized track; every icon sits in a fixed-size box so square
-  logos and wide wordmark logos (n8n, Strapi) read as the same visual weight.*/
+/*coded skills grid (replaces skills.png); content-sized columns keep the gap literal, and
+  fixed-size icon boxes make square logos and wordmark logos (n8n, Strapi) read as equal weight*/
 .skillsGrid {
   display: grid;
   grid-template-columns: repeat(3, auto);
@@ -876,9 +863,7 @@ html.a11y-text-2 {
   justify-content: flex-start;
   gap: var(--space-xs);
   text-align: center;
-  /*grid tracks default to min-width:auto (content-based), so a wide label — e.g. longer
-    skill names, or any text widened by the dyslexia-friendly font toggle — can force the
-    whole 1fr grid to overflow; this lets the track actually shrink to its column's share*/
+  /*min-width:0 lets a wide label (long name, or dyslexia font) shrink instead of overflowing the 1fr grid*/
   min-width: 0;
 }
 
@@ -910,8 +895,7 @@ html.a11y-text-2 {
   min-height: 2.6em;
 }
 
-/*coded language list replacing what used to be languages.png — name/level on the left,
-  a 5-dot proficiency scale on the right*/
+/*coded language list (replaces languages.png): name/level left, 5-dot proficiency scale right*/
 .languageList {
   list-style: none;
   display: flex;
@@ -946,21 +930,17 @@ html.a11y-text-2 {
   width: 16px;
   height: 16px;
   border-radius: 50%;
-  background: var(--muted-olive);
+  background: var(--neutral-gray);
 }
 
 .dot_filled {
-  background: var(--secondary-color);
+  background: var(--muted-olive);
 }
 
-/*coded timeline replacing what used to be experience.png — a 3-column grid (date, marker,
-  content) shared across every row via display:contents on each <li>, so the date and dot
-  columns line up regardless of how long each row's text is*/
+/*coded timeline (replaces experience.png); display:contents per <li> keeps date/dot columns aligned across rows*/
 .timeline {
   display: grid;
-  /*the date column is auto (content-based) with no cap, so at narrow widths + larger
-    text/spacing (text-size, dyslexia-friendly font) it can grow enough to squeeze the
-    content column toward 0 — minmax gives content a floor it can't be squeezed past*/
+  /*minmax gives the content column a floor so the uncapped auto date column can't squeeze it to 0*/
   grid-template-columns: auto auto minmax(80px, 1fr);
   column-gap: var(--space-sm);
   list-style: none;
@@ -996,12 +976,11 @@ html.a11y-text-2 {
   width: 12px;
   height: 12px;
   border-radius: 50%;
-  background: var(--secondary-color);
+  background: var(--muted-olive);
   z-index: 1;
 }
 
-/*the connecting line down to the next item — the marker cell stretches to the full row
-  height by default, so this reaches exactly to where the next dot begins*/
+/*connecting line to the next item; the marker cell's full row-height stretch makes this reach exactly to the next dot*/
 .timeline_marker::after {
   content: '';
   position: absolute;
@@ -1020,9 +999,7 @@ html.a11y-text-2 {
 .timeline_content {
   grid-column: 3;
   padding-bottom: var(--space-md);
-  /*1fr track still defaults to min-width:auto (content-based) — without this, a wide
-    enough descendant (e.g. text widened by the dyslexia-friendly font toggle) can force
-    this column past its share and overflow the grid*/
+  /*min-width:0 so a wide descendant (e.g. dyslexia font) can't force this column past its share*/
   min-width: 0;
 }
 
@@ -1084,7 +1061,7 @@ html.a11y-text-2 {
   aspect-ratio: 16 / 9;
   overflow: hidden;
   border-radius: 48px 0 0 48px;
-  /*bleed past the centered 1280px container so the image reaches the screen edge on wide viewports*/
+  /*bleeds past the centered container so the image reaches the screen edge on wide viewports*/
   margin-right: min(0px, calc((var(--max-width) - 100vw) / 2));
 }
 
@@ -1094,8 +1071,7 @@ html.a11y-text-2 {
   right: 0;
   height: 100%;
   object-fit: fill;
-  /*zoom starts immediately; the color crossfade is delayed so it reads as "zoom, then color"
-    instead of both happening at once, and runs slower than the zoom for a gradual fade*/
+  /*zoom starts immediately; color crossfade is delayed and slower so it reads as zoom-then-color*/
   transition: transform 0.45s ease, opacity 0.8s ease-in-out 0.25s;
 }
 
@@ -1103,9 +1079,7 @@ html.a11y-text-2 {
   opacity: 0;
 }
 
-/*both images zoom together so the crossfade reads as one photo, not two swapping sizes.
-  bw-img stays fully opaque throughout — only color-img fades in on top of it — otherwise
-  fading both independently briefly lets the page background flash through underneath them*/
+/*both images zoom together so the crossfade reads as one photo; bw-img stays opaque so fading color-img alone doesn't flash the background through*/
 .project_card:hover .bw-img,
 .project_card:hover .color-img {
   transform: scale(1.06);
@@ -1115,11 +1089,8 @@ html.a11y-text-2 {
   opacity: 1;
 }
 
-/*touch devices have no real :hover, so trigger the same reveal off touch/scroll-visibility
-  instead (.is-visible is added on scroll-into-view and on tap, see main.js). Gated by
-  html.touch (set on the first real touchstart) rather than "@media (hover: none)" — that
-  media feature misfires on hybrid devices, e.g. a touchscreen laptop with a mouse attached,
-  where the primary input reports as hover-capable even though the screen is also touched*/
+/*touch has no real :hover, so trigger off .is-visible (scroll/tap, see main.js) gated by html.touch —
+  @media(hover:none) misfires on hybrid devices like a touchscreen laptop with a mouse attached*/
 html.touch .project_card.is-visible .bw-img,
 html.touch .project_card.is-visible .color-img {
   transform: scale(1.06);
@@ -1129,8 +1100,7 @@ html.touch .project_card.is-visible .color-img {
   opacity: 1;
 }
 
-/*a tap or a scroll-past is much briefer than a lingering desktop hover, so touch gets a
-  quicker, snappier version of the same zoom-then-color reveal instead of the slower one*/
+/*a tap/scroll-past is briefer than a desktop hover, so touch gets a quicker version of the same reveal*/
 html.touch .project_image img {
   transition: transform 0.3s ease, opacity 0.35s ease-in-out 0.1s;
 }
@@ -1189,15 +1159,9 @@ html.touch .project_image img {
   width: 100%;
 }
 
-/*a 64px circle at rest, holding just the arrow. On hover it expands into a pill that
-  reveals a text label to the arrow's left — the arrow's own position stays visually fixed
-  (anchored to the row's right edge via margin-left:auto + justify-content:flex-end), so
-  only the label appears to slide out from behind it rather than the whole button jumping.
-  max-width (not width) is what's animated: the label's own max-width transition drives the
-  reveal, and since it's naturally narrower than the generous 220px cap, the button always
-  settles at its true content width instead of stopping short or overshooting into empty
-  space — this keeps it correct across both languages and any text-size scale without
-  having to hardcode/measure the label's width.*/
+/*circle at rest, expands into a pill on hover revealing a label; arrow position stays fixed via
+  margin-left:auto. max-width (not width) drives the reveal so the button settles at its true
+  content width across languages/text-size instead of stopping short or overshooting.*/
 .footer_home_backtotop {
   display: flex;
   align-items: center;
@@ -1206,16 +1170,13 @@ html.touch .project_image img {
   height: 64px;
   padding: 0 20px;
   flex-shrink: 0;
-  /*pins it to the row's right edge even if it wraps onto its own line on narrow screens —
-    justify-content:space-between alone only works while both items share one line*/
+  /*pins it to the row's right edge even when wrapped — space-between alone only works on one line*/
   margin-left: auto;
   border-radius: 999px;
   overflow: hidden;
   color: var(--white);
 
-  /*glassmorphism: translucent tint + blur (so it reads as frosted glass rather than a flat
-    tinted circle) + a soft light border standing in for a glass "rim" + a drop shadow for
-    lift, plus a faint inset highlight along the top edge for a touch of glass sheen*/
+  /*glassmorphism: translucent blur tint + light border rim + drop shadow + inset top highlight for sheen*/
   background-color: rgba(255, 255, 255, 0.14);
   backdrop-filter: blur(12px) saturate(160%);
   -webkit-backdrop-filter: blur(12px) saturate(160%);
@@ -1318,13 +1279,12 @@ html.touch .project_image img {
     right: 16px;
     width: auto;
     flex-direction: column;
-    /*cancels the desktop row gap — the mobile list separates rows with a border-bottom
-      on each item instead, so an extra gap here would leave odd blank slivers between them*/
+    /*cancels desktop row gap — mobile rows use border-bottom instead, so a gap here would leave blank slivers*/
     gap: 0;
     height: 0;
     overflow: hidden;
     border-radius: 24px;
-    background-color: var(--primary-color);
+    background-color: var(--bg-page);
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
     transition: height 0.3s ease;
   }
@@ -1339,11 +1299,8 @@ html.touch .project_image img {
     border-bottom: 1px solid rgba(0, 0, 0, 0.08);
   }
 
-  /*unlike the single-link rows above, this one holds two independent tap targets — so the
-    padding moves onto each .lang_link half instead of the wrapper, making the full width of
-    each half tappable (not just the "EN"/"DE" text itself) same as every other nav row.
-    order:1 (default is 0 on every sibling) pushes it after Contact — last row on mobile,
-    unlike desktop where it stays between Projects and Contact*/
+  /*padding moves to each .lang_link half (two tap targets, not one) so both are fully tappable;
+    order:1 pushes it after Contact on mobile, unlike desktop where it sits between Projects and Contact*/
   .lang_switch {
     order: 1;
     height: auto;
@@ -1472,20 +1429,13 @@ html.touch .project_image img {
     align-items: flex-start;
   }
 
-  /*align-items:flex-start above means this flex item no longer stretches to the
-    container's width, so it defaults to sizing around its own content's natural
-    (unwrapped) width instead — invisible normally, but a wide enough heading (long
-    text at a larger text-size level, especially combined with the dyslexia-friendly
-    font's added spacing) can push it past the viewport*/
+  /*align-items:flex-start means no stretch to container width, so a wide heading (large text-size + dyslexia font) can push past the viewport*/
   .footer_home_text {
     min-width: 0;
     width: 100%;
   }
 
-  /*the email link's own width:fit-content (for its underline to hug the text on desktop)
-    sizes it to unconstrained max-content — since an email address has no spaces to wrap
-    at, break-word can't help either, so at larger text sizes it can overflow regardless
-    of the min-width:0/width:100% fix on its parent above*/
+  /*width:fit-content sizes to max-content; an email has no spaces to wrap so break-word can't help either, hence width:100% here*/
   .footer_home_text .footer_home_email {
     width: 100%;
   }

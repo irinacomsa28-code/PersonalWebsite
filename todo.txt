@@ -2,8 +2,7 @@
 - storytelling motion scroll
 -create animation inside-out for the unerlining
 
-- accesibility plugin
-
+problem, solution, etc mrore about your projects
 - side button responsiveness
 
 - improve consistency

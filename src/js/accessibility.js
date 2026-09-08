@@ -1,7 +1,4 @@
-//single source of truth for the accessibility widget (trigger button + dialog + SVG
-//color-vision filters + reading-focus masks), injected into every page's
-//[data-accessibility] placeholder — same pattern as navbar.js/footer.js, so the markup
-//and its English/German strings live in exactly one place instead of N copies.
+//single source of truth for the a11y widget (trigger + dialog + filters + masks), injected per page like navbar.js/footer.js
 (function () {
   //same convention as navbar.js/footer.js: fintalo.html <-> fintalo.de.html
   function currentLang() {
@@ -61,9 +58,7 @@
     },
   };
 
-  //kept separate from panelHTML() below: this one has to land *inside* .social-links
-  //(as a real flex child) to inherit the same gap/alignment as the LinkedIn/Email icons,
-  //while the dialog and its overlays are page-level and don't belong in that flex layout
+  //separate from panelHTML(): this must land inside .social-links as a flex child for gap/alignment; the dialog is page-level
   function triggerHTML(t) {
     return `
     <button
@@ -82,8 +77,7 @@
 
   function panelHTML(t) {
     return `
-    <!--  ACCESSIBILITY MENU  —  native <dialog>: showModal() gives us a real focus trap,
-      Escape-to-close, top-layer stacking and focus-return-to-trigger for free  -->
+    <!-- native <dialog>: showModal() gives focus trap, Escape-close, top-layer stacking, focus-return for free -->
     <dialog class="a11y_panel" id="a11yPanel" aria-labelledby="a11yPanelTitle">
       <div class="a11y_panel_header">
         <p id="a11yPanelTitle" class="a11y_panel_title">${t.panelTitle}</p>
@@ -154,10 +148,7 @@
       </div>
     </dialog>
 
-    <!-- hidden SVG filter defs for the Color Vision select — real daltonization
-      (correction) matrices, not simulation, derived from the standard Machado/Fidaner
-      RGB→LMS pipeline so protanopia/deuteranopia/tritanopia users get more distinguishable
-      colors rather than a filter that mimics what they already can't see. -->
+    <!-- real daltonization matrices (Machado/Fidaner RGB→LMS), not simulation — corrects colors instead of mimicking what users can't see -->
     <svg aria-hidden="true" focusable="false" style="position: absolute; width: 0; height: 0; overflow: hidden">
       <defs>
         <filter id="a11yProtanopiaFilter" color-interpolation-filters="sRGB">
@@ -197,9 +188,7 @@
 
   const STORAGE_KEY = 'a11y-preferences';
 
-  //simple one-class-per-toggle state. contrast/grayscale/color-vision are handled
-  //separately in applyFilters() below since they all need the `filter` property — three
-  //competing rules on the same element would silently drop two instead of combining.
+  //one class per toggle; contrast/grayscale/color-vision handled separately in applyFilters() since they all need `filter` (classes would drop two)
   const TOGGLE_CLASSES = {
     'underline-links': 'a11y-underline-links',
     'reduce-motion': 'a11y-reduce-motion',
@@ -208,8 +197,7 @@
     'big-cursor': 'a11y-big-cursor',
   };
 
-  //real daltonization (correction) filters, defined inline above — see the comment there
-  //for how these matrices were derived
+  //daltonization filters defined inline above; see that comment for how the matrices were derived
   const COLOR_VISION_FILTERS = {
     protanopia: 'url(#a11yProtanopiaFilter)',
     deuteranopia: 'url(#a11yDeuteranopiaFilter)',
@@ -266,9 +254,7 @@
 
   let state = Object.assign({}, DEFAULT_STATE, loadState());
 
-  //composes contrast + grayscale + color-vision correction into one inline filter so any
-  //combination can be active at once. Falls back to nothing (letting the site's own
-  //@media (prefers-contrast: more) rule take over) unless something is explicitly on.
+  //composes contrast+grayscale+color-vision into one inline filter so any combination can be active; falls back to the site's @media(prefers-contrast) rule when nothing is on
   function applyFilters() {
     const filters = [];
     if (state.contrast || contrastQuery.matches) filters.push('contrast(1.5) brightness(1.05)');
@@ -297,9 +283,7 @@
     positionFocusMasks(e.clientY);
   }
 
-  //touchscreens never fire mousemove, so without this the band would just sit frozen at
-  //its starting position on phones/tablets — a dragging finger is the closest touch
-  //equivalent to a moving mouse, so it drives the band the same way
+  //touchscreens never fire mousemove, so a dragging finger drives the band instead
   function onFocusMaskTouchMove(e) {
     if (e.touches.length) positionFocusMasks(e.touches[0].clientY);
   }
@@ -340,8 +324,7 @@
   }
 
   applyState();
-  //OS-level contrast preference can change while the tab is open — keep the composed
-  //filter in sync even if the user never touches the panel
+  //keeps the composed filter in sync if the OS contrast pref changes while the tab is open
   contrastQuery.addEventListener('change', applyFilters);
 
   trigger.addEventListener('click', () => {
@@ -349,8 +332,7 @@
     trigger.setAttribute('aria-expanded', 'true');
   });
 
-  //fires on every close path — close(), Escape/cancel — so this is the one place
-  //that needs to keep the trigger's aria-expanded in sync
+  //fires on every close path (close(), Escape/cancel) to keep aria-expanded in sync
   dialog.addEventListener('close', () => {
     trigger.setAttribute('aria-expanded', 'false');
   });

@@ -1,5 +1,4 @@
-/*project page's main heading is an <h1> for correct document structure, styled at the
-  same size as the sitewide h2 scale (project pages have no bigger heading to reserve h1 for)*/
+/*<h1> for correct doc structure, sized to h2 scale since project pages have no bigger heading*/
 .project_title {
   font-family: 'Jost-Medium';
   font-size: var(--fs-h2);
@@ -61,9 +60,7 @@
   left:0;
 }
 
-/*flex-basis + min-width:0 (not a fixed width) so this shrinks gracefully alongside
-  .descriptionAndphoto on tablet instead of relying on the two of them overflowing until
-  the 768px breakpoint forces width:100%*/
+/*flex-basis+min-width:0 lets this shrink gracefully alongside .descriptionAndphoto instead of overflowing until the 768px breakpoint*/
 .keypoints{
     display: flex;
     flex-direction: column;
@@ -117,21 +114,18 @@
     gap: 36px;
 }
 
-/*grid (not flex) so the mobile override can just drop to one column —
-  no per-image sizing hack needed, the sitewide img rule already handles width/height*/
+/*grid (not flex) so mobile can drop to one column with no per-image sizing hack needed*/
 .Img1And2Project{
     display: grid;
     grid-template-columns: 1fr 1fr;
-    /*without this, the grid's default row-stretch forces the shorter image to match its
-      taller sibling's height, which object-fit:cover then crops to fill*/
+    /*without this, row-stretch would force the shorter image to match its taller sibling's height*/
     align-items: start;
     width: 100%;
     gap: 20px;
 }
 
 /*stacked titled blocks, e.g. "What I Did" / "The Challenge" / "The Solution".
-  width:100%/max-width (not a fixed width) so it also fills fintalo_content_row's
-  minmax(0, 600px) grid track instead of overflowing it once that track shrinks below 600px*/
+  width:100%/max-width (not fixed) so it fills fintalo_content_row's grid track without overflowing below 600px*/
 .titled_description {
   display: flex;
   flex-direction: column;

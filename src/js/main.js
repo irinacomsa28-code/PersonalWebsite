@@ -1,7 +1,5 @@
-//covers both the OS-level setting and the accessibility panel's own "Reduce Motion"
-//toggle (index.html only for now) — checked live, not just once at page load, since
-//JS-driven motion (setTimeout loops, explicit scrollTo({behavior:'smooth'})) doesn't
-//stop on its own just because a CSS animation/transition rule says none
+//covers OS-level pref + the a11y panel's Reduce Motion toggle; checked live since JS-driven
+//motion (setTimeout, scrollTo) doesn't stop just because a CSS rule says none
 function prefersReducedMotion() {
     return window.matchMedia('(prefers-reduced-motion: reduce)').matches
         || document.documentElement.classList.contains('a11y-reduce-motion');
@@ -67,8 +65,7 @@ window.addEventListener('DOMContentLoaded', () => {
     let phraseIndex = 0;
     let charIndex = 0;
 
-    //checked on every tick, not just once at start, so turning the accessibility panel's
-    //Reduce Motion toggle on mid-animation actually stops it instead of finishing the cycle
+    //checked every tick so toggling Reduce Motion mid-animation stops it instead of finishing the cycle
     function stopIfMotionNowReduced() {
         if (!prefersReducedMotion()) return false;
         target.textContent = phrases[phraseIndex];
@@ -104,22 +101,19 @@ window.addEventListener('DOMContentLoaded', () => {
 
 
 
-//animating about_imageAndtext on scroll into about section, and standing in for :hover on
-//touch devices for the project teaser images (see the "html.touch" rules in layout.css)
+//reveals about_imageAndText on scroll; also stands in for :hover on touch (see html.touch rules in layout.css)
 const observer = new IntersectionObserver((entries) => {
   entries.forEach(entry => {
     if (entry.isIntersecting) {
       entry.target.classList.add('is-visible');
     }
   });
-}, { threshold: 0.2 }); // Löst aus, wenn 20% des Bereichs sichtbar sind
+}, { threshold: 0.2 });
 
 const aboutImageAndText = document.querySelector('.about_imageAndText');
 if (aboutImageAndText) observer.observe(aboutImageAndText);
 
-//project cards get their own, more sensitive observer: a lower threshold (barely a sliver
-//needs to show) plus a rootMargin that extends the trigger zone below the viewport, so the
-//reveal fires just before a card is scrolled fully into view instead of only once it's there
+//project cards use a lower threshold + rootMargin below the viewport so the reveal fires just before they're fully in view
 const projectCards = document.querySelectorAll('.project_card');
 const projectObserver = new IntersectionObserver((entries) => {
   entries.forEach(entry => {
@@ -131,8 +125,7 @@ const projectObserver = new IntersectionObserver((entries) => {
 
 projectCards.forEach((card) => projectObserver.observe(card));
 
-//"hover: none" misfires on hybrid devices (e.g. a touchscreen laptop with a mouse also
-//attached), so a real touchstart is a more reliable signal that this is a touch interaction
+//"hover:none" misfires on hybrid touchscreen+mouse devices, so touchstart is the reliable signal
 document.addEventListener('touchstart', function onFirstTouch() {
   document.documentElement.classList.add('touch');
   document.removeEventListener('touchstart', onFirstTouch);
@@ -156,8 +149,7 @@ window.addEventListener('load', sizeHeroAboutSpacer);
 window.addEventListener('resize', sizeHeroAboutSpacer);
 
 
-//native #hash anchor jumps miscalculate against our sticky sections, so scroll manually.
-//sticky elements can also misreport their own rect while "stuck", so unstick before measuring
+//native #hash jumps miscalculate against sticky sections; unstick elements before measuring their rect
 function trueOffsetTop(el) {
     const prevPosition = el.style.position;
     el.style.position = 'static';
