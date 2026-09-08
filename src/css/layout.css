@@ -400,6 +400,48 @@
   margin-top: -12px; /*tops down the 20px flex gap to 8px*/
 }
 
+.logo_hover_link {
+  position: relative;
+  white-space: nowrap;
+}
+
+.logo_hover_link::after {
+  content: '';
+  position: absolute;
+  left: 100%;
+  top: 50%;
+  transform: translateY(-50%);
+  margin-left: 4px;
+  width: 48px;
+  height: 48px;
+  background-color: var(--white);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.35);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.15s ease;
+}
+
+.logo_hover_link:hover::after,
+.logo_hover_link:focus-visible::after {
+  opacity: 1;
+}
+
+.usaneers_link::after {
+  background-image: url('../../public/assets/images/logos/Usaneers_icon.png');
+}
+
+.tudesign_link::after {
+  background-image: url('../../public/assets/images/logos/tudesign.jpg');
+}
+
+.monacofriends_link::after {
+  background-image: url('../../public/assets/images/logos/monaco_friends.jpg');
+}
+
 /*2-column grid holding skills/experience/education/languages as 4 cells — the wrapper
   divs below are display:contents so these become direct grid items in reading order*/
 .about_skills {
@@ -752,8 +794,9 @@ html.touch .project_image img {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 84px;
-  height: 84px;
+  min-width: 84px;
+  min-height: 84px;
+  padding: 4px;
   flex-shrink: 0;
   /*pins it to the row's right edge even if it wraps onto its own line on narrow screens —
     justify-content:space-between alone only works while both items share one line*/
@@ -989,12 +1032,13 @@ html.touch .project_image img {
   .footer_home_bottom {
     flex-wrap: wrap;
     align-items: center;
-    gap: var(--space-md);
+    gap: var(--space-lg);
   }
 
   .footer_home_backtotop {
-    width: 64px;
-    height: 64px;
+    min-width: 64px;
+    min-height: 64px;
+    padding: 4px;
     font-size: 14px;
   }
 

@@ -3,28 +3,48 @@
   filter: grayscale(1);
 }
 
-/*text column, group photo and Challenge/Solution laid out in a 2-column grid,
-  so Challenge (col 1) and Solution (col 2) land on the same row automatically.
-  minmax() lets column 1 shrink below 600px on tablet instead of forcing column 2 (which
-  holds the group photo) down to a sliver — grid tracks don't shrink on their own like flex does.
-  align-items:start stops the default grid stretch from forcing the photo taller than its own
-  aspect ratio, which is what was cropping it via object-fit:cover.*/
+/*two stacked grids — keypoints|photo, then Challenge|Solution — 16px between the two grids.*/
 .fintalo_content_row {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+/*keypoints column and photo column, side by side*/
+.fintalo_top_row {
   display: grid;
   grid-template-columns: minmax(0, 600px) minmax(240px, 1fr);
   align-items: start;
-  column-gap: 36px;
-  row-gap: 16px;
+  gap: 24px;
 }
 
-.fintalo_content_row .fintalo_group_photo {
+.fintalo_top_row .titled_description {
+  max-width: none; /*was capped to fit the old 600px grid column; now it fills this grid's own column*/
+  gap: 16px; /*between each stacked keypoint div, overriding the shared --space-lg gap*/
+}
+
+.fintalo_top_row .fintalo_group_photo {
   width: 100%;
   max-width: none; /*override the sitewide .section_project img max-width:100% cap*/
   height: auto;
 }
 
+/*Challenge and Solution side by side*/
+.fintalo_bottom_row {
+  display: flex;
+  gap: 24px;
+}
+
+.fintalo_bottom_row .titled_keypoint {
+  flex: 1;
+}
+
 @media (max-width: 768px) {
-  .fintalo_content_row {
+  .fintalo_top_row {
     grid-template-columns: 1fr;
+  }
+
+  .fintalo_bottom_row {
+    flex-direction: column;
   }
 }
