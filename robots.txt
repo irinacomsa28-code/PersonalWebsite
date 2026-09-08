@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://irinacomsa28-code.github.io/PersonalWebsite/sitemap.xml

@@ -48,7 +48,7 @@ window.addEventListener('DOMContentLoaded', () => {
     const target = document.querySelector('[data-typewriter-phrases]');
     if (!target) return;
 
-    const heading = target.closest('h2');
+    const heading = target.closest('h1');
     const phrases = JSON.parse(target.dataset.typewriterPhrases);
     reserveHeroHeadingHeight(heading, target, phrases);
     window.addEventListener('resize', () => reserveHeroHeadingHeight(heading, target, phrases));

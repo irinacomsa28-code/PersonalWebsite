@@ -256,6 +256,18 @@ h4 {
   font-size: var(--fs-h4);
 }
 
+/*the hero heading (the actual page intro) and "Latest Projects" swapped tags for
+  correct SEO heading order — a page should have exactly one h1, and it should be the
+  person's intro, not a section title further down. These two classes keep both headings
+  visually exactly as they were (h2-sized hero, h1-sized section title).*/
+.hero_heading {
+  font-size: var(--fs-h2);
+}
+
+.projects_heading {
+  font-size: var(--fs-h1);
+}
+
 p {
   font-family: 'Jost-Regular';
   font-size: var(--fs-body);
