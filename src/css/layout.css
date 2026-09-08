@@ -1157,28 +1157,70 @@ html.touch .project_image img {
   width: 100%;
 }
 
+/*a 64px circle at rest, holding just the arrow. On hover it expands into a pill that
+  reveals a text label to the arrow's left — the arrow's own position stays visually fixed
+  (anchored to the row's right edge via margin-left:auto + justify-content:flex-end), so
+  only the label appears to slide out from behind it rather than the whole button jumping.
+  max-width (not width) is what's animated: the label's own max-width transition drives the
+  reveal, and since it's naturally narrower than the generous 220px cap, the button always
+  settles at its true content width instead of stopping short or overshooting into empty
+  space — this keeps it correct across both languages and any text-size scale without
+  having to hardcode/measure the label's width.*/
 .footer_home_backtotop {
   display: flex;
   align-items: center;
-  justify-content: center;
-  min-width: 84px;
-  min-height: 84px;
-  padding: 4px;
+  justify-content: flex-end;
+  width: 64px;
+  height: 64px;
+  padding: 0 20px;
   flex-shrink: 0;
   /*pins it to the row's right edge even if it wraps onto its own line on narrow screens —
     justify-content:space-between alone only works while both items share one line*/
   margin-left: auto;
-  border-radius: 100px;
-  background-color: var(--muted-olive);
+  border-radius: 999px;
+  overflow: hidden;
   color: var(--white);
-  font-family: 'Jost-Medium';
-  font-size: calc(16px * var(--fs-scale));
-  text-align: center;
+
+  /*glassmorphism: translucent tint + blur (so it reads as frosted glass rather than a flat
+    tinted circle) + a soft light border standing in for a glass "rim" + a drop shadow for
+    lift, plus a faint inset highlight along the top edge for a touch of glass sheen*/
+  background-color: rgba(255, 255, 255, 0.14);
+  backdrop-filter: blur(12px) saturate(160%);
+  -webkit-backdrop-filter: blur(12px) saturate(160%);
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.16);
+  transition: width 0.35s ease, background-color 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
 }
 
-.footer_home_backtotop:hover {
+.footer_home_backtotop svg {
+  flex-shrink: 0;
+}
+
+.footer_home_backtotop_label {
+  font-family: 'Jost-Medium';
+  font-size: calc(16px * var(--fs-scale));
+  white-space: nowrap;
+  overflow: hidden;
+  max-width: 0;
+  opacity: 0;
+  transition: max-width 0.35s ease, opacity 0.25s ease, margin-right 0.35s ease;
+}
+
+.footer_home_backtotop:hover,
+.footer_home_backtotop:focus-visible {
+  width: auto;
+  max-width: 260px;
   color: var(--white);
-  background-color: var(--hover-color);
+  background-color: rgba(255, 255, 255, 0.24);
+  border-color: rgba(255, 255, 255, 0.45);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.28);
+}
+
+.footer_home_backtotop:hover .footer_home_backtotop_label,
+.footer_home_backtotop:focus-visible .footer_home_backtotop_label {
+  max-width: 200px;
+  opacity: 1;
+  margin-right: 10px;
 }
 
 
@@ -1419,13 +1461,6 @@ html.touch .project_image img {
     flex-wrap: wrap;
     align-items: center;
     gap: var(--space-lg);
-  }
-
-  .footer_home_backtotop {
-    min-width: 64px;
-    min-height: 64px;
-    padding: 4px;
-    font-size: calc(14px * var(--fs-scale));
   }
 
   /*PROJECT DETAIL PAGES (shared across fintalo/muntum/wildCraftFoundry/semanticCanvas/storytellingGame)*/
