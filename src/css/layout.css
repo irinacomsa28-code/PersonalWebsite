@@ -1,25 +1,57 @@
+/*floating rounded "capsule" bar (the Apple-style treatment) instead of a full-bleed strip:
+  inset from the top and sides, capped at the site's own content width so its edges line up
+  with everything else on the page rather than floating at an arbitrary width.
+  At rest it's barely-there glass, so it doesn't compete with the hero image, but still isn't
+  the "flat zero-effect" it would be with no blur/tint/border at all — a hint of the same
+  glass language the scrolled state uses, rather than an on/off switch between the two.
+  A dark (not white) hairline outlines the capsule rather than a light rim: this bar floats
+  above whatever scrolls beneath it — hero photo, light sections, project imagery — and a
+  subtle dark edge reads consistently against all of them, where a light highlight only
+  would against darker content. It's a full border (not just border-bottom) since a bottom-
+  only line would cut across the capsule's rounded corners instead of following them.
+
+  Content alignment: hero_container/about_container/etc. all get their edge position from
+  "var(--space-lg) padding on a full-width parent, then max-width:var(--max-width) that
+  centers once the viewport is wide enough" — a two-step formula, not just a single
+  max-width. A pill that's simply inset by a flat margin (e.g. calc(100% - 32px)) only
+  matches that by coincidence in the narrow band around max-width itself; on wider screens
+  the two formulas cross over to "centered" at different viewport widths and drift apart
+  (by ~49px in testing). So the pill below uses the *same shape* of formula — fixed inset,
+  then a max-width that's widened by exactly the padding on each side — just uniformly
+  shifted inward by --space-md (the pill's own decorative gap from the content edge). That
+  keeps the crossover point identical to the content sections', so navbar content (after
+  its own --space-md padding) lands on the exact same edge as the page content below it at
+  every viewport width, not just near 1280px.*/
 .navbar {
   position: fixed;
-  top: 0;
-  width: 100%;
+  top: 12px;
+  left: calc(var(--space-lg) - var(--space-md));
+  right: calc(var(--space-lg) - var(--space-md));
+  max-width: calc(var(--max-width) + 2 * var(--space-md));
+  margin-inline: auto;
   height: 64px;
-  padding-left: var(--space-lg);
-  padding-right: var(--space-lg);
+  padding-left: var(--space-md);
+  padding-right: var(--space-md);
   /*higher than side-nav/social-links (both 1000) so the open mobile dropdown fully covers them*/
   z-index: 1100;
-  background-color: rgba(var(--primary-color-rgb), 0);
+  border-radius: 999px;
+  background-color: rgba(var(--primary-color-rgb), 0.06);
+  border: 1px solid rgba(0, 0, 0, 0);
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0);
-  backdrop-filter: blur(0px);
-  -webkit-backdrop-filter: blur(0px);
-  transition: background-color 0.4s ease, box-shadow 0.4s ease, backdrop-filter 0.4s ease, -webkit-backdrop-filter 0.4s ease;
+  backdrop-filter: blur(3px);
+  -webkit-backdrop-filter: blur(3px);
+  transition: background-color 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease, backdrop-filter 0.4s ease, -webkit-backdrop-filter 0.4s ease;
 }
 
-/*fades in a frosted-glass background once the page has scrolled past the hero*/
+/*fades into a fuller frosted-glass capsule once the page has scrolled past the hero — the
+  saturate boost alongside the blur keeps colors showing through from looking washed out,
+  and the inset top highlight adds a touch of glass sheen along the capsule's top edge*/
 .navbar.scrolled {
-  background-color: rgba(var(--primary-color-rgb), 0.40);
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.01);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+  background-color: rgba(var(--primary-color-rgb), 0.55);
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.06), inset 0 1px 0 rgba(255, 255, 255, 0.5);
+  backdrop-filter: blur(16px) saturate(160%);
+  -webkit-backdrop-filter: blur(16px) saturate(160%);
 }
 
 .navbar_container {
@@ -1275,24 +1307,30 @@ html.touch .project_image img {
     font-size: calc(18px * var(--fs-scale));
   }
 
+  /*floats as its own rounded panel below the capsule navbar (12px top inset + 64px tall +
+    8px gap = 84px), inset by the same 16px the navbar itself uses so its edges line up with
+    the capsule above it, with a matching gap left at the bottom so it floats rather than
+    running flush to the edge of the screen*/
   .navbar_nav {
     position: fixed;
-    top: 64px;
-    left: 0;
-    width: 100%;
+    top: 84px;
+    left: 16px;
+    right: 16px;
+    width: auto;
     flex-direction: column;
     /*cancels the desktop row gap — the mobile list separates rows with a border-bottom
       on each item instead, so an extra gap here would leave odd blank slivers between them*/
     gap: 0;
     height: 0;
     overflow: hidden;
+    border-radius: 24px;
     background-color: var(--primary-color);
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
     transition: height 0.3s ease;
   }
 
   .navbar_nav.open {
-    height: calc(100vh - 64px);
+    height: calc(100vh - 84px - 16px);
   }
 
   .navbar_nav > a {
@@ -1372,7 +1410,7 @@ html.touch .project_image img {
   /*ABOUT*/
   .about_imageAndText {
     flex-direction: column;
-    gap: 4px;
+    gap: var(--space-md);
   }
 
   .about_image {

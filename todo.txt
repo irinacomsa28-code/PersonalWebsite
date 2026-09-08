@@ -1,23 +1,16 @@
 - drop down menu projects
-- change gnome intoo foot
-- experience etc coded instead of images
 - storytelling motion scroll
-- smoother when hovered, gains color
 -create animation inside-out for the unerlining
 
 - accesibility plugin
 
-- make it coherent
+- improve consistency
 
--dark mode
+- dark mode
 
-- a "let s talk" but creative OR piegon there?
-
--responsive
+- keep it responsive
 
 - contact form - CTA
-
-!!!!! -projectsL drop down menu
 
 
 ---done for performance:
