@@ -35,7 +35,7 @@
 
 .navbar_logo {
   font-family: 'Fugaz One';
-  font-size: 24px;
+  font-size: calc(24px * var(--fs-scale));
   color: var(--secondary-color);
 
   white-space: nowrap; /*text stays in one line*/
@@ -286,33 +286,29 @@
   -webkit-mask-size: contain;
 }
 
-/*  ACCESSIBILITY MENU  */
-.a11y_overlay[hidden] {
-  display: none;
-}
-
-.a11y_overlay {
-  position: fixed;
-  inset: 0;
-  z-index: 2000;
-}
-
-.a11y_backdrop {
-  position: absolute;
-  inset: 0;
+/*  ACCESSIBILITY MENU  —  <dialog>.showModal() renders this in the browser's top layer,
+  so it's always above everything else without a manual z-index, and its own ::backdrop
+  replaces what used to be a separate dimming div.  */
+.a11y_panel::backdrop {
   background-color: rgba(0, 0, 0, 0.45);
 }
 
 /*anchored bottom-left near the trigger, but shifted clear of the social-links icon
-  column (34px wide, 8px from the edge) so the open panel never covers its own trigger*/
+  column (34px wide, 8px from the edge) so the open panel never covers its own trigger.
+  Overrides the UA stylesheet's centered dialog[open] positioning (inset:0; margin:auto).*/
 .a11y_panel {
-  position: absolute;
+  position: fixed;
   left: 56px;
   bottom: 16px;
+  top: auto;
+  right: auto;
+  margin: 0;
   width: 280px;
   max-width: calc(100vw - 72px);
   max-height: calc(100vh - 32px);
   overflow-y: auto;
+  border: none;
+  padding: 0;
   border-radius: 16px;
   background-color: var(--white);
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
@@ -375,6 +371,20 @@
   background-color: rgba(0, 0, 0, 0.08);
 }
 
+.a11y_stepper_button:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+  background-color: var(--white);
+}
+
+.a11y_stepper_value {
+  min-width: 56px;
+  text-align: center;
+  font-family: 'Jost-Light';
+  font-size: 13px;
+  color: rgba(0, 0, 0, 0.65);
+}
+
 .a11y_toggle {
   width: 18px;
   height: 18px;
@@ -402,8 +412,31 @@ html.a11y-underline-links a {
   text-decoration: underline !important;
 }
 
-html.a11y-contrast {
-  filter: contrast(1.3) brightness(1.05);
+/*contrast and grayscale both need the `filter` property — combining them in CSS via two
+  separate classes would silently drop one, so accessibility.js composes both into a
+  single inline style on <html> instead of using classes here (see applyFilters())*/
+
+html.a11y-highlight-titles h1,
+html.a11y-highlight-titles h2,
+html.a11y-highlight-titles h3,
+html.a11y-highlight-titles h4 {
+  background-color: #fff3b0 !important;
+  color: #000 !important;
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+}
+
+html.a11y-dyslexia-font,
+html.a11y-dyslexia-font * {
+  font-family: Arial, Verdana, sans-serif !important;
+  letter-spacing: 0.06em !important;
+  word-spacing: 0.12em !important;
+  line-height: 1.6 !important;
+}
+
+html.a11y-big-cursor,
+html.a11y-big-cursor * {
+  cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40' viewBox='0 0 24 24'%3E%3Cpath d='M3 2 L3 20 L8 16 L11 22 L14 21 L11 15 L17 15 Z' fill='black' stroke='white' stroke-width='1.5' stroke-linejoin='round'/%3E%3C/svg%3E") 4 4, auto !important;
 }
 
 html.a11y-reduce-motion,
@@ -415,13 +448,45 @@ html.a11y-reduce-motion *::after {
   scroll-behavior: auto !important;
 }
 
-/*only affects elements already using var(--fs-body): paragraphs, list items, project body text*/
+/*rescales every fluid type-scale variable (headings included, not just body copy), plus
+  --fs-scale for the fixed-px sizes (nav logo, skill/language labels, timeline, footer)
+  that reference it via calc() — see --fs-scale's definition in main.css for why those
+  need a separate mechanism from the clamp()-based --fs-* variables above.*/
 html.a11y-text-1 {
-  --fs-body: clamp(17px, 0.6vw + 15px, 23px);
+  --fs-h1: clamp(40px, 8.75vw + 9px, 120px);
+  --fs-h2: clamp(28px, 3.5vw + 15px, 60px);
+  --fs-h3: clamp(25px, 2.1vw + 18px, 45px);
+  --fs-h4: clamp(20px, 0.6vw + 18px, 25px);
+  --fs-body: clamp(19px, 0.68vw + 16px, 25px);
+  --fs-scale: 1.25;
 }
 
 html.a11y-text-2 {
-  --fs-body: clamp(19px, 0.68vw + 17px, 26px);
+  --fs-h1: clamp(48px, 10.5vw + 11px, 144px);
+  --fs-h2: clamp(33px, 4.2vw + 18px, 72px);
+  --fs-h3: clamp(30px, 2.6vw + 21px, 54px);
+  --fs-h4: clamp(24px, 0.7vw + 21px, 30px);
+  --fs-body: clamp(23px, 0.81vw + 20px, 30px);
+  --fs-scale: 1.5;
+}
+
+/*OS-level preferences, respected automatically regardless of the panel — these are the
+  real baseline; the panel's toggles above are an explicit, sitewide-persisted override
+  for anyone who wants the same effect without an OS-level setting.*/
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+@media (prefers-contrast: more) {
+  html {
+    filter: contrast(1.5) brightness(1.05);
+  }
 }
 
 
@@ -688,7 +753,7 @@ html.a11y-text-2 {
 
 .skill_name {
   font-family: 'Jost-Light';
-  font-size: 14px;
+  font-size: calc(14px * var(--fs-scale));
   line-height: 1.3;
   min-height: 2.6em;
 }
@@ -711,12 +776,12 @@ html.a11y-text-2 {
 
 .language_name {
   font-family: 'Jost-Regular';
-  font-size: 18px;
+  font-size: calc(18px * var(--fs-scale));
 }
 
 .language_level {
   font-family: 'Jost-Light';
-  font-size: 14px;
+  font-size: calc(14px * var(--fs-scale));
 }
 
 .language_dots {
@@ -757,7 +822,7 @@ html.a11y-text-2 {
   text-align: right;
   white-space: nowrap;
   font-family: 'Jost-Light';
-  font-size: 14px;
+  font-size: calc(14px * var(--fs-scale));
 }
 
 .timeline_marker {
@@ -804,21 +869,21 @@ html.a11y-text-2 {
 
 .timeline_role {
   font-family: 'Jost-Regular';
-  font-size: 18px;
+  font-size: calc(18px * var(--fs-scale));
 }
 
 .timeline_content ul {
   margin-top: 4px;
   padding-left: 18px;
   font-family: 'Jost-Light';
-  font-size: 14px;
+  font-size: calc(14px * var(--fs-scale));
 }
 
 /*plain detail lines for timelines without a bulleted list, e.g. education*/
 .timeline_detail {
   margin-top: 4px;
   font-family: 'Jost-Light';
-  font-size: 14px;
+  font-size: calc(14px * var(--fs-scale));
 }
 
 
@@ -945,7 +1010,7 @@ html.touch .project_image img {
 }
 
 .footer_home_email {
-  font-size: 16px;
+  font-size: calc(16px * var(--fs-scale));
   font-family: 'Jost-Medium';
   color: var(--white);
   text-decoration: underline;
@@ -953,7 +1018,7 @@ html.touch .project_image img {
 }
 
 .footer_home_copyright {
-  font-size: 12px;
+  font-size: calc(12px * var(--fs-scale));
   font-family: 'Jost-Light';
   color: var(--white);
 }
@@ -980,7 +1045,7 @@ html.touch .project_image img {
   background-color: var(--muted-olive);
   color: var(--white);
   font-family: 'Jost-Medium';
-  font-size: 16px;
+  font-size: calc(16px * var(--fs-scale));
   text-align: center;
 }
 
@@ -1038,7 +1103,7 @@ html.touch .project_image img {
   }
 
   .navbar_logo {
-    font-size: 18px;
+    font-size: calc(18px * var(--fs-scale));
   }
 
   .navbar_nav {
@@ -1162,7 +1227,7 @@ html.touch .project_image img {
   }
 
   .timeline_date {
-    font-size: 12px;
+    font-size: calc(12px * var(--fs-scale));
   }
 
   /*PROJECTS GRID*/
@@ -1214,7 +1279,7 @@ html.touch .project_image img {
     min-width: 64px;
     min-height: 64px;
     padding: 4px;
-    font-size: 14px;
+    font-size: calc(14px * var(--fs-scale));
   }
 
   /*PROJECT DETAIL PAGES (shared across fintalo/muntum/wildCraftFoundry/semanticCanvas/storytellingGame)*/

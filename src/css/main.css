@@ -36,6 +36,12 @@
   --fs-h3: clamp(20px, 1.7vw + 14px, 36px);
   --fs-h4: clamp(16px, 0.45vw + 14px, 20px);
   --fs-body: clamp(15px, 0.54vw + 13px, 20px);
+
+  /*multiplier for the handful of fixed-px text sizes (nav logo, skill/language labels,
+    timeline, footer) that don't go through the fluid --fs-* scale above. Left at 1 by
+    default; the accessibility panel's text-size control is the only thing that changes it,
+    via calc(<size> * var(--fs-scale)) on each of those declarations.*/
+  --fs-scale: 1;
 }
 
 /*  FONTS  */

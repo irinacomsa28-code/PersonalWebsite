@@ -1,22 +1,47 @@
-//accessibility widget: floating button opens a panel with text size, contrast, underline-links and reduce-motion controls
+//accessibility widget: floating button opens a <dialog> with text size, contrast,
+//grayscale, underline-links, highlight-titles, dyslexia-friendly font, big cursor and
+//reduce-motion controls. showModal()/close() give us a real focus trap, Escape-to-close
+//and focus-return-to-trigger natively — no need to hand-roll them.
 (function () {
   const STORAGE_KEY = 'a11y-preferences';
+
+  //simple one-class-per-toggle state. contrast/grayscale are handled separately in
+  //applyFilters() below since they both need the `filter` property — two competing
+  //classes on the same element would silently drop one instead of combining.
   const TOGGLE_CLASSES = {
-    contrast: 'a11y-contrast',
     'underline-links': 'a11y-underline-links',
     'reduce-motion': 'a11y-reduce-motion',
+    'highlight-titles': 'a11y-highlight-titles',
+    'dyslexia-font': 'a11y-dyslexia-font',
+    'big-cursor': 'a11y-big-cursor',
   };
+
   const TEXT_SIZE_CLASSES = ['', 'a11y-text-1', 'a11y-text-2'];
+  const TEXT_SIZE_LABELS = ['Normal', 'Large', 'Larger'];
+
+  const DEFAULT_STATE = {
+    textSize: 0,
+    contrast: false,
+    grayscale: false,
+    'underline-links': false,
+    'highlight-titles': false,
+    'dyslexia-font': false,
+    'big-cursor': false,
+    'reduce-motion': false,
+  };
 
   const root = document.documentElement;
   const trigger = document.getElementById('a11yTrigger');
-  const overlay = document.getElementById('a11yOverlay');
-  if (!trigger || !overlay) return;
+  const dialog = document.getElementById('a11yPanel');
+  if (!trigger || !dialog) return;
 
-  const panel = document.getElementById('a11yPanel');
-  const toggles = overlay.querySelectorAll('[data-a11y-toggle]');
-  const closeEls = overlay.querySelectorAll('[data-a11y-close]');
-  const actionEls = overlay.querySelectorAll('[data-a11y-action]');
+  const toggles = dialog.querySelectorAll('[data-a11y-toggle]');
+  const actionEls = dialog.querySelectorAll('[data-a11y-action]');
+  const closeButton = dialog.querySelector('.a11y_panel_close');
+  const textSizeLabel = document.getElementById('a11yTextSizeLabel');
+  const decreaseButton = dialog.querySelector('[data-a11y-action="text-decrease"]');
+  const increaseButton = dialog.querySelector('[data-a11y-action="text-increase"]');
+  const contrastQuery = window.matchMedia('(prefers-contrast: more)');
 
   function loadState() {
     try {
@@ -34,7 +59,27 @@
     }
   }
 
-  let state = Object.assign({ textSize: 0, contrast: false, 'underline-links': false, 'reduce-motion': false }, loadState());
+  let state = Object.assign({}, DEFAULT_STATE, loadState());
+
+  //composes contrast + grayscale into one inline filter so both can be active at once.
+  //Falls back to nothing (letting the site's own @media (prefers-contrast: more) rule
+  //take over) unless a toggle is explicitly on or the OS already prefers more contrast.
+  function applyFilters() {
+    const filters = [];
+    if (state.contrast || contrastQuery.matches) filters.push('contrast(1.5) brightness(1.05)');
+    if (state.grayscale) filters.push('grayscale(1)');
+    if (filters.length) {
+      root.style.filter = filters.join(' ');
+    } else {
+      root.style.removeProperty('filter');
+    }
+  }
+
+  function updateTextSizeUI() {
+    if (textSizeLabel) textSizeLabel.textContent = TEXT_SIZE_LABELS[state.textSize];
+    if (decreaseButton) decreaseButton.disabled = state.textSize === 0;
+    if (increaseButton) increaseButton.disabled = state.textSize === TEXT_SIZE_CLASSES.length - 1;
+  }
 
   function applyState() {
     Object.keys(TOGGLE_CLASSES).forEach((key) => {
@@ -45,40 +90,35 @@
     });
 
     TEXT_SIZE_CLASSES.forEach((cls) => cls && root.classList.remove(cls));
-    const sizeClass = TEXT_SIZE_CLASSES[state.textSize] || '';
+    const sizeClass = TEXT_SIZE_CLASSES[state.textSize];
     if (sizeClass) root.classList.add(sizeClass);
+
+    applyFilters();
+    updateTextSizeUI();
   }
 
   applyState();
-
-  function openPanel() {
-    overlay.hidden = false;
-    trigger.setAttribute('aria-expanded', 'true');
-    const closeButton = overlay.querySelector('.a11y_panel_close');
-    if (closeButton) closeButton.focus();
-    document.addEventListener('keydown', onKeydown);
-  }
-
-  function closePanel() {
-    overlay.hidden = true;
-    trigger.setAttribute('aria-expanded', 'false');
-    trigger.focus();
-    document.removeEventListener('keydown', onKeydown);
-  }
-
-  function onKeydown(e) {
-    if (e.key === 'Escape') closePanel();
-  }
+  //OS-level contrast preference can change while the tab is open — keep the composed
+  //filter in sync even if the user never touches the panel
+  contrastQuery.addEventListener('change', applyFilters);
 
   trigger.addEventListener('click', () => {
-    if (overlay.hidden) openPanel();
-    else closePanel();
+    dialog.showModal();
+    trigger.setAttribute('aria-expanded', 'true');
   });
 
-  closeEls.forEach((el) => el.addEventListener('click', closePanel));
+  //fires on every close path — close(), Escape/cancel — so this is the one place
+  //that needs to keep the trigger's aria-expanded in sync
+  dialog.addEventListener('close', () => {
+    trigger.setAttribute('aria-expanded', 'false');
+  });
 
-  //stop clicks inside the panel from bubbling to the backdrop and closing it
-  if (panel) panel.addEventListener('click', (e) => e.stopPropagation());
+  if (closeButton) closeButton.addEventListener('click', () => dialog.close());
+
+  //click on the backdrop (the dialog's own box, outside its content) closes it
+  dialog.addEventListener('click', (e) => {
+    if (e.target === dialog) dialog.close();
+  });
 
   toggles.forEach((el) => {
     el.addEventListener('change', () => {
@@ -96,7 +136,7 @@
       } else if (action === 'text-decrease') {
         state.textSize = Math.max(state.textSize - 1, 0);
       } else if (action === 'reset') {
-        state = { textSize: 0, contrast: false, 'underline-links': false, 'reduce-motion': false };
+        state = Object.assign({}, DEFAULT_STATE);
       }
       saveState(state);
       applyState();

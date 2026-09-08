@@ -7,6 +7,8 @@
 
 - accesibility plugin
 
+- make it coherent
+
 -dark mode
 
 - a "let s talk" but creative OR piegon there?
