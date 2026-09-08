@@ -4,6 +4,8 @@
 
 - accesibility plugin
 
+- side button responsiveness
+
 - improve consistency
 
 - dark mode
