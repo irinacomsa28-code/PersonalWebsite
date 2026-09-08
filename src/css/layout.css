@@ -244,9 +244,184 @@
   opacity: 1;
 }
 
-.social-links a:hover .buttonLinkedin-default, 
+.social-links a:hover .buttonLinkedin-default,
 .social-links a:hover .buttonEmail-default {
   opacity: 0;
+}
+
+.accessibility_button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  flex-shrink: 0;
+  border: none;
+  padding: 0;
+  border-radius: 50%;
+  background-color: black;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.accessibility_button:hover,
+.accessibility_button:focus-visible {
+  /*36/34 — grows the button visually without resizing its flex box, so the
+    LinkedIn/Email icons above it don't shift*/
+  transform: scale(1.0588);
+}
+
+.accessibility_icon {
+  width: 21px;
+  height: 21px;
+  flex-shrink: 0;
+  background-color: var(--white);
+  mask-image: url('../../public/assets/images/accessiblity_icon.svg');
+  mask-repeat: no-repeat;
+  mask-position: center;
+  mask-size: contain;
+  -webkit-mask-image: url('../../public/assets/images/accessiblity_icon.svg');
+  -webkit-mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+  -webkit-mask-size: contain;
+}
+
+/*  ACCESSIBILITY MENU  */
+.a11y_overlay[hidden] {
+  display: none;
+}
+
+.a11y_overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 2000;
+}
+
+.a11y_backdrop {
+  position: absolute;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.45);
+}
+
+/*anchored bottom-left near the trigger, but shifted clear of the social-links icon
+  column (34px wide, 8px from the edge) so the open panel never covers its own trigger*/
+.a11y_panel {
+  position: absolute;
+  left: 56px;
+  bottom: 16px;
+  width: 280px;
+  max-width: calc(100vw - 72px);
+  max-height: calc(100vh - 32px);
+  overflow-y: auto;
+  border-radius: 16px;
+  background-color: var(--white);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+  font-family: 'Jost-Medium';
+}
+
+.a11y_panel_header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.a11y_panel_title {
+  font-size: 18px;
+}
+
+.a11y_panel_close {
+  border: none;
+  background: none;
+  font-size: 20px;
+  line-height: 1;
+  cursor: pointer;
+  padding: 4px;
+}
+
+.a11y_panel_body {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 16px;
+}
+
+.a11y_option_row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-family: 'Jost-Light';
+  font-size: 16px;
+  cursor: default;
+}
+
+.a11y_stepper {
+  display: flex;
+  gap: 8px;
+}
+
+.a11y_stepper_button {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  background-color: var(--white);
+  cursor: pointer;
+  font-family: 'Jost-Medium';
+}
+
+.a11y_stepper_button:hover {
+  background-color: rgba(0, 0, 0, 0.08);
+}
+
+.a11y_toggle {
+  width: 18px;
+  height: 18px;
+  cursor: pointer;
+  accent-color: black;
+}
+
+.a11y_reset_button {
+  align-self: flex-start;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  background-color: var(--white);
+  border-radius: 100px;
+  padding: 8px 16px;
+  font-family: 'Jost-Medium';
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.a11y_reset_button:hover {
+  background-color: rgba(0, 0, 0, 0.08);
+}
+
+/*  ACCESSIBILITY STATE OVERRIDES — driven by classes accessibility.js toggles on <html>  */
+html.a11y-underline-links a {
+  text-decoration: underline !important;
+}
+
+html.a11y-contrast {
+  filter: contrast(1.3) brightness(1.05);
+}
+
+html.a11y-reduce-motion,
+html.a11y-reduce-motion *,
+html.a11y-reduce-motion *::before,
+html.a11y-reduce-motion *::after {
+  animation: none !important;
+  transition: none !important;
+  scroll-behavior: auto !important;
+}
+
+/*only affects elements already using var(--fs-body): paragraphs, list items, project body text*/
+html.a11y-text-1 {
+  --fs-body: clamp(17px, 0.6vw + 15px, 23px);
+}
+
+html.a11y-text-2 {
+  --fs-body: clamp(19px, 0.68vw + 17px, 26px);
 }
 
 

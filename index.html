@@ -25,6 +25,7 @@
     <script src="src/js/navbar.js" defer></script>
     <script src="src/js/footer.js" defer></script>
     <script src="src/js/main.js" defer></script>
+    <script src="src/js/accessibility.js" defer></script>
 
     <!--logo-->
     <link
@@ -75,7 +76,85 @@
             aria-hidden="true"
           />
         </a>
+        <button
+          type="button"
+          class="accessibility_button"
+          aria-label="Accessibility options"
+          aria-haspopup="dialog"
+          aria-expanded="false"
+          aria-controls="a11yPanel"
+          id="a11yTrigger"
+        >
+          <span class="accessibility_icon"></span>
+        </button>
       </aside>
+
+      <!--  ACCESSIBILITY MENU  -->
+      <div class="a11y_overlay" id="a11yOverlay" hidden>
+        <div class="a11y_backdrop" data-a11y-close></div>
+        <div
+          class="a11y_panel"
+          id="a11yPanel"
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="a11yPanelTitle"
+        >
+          <div class="a11y_panel_header">
+            <p id="a11yPanelTitle" class="a11y_panel_title">Accessibility</p>
+            <button
+              type="button"
+              class="a11y_panel_close"
+              data-a11y-close
+              aria-label="Close accessibility menu"
+            >
+              &times;
+            </button>
+          </div>
+
+          <div class="a11y_panel_body">
+            <div class="a11y_option_row">
+              <span>Text Size</span>
+              <div class="a11y_stepper">
+                <button
+                  type="button"
+                  class="a11y_stepper_button"
+                  data-a11y-action="text-decrease"
+                  aria-label="Decrease text size"
+                >
+                  A&minus;
+                </button>
+                <button
+                  type="button"
+                  class="a11y_stepper_button"
+                  data-a11y-action="text-increase"
+                  aria-label="Increase text size"
+                >
+                  A&plus;
+                </button>
+              </div>
+            </div>
+
+            <label class="a11y_option_row a11y_toggle_row">
+              <span>High Contrast</span>
+              <input type="checkbox" class="a11y_toggle" data-a11y-toggle="contrast" />
+            </label>
+
+            <label class="a11y_option_row a11y_toggle_row">
+              <span>Underline Links</span>
+              <input type="checkbox" class="a11y_toggle" data-a11y-toggle="underline-links" />
+            </label>
+
+            <label class="a11y_option_row a11y_toggle_row">
+              <span>Reduce Motion</span>
+              <input type="checkbox" class="a11y_toggle" data-a11y-toggle="reduce-motion" />
+            </label>
+
+            <button type="button" class="a11y_reset_button" data-a11y-action="reset">
+              Reset All
+            </button>
+          </div>
+        </div>
+      </div>
 
       <!-- wrapped so About's sticky cover-hero effect doesn't extend into Projects -->
       <div class="hero_about_stack">
