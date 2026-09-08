@@ -12,7 +12,7 @@ problem, solution, etc mrore about your projects
 - keep it responsive
 
 - contact form - CTA
-
+- icons as svgnot png
 
 ---done for performance:
 webp format images + fetchpriority="high" for certain images

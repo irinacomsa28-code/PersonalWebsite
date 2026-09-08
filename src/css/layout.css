@@ -284,6 +284,11 @@
   height: 32px;
 }
 
+/*icons are baked-in muted-olive PNGs; brightness alone (same hue/sat) lands on the dark-mode shade*/
+html[data-theme="dark"] .social-links img {
+  filter: brightness(1.38);
+}
+
 
 .buttonLinkedin-hovered, 
 .buttonEmail-hovered { 
