@@ -303,7 +303,7 @@
   top: auto;
   right: auto;
   margin: 0;
-  width: 280px;
+  width: 304px;
   max-width: calc(100vw - 72px);
   max-height: calc(100vh - 32px);
   overflow-y: auto;
@@ -328,12 +328,24 @@
 }
 
 .a11y_panel_close {
-  border: none;
-  background: none;
-  font-size: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  border-radius: 50%;
+  background-color: var(--white);
+  font-size: 18px;
   line-height: 1;
   cursor: pointer;
-  padding: 4px;
+  padding: 0;
+  transition: background-color 0.15s ease, border-color 0.15s ease;
+}
+
+.a11y_panel_close:hover {
+  background-color: rgba(0, 0, 0, 0.08);
+  border-color: rgba(0, 0, 0, 0.35);
 }
 
 .a11y_panel_body {
@@ -347,9 +359,25 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
   font-family: 'Jost-Light';
   font-size: 16px;
   cursor: default;
+}
+
+/*negative margin cancels the padding out, so the hover highlight reaches past the row's
+  text/control edges without shifting anything or changing the panel's overall spacing*/
+.a11y_toggle_row {
+  cursor: pointer;
+  padding: 4px 8px;
+  margin: -4px -8px;
+  border-radius: 8px;
+  transition: background-color 0.15s ease;
+}
+
+.a11y_toggle_row:hover {
+  background-color: rgba(0, 0, 0, 0.06);
 }
 
 .a11y_stepper {
@@ -365,10 +393,12 @@
   background-color: var(--white);
   cursor: pointer;
   font-family: 'Jost-Medium';
+  transition: background-color 0.15s ease, border-color 0.15s ease;
 }
 
-.a11y_stepper_button:hover {
+.a11y_stepper_button:hover:not(:disabled) {
   background-color: rgba(0, 0, 0, 0.08);
+  border-color: rgba(0, 0, 0, 0.35);
 }
 
 .a11y_stepper_button:disabled {
@@ -392,6 +422,22 @@
   accent-color: black;
 }
 
+.a11y_select {
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  border-radius: 8px;
+  padding: 4px 8px;
+  font-family: 'Jost-Light';
+  font-size: 14px;
+  background-color: var(--white);
+  cursor: pointer;
+  transition: border-color 0.15s ease, background-color 0.15s ease;
+}
+
+.a11y_select:hover {
+  background-color: rgba(0, 0, 0, 0.06);
+  border-color: rgba(0, 0, 0, 0.35);
+}
+
 .a11y_reset_button {
   align-self: flex-start;
   border: 1px solid rgba(0, 0, 0, 0.2);
@@ -401,10 +447,12 @@
   font-family: 'Jost-Medium';
   font-size: 14px;
   cursor: pointer;
+  transition: background-color 0.15s ease, border-color 0.15s ease;
 }
 
 .a11y_reset_button:hover {
   background-color: rgba(0, 0, 0, 0.08);
+  border-color: rgba(0, 0, 0, 0.35);
 }
 
 /*  ACCESSIBILITY STATE OVERRIDES — driven by classes accessibility.js toggles on <html>  */
@@ -426,17 +474,81 @@ html.a11y-highlight-titles h4 {
   -webkit-box-decoration-break: clone;
 }
 
-html.a11y-dyslexia-font,
-html.a11y-dyslexia-font * {
-  font-family: Arial, Verdana, sans-serif !important;
-  letter-spacing: 0.06em !important;
+/*OpenDyslexic: bottom-weighted letterforms designed to stop letters "flipping"
+  (b/d, p/q) for dyslexic readers — self-hosted in public/fonts, SIL OFL licensed.
+  Falls back to a plain sans-serif if the font ever fails to load.
+  Excludes the accessibility panel itself (:not(.a11y_panel, .a11y_panel *)) — the panel
+  has a fixed width, and the wider letterforms/spacing this rule adds were overflowing its
+  own rows and hiding controls, which defeats the point of a control that's meant to stay
+  usable regardless of what it's currently switching on.*/
+html.a11y-dyslexia-font :not(.a11y_panel, .a11y_panel *) {
+  font-family: 'OpenDyslexic', Arial, sans-serif !important;
+  letter-spacing: 0.04em !important;
   word-spacing: 0.12em !important;
   line-height: 1.6 !important;
+  /*a CSS grid/flex item's implicit min-width:auto is its MIN-CONTENT size — normally
+    bounded by the longest unbreakable word, which the wider spacing above pushes past
+    what several of the site's fixed-track layouts (skills grid, timeline) have room for.
+    Letting words break shrinks that min-content contribution back down, which resolves
+    the overflow without having to chase and patch every nested grid/flex container.*/
+  overflow-wrap: break-word !important;
+}
+
+/*the wider spacing above needs somewhere to go: .btn and .skill_name both set
+  white-space/sizing that assumes the site's own tighter Jost metrics, and can overflow
+  small screens once OpenDyslexic's extra spacing is added to a nowrap label*/
+html.a11y-dyslexia-font .btn,
+html.a11y-dyslexia-font .logo_hover_link {
+  white-space: normal !important;
+  text-align: center;
+}
+
+html.a11y-dyslexia-font .skill_name {
+  /*.skill_item uses align-items:center (not the flex default stretch), so without an
+    explicit width this still renders at its own content-based size and pokes out past its
+    parent regardless of min-width/overflow-wrap — those only cap how far it CAN shrink,
+    they don't make it try to in the first place*/
+  width: 100%;
+  min-width: 0;
+  overflow-wrap: break-word;
 }
 
 html.a11y-big-cursor,
 html.a11y-big-cursor * {
   cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40' viewBox='0 0 24 24'%3E%3Cpath d='M3 2 L3 20 L8 16 L11 22 L14 21 L11 15 L17 15 Z' fill='black' stroke='white' stroke-width='1.5' stroke-linejoin='round'/%3E%3C/svg%3E") 4 4, auto !important;
+}
+
+/*the color-vision correction filters (url(#a11y...Filter), defined inline in index.html)
+  join the same composed `filter` on <html> as contrast/grayscale — see applyFilters()*/
+
+/*two masks that track the mouse to keep a horizontal reading band clear while dimming
+  and blurring everything else, for people who lose their place easily while reading.
+  z-index sits just under the navbar/side-nav/social-links band (all 1000+) rather than
+  above it: .social-links' own position:fixed makes it a stacking context, so no z-index
+  on the accessibility button alone could ever lift it above a mask that outranks its
+  ancestor — putting the mask below that whole persistent-chrome band keeps the button
+  (and the rest of that chrome) visible and usable while reading focus is on.*/
+.a11y_focus_mask {
+  position: fixed;
+  left: 0;
+  right: 0;
+  z-index: 999;
+  pointer-events: none;
+  background-color: rgba(0, 0, 0, 0.55);
+  backdrop-filter: blur(3px);
+  -webkit-backdrop-filter: blur(3px);
+}
+
+.a11y_focus_mask[hidden] {
+  display: none;
+}
+
+.a11y_focus_mask_top {
+  top: 0;
+}
+
+.a11y_focus_mask_bottom {
+  bottom: 0;
 }
 
 html.a11y-reduce-motion,
@@ -705,6 +817,10 @@ html.a11y-text-2 {
   justify-self: start;
   gap: var(--space-md);
   width: 100%;
+  /*grid items default to min-width:auto (content-based) regardless of width:100% above,
+    so a wide enough descendant (e.g. text widened by the dyslexia-friendly font toggle)
+    can still force this track past its 1fr share and overflow the grid*/
+  min-width: 0;
 }
 
 /*coded skills grid replacing what used to be skills.png — icon above, label below.
@@ -728,6 +844,10 @@ html.a11y-text-2 {
   justify-content: flex-start;
   gap: var(--space-xs);
   text-align: center;
+  /*grid tracks default to min-width:auto (content-based), so a wide label — e.g. longer
+    skill names, or any text widened by the dyslexia-friendly font toggle — can force the
+    whole 1fr grid to overflow; this lets the track actually shrink to its column's share*/
+  min-width: 0;
 }
 
 .skill_icon_box {
@@ -806,7 +926,10 @@ html.a11y-text-2 {
   columns line up regardless of how long each row's text is*/
 .timeline {
   display: grid;
-  grid-template-columns: auto auto 1fr;
+  /*the date column is auto (content-based) with no cap, so at narrow widths + larger
+    text/spacing (text-size, dyslexia-friendly font) it can grow enough to squeeze the
+    content column toward 0 — minmax gives content a floor it can't be squeezed past*/
+  grid-template-columns: auto auto minmax(80px, 1fr);
   column-gap: var(--space-sm);
   list-style: none;
   width: 100%;
@@ -865,6 +988,10 @@ html.a11y-text-2 {
 .timeline_content {
   grid-column: 3;
   padding-bottom: var(--space-md);
+  /*1fr track still defaults to min-width:auto (content-based) — without this, a wide
+    enough descendant (e.g. text widened by the dyslexia-friendly font toggle) can force
+    this column past its share and overflow the grid*/
+  min-width: 0;
 }
 
 .timeline_role {
@@ -1203,6 +1330,7 @@ html.touch .project_image img {
   /*ABOUT*/
   .about_imageAndText {
     flex-direction: column;
+    gap: 4px;
   }
 
   .about_image {
@@ -1262,6 +1390,24 @@ html.touch .project_image img {
   .footer_home_content {
     flex-direction: column;
     align-items: flex-start;
+  }
+
+  /*align-items:flex-start above means this flex item no longer stretches to the
+    container's width, so it defaults to sizing around its own content's natural
+    (unwrapped) width instead — invisible normally, but a wide enough heading (long
+    text at a larger text-size level, especially combined with the dyslexia-friendly
+    font's added spacing) can push it past the viewport*/
+  .footer_home_text {
+    min-width: 0;
+    width: 100%;
+  }
+
+  /*the email link's own width:fit-content (for its underline to hug the text on desktop)
+    sizes it to unconstrained max-content — since an email address has no spaces to wrap
+    at, break-word can't help either, so at larger text sizes it can overflow regardless
+    of the min-width:0/width:100% fix on its parent above*/
+  .footer_home_text .footer_home_email {
+    width: 100%;
   }
 
   .footer_home_icon {

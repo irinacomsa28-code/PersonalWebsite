@@ -1,3 +1,12 @@
+//covers both the OS-level setting and the accessibility panel's own "Reduce Motion"
+//toggle (index.html only for now) — checked live, not just once at page load, since
+//JS-driven motion (setTimeout loops, explicit scrollTo({behavior:'smooth'})) doesn't
+//stop on its own just because a CSS animation/transition rule says none
+function prefersReducedMotion() {
+    return window.matchMedia('(prefers-reduced-motion: reduce)').matches
+        || document.documentElement.classList.contains('a11y-reduce-motion');
+}
+
 const navLinks = document.querySelectorAll(".nav_link");
 const sections = document.querySelectorAll(".section");
 const navbar = document.querySelector(".navbar");
@@ -44,9 +53,7 @@ window.addEventListener('DOMContentLoaded', () => {
     reserveHeroHeadingHeight(heading, target, phrases);
     window.addEventListener('resize', () => reserveHeroHeadingHeight(heading, target, phrases));
 
-    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-    if (prefersReducedMotion) {
+    if (prefersReducedMotion()) {
         target.textContent = phrases[0];
         target.classList.add('typewriter-done');
         return;
@@ -60,7 +67,17 @@ window.addEventListener('DOMContentLoaded', () => {
     let phraseIndex = 0;
     let charIndex = 0;
 
+    //checked on every tick, not just once at start, so turning the accessibility panel's
+    //Reduce Motion toggle on mid-animation actually stops it instead of finishing the cycle
+    function stopIfMotionNowReduced() {
+        if (!prefersReducedMotion()) return false;
+        target.textContent = phrases[phraseIndex];
+        target.classList.add('typewriter-done');
+        return true;
+    }
+
     function typeNextChar() {
+        if (stopIfMotionNowReduced()) return;
         charIndex++;
         target.textContent = phrases[phraseIndex].slice(0, charIndex);
         if (charIndex < phrases[phraseIndex].length) {
@@ -71,6 +88,7 @@ window.addEventListener('DOMContentLoaded', () => {
     }
 
     function deletePhrase() {
+        if (stopIfMotionNowReduced()) return;
         charIndex--;
         target.textContent = phrases[phraseIndex].slice(0, charIndex);
         if (charIndex > 0) {
@@ -154,7 +172,7 @@ document.addEventListener('click', (e) => {
     const target = document.getElementById(link.getAttribute('href').slice(1));
     if (!target) return;
     e.preventDefault();
-    window.scrollTo({ top: trueOffsetTop(target), behavior: 'smooth' });
+    window.scrollTo({ top: trueOffsetTop(target), behavior: prefersReducedMotion() ? 'auto' : 'smooth' });
     history.pushState(null, '', link.getAttribute('href'));
 });
 

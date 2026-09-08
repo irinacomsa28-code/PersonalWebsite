@@ -25,6 +25,7 @@
     <script src="src/js/navbar.js" defer></script>
     <script src="src/js/footer.js" defer></script>
     <script src="src/js/main.js" defer></script>
+    <script src="src/js/accessibility.js" defer></script>
 
     <!--logo-->
     <link
@@ -75,7 +76,14 @@
             aria-hidden="true"
           />
         </a>
+        <!-- accessibility_button: a real flex child here so it inherits the same
+          gap/alignment as the LinkedIn/Email icons above it -->
+        <div data-accessibility-trigger></div>
       </aside>
+
+      <!-- accessibility dialog + color-vision SVG filters + reading-focus overlay —
+        page-level, not part of the social-links layout -->
+      <div data-accessibility-panel></div>
 
       <!-- wrapped so About's sticky cover-hero effect doesn't extend into Projects -->
       <div class="hero_about_stack">

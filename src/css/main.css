@@ -71,6 +71,41 @@
   src: url('../../public/fonts/FugazOne-Regular.woff2') format('woff2');
 }
 
+/*only ever matched when the accessibility panel's "Dyslexia-Friendly Font" toggle is on
+  (see html.a11y-dyslexia-font in layout.css) — browsers don't fetch @font-face files
+  until something on the page actually needs them, so this costs nothing otherwise*/
+@font-face {
+  font-family: 'OpenDyslexic';
+  src: url('../../public/fonts/OpenDyslexic-Regular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'OpenDyslexic';
+  src: url('../../public/fonts/OpenDyslexic-Bold.woff2') format('woff2');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'OpenDyslexic';
+  src: url('../../public/fonts/OpenDyslexic-Italic.woff2') format('woff2');
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'OpenDyslexic';
+  src: url('../../public/fonts/OpenDyslexic-Bold-Italic.woff2') format('woff2');
+  font-weight: 700;
+  font-style: italic;
+  font-display: swap;
+}
+
 /*  GLOBAL  */
 html {
   scroll-behavior: smooth;
