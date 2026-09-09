@@ -11,6 +11,7 @@
 :root {
   /* Colors */
   --secondary-color: #004D0C;
+  --secondary-color-rgb: 0, 77, 12;
   --primary-color: #F4F7F1;
   --primary-color-rgb: 244, 247, 241;
   --muted-olive: #8CAE68;
@@ -18,6 +19,7 @@
   --white: #ffffff;
   --black: #000000;
   --hover-color: #96B6A1;
+  --hover-color-rgb: 150, 182, 161;
 
   /*semantic tokens so dark mode only needs to override these few values*/
   --bg-page: var(--primary-color);

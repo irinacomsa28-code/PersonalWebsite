@@ -134,6 +134,30 @@ document.addEventListener('touchstart', function onFirstTouch() {
 //tapping a card reveals it immediately instead of waiting on scroll position
 projectCards.forEach((card) => card.addEventListener('touchstart', () => card.classList.add('is-visible'), { passive: true }));
 
+//SWIPE NAVIGATION (project pages only): swipe left/right anywhere to go to the next/previous project
+const sideNav = document.querySelector('.side-nav');
+if (sideNav) {
+  const prevLink = sideNav.querySelector('.side-nav_prev');
+  const nextLink = sideNav.querySelector('.side-nav_next');
+  const SWIPE_MIN_DISTANCE = 60; //px
+  const SWIPE_MIN_RATIO = 1.5; //horizontal must dominate over vertical, so scrolling isn't mistaken for a swipe
+  let touchStartX = 0;
+  let touchStartY = 0;
+
+  document.addEventListener('touchstart', (e) => {
+    touchStartX = e.changedTouches[0].clientX;
+    touchStartY = e.changedTouches[0].clientY;
+  }, { passive: true });
+
+  document.addEventListener('touchend', (e) => {
+    const dx = e.changedTouches[0].clientX - touchStartX;
+    const dy = e.changedTouches[0].clientY - touchStartY;
+    if (Math.abs(dx) < SWIPE_MIN_DISTANCE || Math.abs(dx) < Math.abs(dy) * SWIPE_MIN_RATIO) return;
+    const link = dx < 0 ? nextLink : prevLink;
+    if (link) window.location.href = link.getAttribute('href');
+  }, { passive: true });
+}
+
 
 //gives #about a "stuck" range long enough to reveal its own overflow before releasing
 function sizeHeroAboutSpacer() {

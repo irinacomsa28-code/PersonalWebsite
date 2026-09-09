@@ -17,12 +17,15 @@
   /*higher than side-nav/social-links (both 1000) so the open mobile dropdown fully covers them*/
   z-index: 1100;
   border-radius: 999px;
+  /*without this, backdrop-filter's blur ignores border-radius in some browsers and leaks
+    into a rectangular halo beyond the pill shape — clip-path forces it to clip correctly*/
+  clip-path: inset(0 round 999px);
   background-color: rgba(var(--bg-page-rgb), 0.06);
   border: 1px solid rgba(0, 0, 0, 0);
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0);
   backdrop-filter: blur(3px);
   -webkit-backdrop-filter: blur(3px);
-  transition: background-color 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease, backdrop-filter 0.4s ease, -webkit-backdrop-filter 0.4s ease;
+  transition: background-color 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease;
 }
 
 /*frosted glass once scrolled past the hero — saturate keeps colors from washing out, inset top highlight adds sheen*/
@@ -206,44 +209,48 @@
 
 
 
+/*vertical-rectangle tab buttons pinned to the viewport edges either side of the project content*/
 .side-nav a {
   position: fixed;
-  display: block;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   top: 36%; /*of screen*/
-  transform: translateY(-50%); /*Pulls button back up by half its height*/
+  transform: translateY(-50%); /*pulls button back up by half its height*/
   z-index: 1000;
-  width: 60px; /*same as social links with padding*/
-  height: 226px;
+  width: 48px;
+  height: 200px;
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+  font-family: 'Jost-Medium';
+  font-size: 14px;
+  letter-spacing: 0.5px;
+  text-align: center;
+  color: var(--muted-olive);
+  background-color: rgba(255, 255, 255, 0.22);
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.3);
+  backdrop-filter: blur(10px) saturate(160%);
+  -webkit-backdrop-filter: blur(10px) saturate(160%);
+  transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
 }
 
-.backButton {
+.side-nav a:hover {
+  color: var(--hover-color);
+  background-color: rgba(255, 255, 255, 0.38);
+  border-color: rgba(255, 255, 255, 0.5);
+}
+
+.side-nav_prev {
   left: 0;
+  border-radius: 0 12px 12px 0;
+  clip-path: inset(0 round 0 12px 12px 0); /*keeps the backdrop-filter blur clipped to the rounded corners*/
 }
 
-.nextButton {
+.side-nav_next {
   right: 0;
-}
-
-.side-nav img {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: auto;
-}
-
-.backButton-hovered, .nextButton-hovered{ 
-  opacity: 0; 
-}
-
-.side-nav a:hover .backButton-hovered, 
-.side-nav a:hover .nextButton-hovered{
-  opacity: 1;
-}
-
-.side-nav a:hover .backButton, 
-.side-nav a:hover .nextButton {
-  opacity: 0;
+  border-radius: 12px 0 0 12px;
+  clip-path: inset(0 round 12px 0 0 12px);
 }
 
 
@@ -462,7 +469,7 @@ html[data-theme="dark"] .social-links img {
   min-width: 56px;
   text-align: center;
   font-family: 'Jost-Light';
-  font-size: 13px;
+  font-size: 16px;
   color: rgba(0, 0, 0, 0.65);
 }
 
@@ -1179,6 +1186,7 @@ html.touch .project_image img {
   margin-left: auto;
   border-radius: 999px;
   overflow: hidden;
+  clip-path: inset(0 round 999px); /*keeps the backdrop-filter blur clipped to the rounded corners*/
   color: var(--white);
 
   /*glassmorphism: translucent blur tint + light border rim + drop shadow + inset top highlight for sheen*/
@@ -1247,8 +1255,9 @@ html.touch .project_image img {
     container's own padding — shrink their footprint below var(--space-lg) at each tier below
     so they never sit on top of section content*/
   .side-nav a {
-    width: 32px;
-    height: 130px;
+    width: 40px;
+    height: 150px;
+    font-size: 16px;
   }
 
   .social-links {
@@ -1324,10 +1333,13 @@ html.touch .project_image img {
     overflow: hidden;
   }
 
-  /*SIDE-NAV (project prev/next buttons): shrink so they don't sit on top of text*/
+  /*SIDE-NAV (project prev/next buttons): narrower than the section's own side padding
+    (--space-lg) so there's a visible gap instead of text butting right up against them*/
   .side-nav a {
     width: 28px;
-    height: 110px;
+    height: 120px;
+    font-size: 11px;
+    letter-spacing: 0.3px;
   }
 
   /*SOCIAL LINKS*/
@@ -1479,11 +1491,6 @@ html.touch .project_image img {
 }
 
 @media (max-width: 480px) {
-  .side-nav a {
-    width: 22px;
-    height: 88px;
-  }
-
   .hero_image {
     max-width: 160px;
   }
