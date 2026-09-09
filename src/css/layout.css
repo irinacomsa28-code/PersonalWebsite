@@ -16,6 +16,17 @@
   padding-right: var(--space-md);
   /*higher than side-nav/social-links (both 1000) so the open mobile dropdown fully covers them*/
   z-index: 1100;
+  /*no border-radius/clip-path/backdrop-filter directly on .navbar: any of those on an ancestor
+    turns it into a containing block for position:fixed descendants, which broke .navbar_nav
+    (the mobile dropdown lives inside .navbar) — it got clipped to this 64px pill and vanished.
+    The glass pill is drawn on ::before instead so .navbar itself stays a plain fixed box.*/
+}
+
+.navbar::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
   border-radius: 999px;
   /*without this, backdrop-filter's blur ignores border-radius in some browsers and leaks
     into a rectangular halo beyond the pill shape — clip-path forces it to clip correctly*/
@@ -29,7 +40,7 @@
 }
 
 /*frosted glass once scrolled past the hero — saturate keeps colors from washing out, inset top highlight adds sheen*/
-.navbar.scrolled {
+.navbar.scrolled::before {
   background-color: rgba(var(--bg-page-rgb), 0.55);
   border: 1px solid rgba(0, 0, 0, 0.06);
   box-shadow: 0 4px 24px rgba(0, 0, 0, 0.06), inset 0 1px 0 rgba(255, 255, 255, 0.5);
