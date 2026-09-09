@@ -1484,12 +1484,6 @@ html.touch .project_image img {
     height: 88px;
   }
 
-  .social-links a,
-  .social-links img {
-    width: 20px;
-    height: 20px;
-  }
-
   .hero_image {
     max-width: 160px;
   }
