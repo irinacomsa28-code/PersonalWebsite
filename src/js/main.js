@@ -125,6 +125,23 @@ const projectObserver = new IntersectionObserver((entries) => {
 
 projectCards.forEach((card) => projectObserver.observe(card));
 
+//LAZY VIDEO LOAD: autoplay demo videos are several MB each and sit below the fold on project
+//pages — loading data-src only once scrolled near view keeps them from downloading on every visit
+const lazyVideos = document.querySelectorAll('video[data-src]');
+const videoObserver = new IntersectionObserver((entries) => {
+  entries.forEach((entry) => {
+    if (!entry.isIntersecting) return;
+    const video = entry.target;
+    video.src = video.dataset.src;
+    video.removeAttribute('data-src');
+    video.load();
+    video.play().catch(() => {}); //autoplay can still be blocked by browser policy; muted+playsinline covers most cases
+    videoObserver.unobserve(video);
+  });
+}, { rootMargin: '200px 0px' });
+
+lazyVideos.forEach((video) => videoObserver.observe(video));
+
 //"hover:none" misfires on hybrid touchscreen+mouse devices, so touchstart is the reliable signal
 document.addEventListener('touchstart', function onFirstTouch() {
   document.documentElement.classList.add('touch');

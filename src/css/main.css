@@ -238,6 +238,7 @@ a:hover {
 .btn-primary:hover {
   background-color: var(--hover-color);
   border-color: var(--hover-color);
+  color: var(--secondary-color); /*hover bg is light sage — white text loses contrast, needs a dark color here*/
 }
 
 /*outline button, secondary action*/
