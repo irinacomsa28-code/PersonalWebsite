@@ -1479,7 +1479,7 @@ html.touch .project_image img {
     gap: var(--space-lg);
   }
 
-  /*PROJECT DETAIL PAGES (shared across fintalo/muntum/wildCraftFoundry/semanticCanvas/storytellingGame)*/
+  /*PROJECT DETAIL PAGES (shared across fintalo/MUNTUM/wildCraftFoundry/semanticCanvas/storytellingGame)*/
   .project_hero_image {
     width: 100%;
     max-width: 100%;
