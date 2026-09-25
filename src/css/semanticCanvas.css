@@ -3,12 +3,19 @@
   filter: grayscale(1);
 }
 
+/*tighter spacing between the text blocks, matching fintalo (the wider project_content gap stays for the images below)*/
+.sc_text_stack {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
 /*Challenge and Solution side by side, top-aligned so both titles sit at the same level*/
 .challenge_solution_row {
   display: flex;
   flex-direction: row;
   align-items: flex-start;
-  gap: 36px;
+  gap: 24px;
 }
 
 .challenge_solution_row .titled_keypoint {
