@@ -258,6 +258,11 @@
   clip-path: inset(0 round 0 12px 12px 0); /*keeps the backdrop-filter blur clipped to the rounded corners*/
 }
 
+.side-nav_prev span {
+  display: inline-block;
+  transform: rotate(180deg); /*text reads bottom-to-top; box stays put*/
+}
+
 .side-nav_next {
   right: 0;
   border-radius: 12px 0 0 12px;
