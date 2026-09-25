@@ -31,8 +31,7 @@
             <h3>${t.heading}</h3>
             <h4>${t.sub}</h4>
             <a
-              href="https://mail.google.com/mail/?view=cm&fs=1&to=irinacomsa28@gmail.com"
-              target="_blank"
+              href="mailto:irinacomsa28@gmail.com"
               class="footer_home_email"
               >irinacomsa28@gmail.com</a
             >

@@ -829,7 +829,7 @@ html.a11y-text-2 {
   opacity: 1;
 }
 
-.usaneers_link::after {
+.Usaneers_link::after {
   background-image: url('../../public/assets/images/logos/Usaneers_icon.png');
 }
 

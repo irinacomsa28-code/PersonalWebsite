@@ -45,8 +45,7 @@
             <a href="${deHref}" class="lang_link${lang === 'de' ? ' active' : ''}"${lang === 'de' ? ' aria-current="page"' : ''}>DE</a>
           </div>
           <a
-            href="https://mail.google.com/mail/?view=cm&fs=1&to=irinacomsa28@gmail.com"
-            target="_blank"
+            href="mailto:irinacomsa28@gmail.com"
             aria-label="${t.contact}"
             >${t.contact}</a
           >
