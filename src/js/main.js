@@ -31,29 +31,83 @@ window.addEventListener("scroll", () => {
 }, { passive: true });
 
 
-//pre-allocates the heading's height to its tallest phrase, so cycling text doesn't reflow the page
-function reserveHeroHeadingHeight(heading, target, phrases) {
-    const heights = phrases.map((phrase) => {
-        target.textContent = phrase;
-        return heading.getBoundingClientRect().height;
+//figures out, at the current width, which words the browser would wrap onto which line for
+//each phrase (via each word's offsetTop), plus the tallest phrase's height. Typing then fills
+//within those pre-assigned lines instead of relying on live reflow — a word can't jump to the
+//next line mid-type if it was already assigned there before typing started.
+function measurePhrases(heading, target, phrases) {
+    heading.style.minHeight = '0'; //don't let a stale reservation skew this measurement
+    const measured = phrases.map((phrase) => {
+        const words = phrase.split(' ');
+        const wordEls = words.map((word) => {
+            const span = document.createElement('span');
+            span.textContent = word;
+            return span;
+        });
+        target.innerHTML = '';
+        wordEls.forEach((el, i) => {
+            target.appendChild(el);
+            if (i < wordEls.length - 1) target.appendChild(document.createTextNode(' '));
+        });
+
+        const lines = [];
+        let currentLine = [];
+        let lastTop = null;
+        wordEls.forEach((el, i) => {
+            const top = el.offsetTop;
+            if (lastTop !== null && top > lastTop) {
+                lines.push(currentLine.join(' '));
+                currentLine = [];
+            }
+            currentLine.push(words[i]);
+            lastTop = top;
+        });
+        lines.push(currentLine.join(' '));
+
+        return { lines, height: heading.getBoundingClientRect().height };
     });
-    target.textContent = '';
-    heading.style.minHeight = Math.max(...heights) + 'px';
+
+    target.innerHTML = '';
+    heading.style.minHeight = Math.max(...measured.map((m) => m.height)) + 'px';
+    return measured.map((m) => m.lines);
+}
+
+//renders `count` characters of a phrase already split into lines (see measurePhrases), joining
+//completed/partial lines with <br> so a line only ever shows a prefix of its own final content
+function renderTypedLines(target, lines, count) {
+    let remaining = count;
+    const parts = [];
+    for (let i = 0; i < lines.length && remaining > 0; i++) {
+        const line = lines[i];
+        if (remaining >= line.length) {
+            parts.push(line);
+            remaining -= line.length + (i < lines.length - 1 ? 1 : 0); //+1 consumes the space collapsed into the <br>
+        } else {
+            parts.push(line.slice(0, remaining));
+            remaining = 0;
+        }
+    }
+    target.innerHTML = parts.join('<br>');
 }
 
 //cycles the hero heading's tail through phrases: type, pause, delete, next phrase, repeat
-window.addEventListener('DOMContentLoaded', () => {
+window.addEventListener('DOMContentLoaded', async () => {
     const target = document.querySelector('[data-typewriter-phrases]');
     if (!target) return;
 
     const heading = target.closest('h1');
     const phrases = JSON.parse(target.dataset.typewriterPhrases);
-    reserveHeroHeadingHeight(heading, target, phrases);
-    window.addEventListener('resize', () => reserveHeroHeadingHeight(heading, target, phrases));
+
+    //Jost has no font-display:swap, so it can still be loading here — measuring against the
+    //fallback font first would bake in wrong line breaks that never correct themselves
+    if (document.fonts && document.fonts.ready) await document.fonts.ready;
+
+    let linesByPhrase = measurePhrases(heading, target, phrases);
 
     if (prefersReducedMotion()) {
         target.textContent = phrases[0];
         target.classList.add('typewriter-done');
+        window.addEventListener('resize', () => measurePhrases(heading, target, phrases));
         return;
     }
 
@@ -64,6 +118,13 @@ window.addEventListener('DOMContentLoaded', () => {
 
     let phraseIndex = 0;
     let charIndex = 0;
+
+    window.addEventListener('resize', () => {
+        linesByPhrase = measurePhrases(heading, target, phrases);
+        if (!target.classList.contains('typewriter-done')) {
+            renderTypedLines(target, linesByPhrase[phraseIndex], charIndex);
+        }
+    });
 
     //checked every tick so toggling Reduce Motion mid-animation stops it instead of finishing the cycle
     function stopIfMotionNowReduced() {
@@ -76,7 +137,7 @@ window.addEventListener('DOMContentLoaded', () => {
     function typeNextChar() {
         if (stopIfMotionNowReduced()) return;
         charIndex++;
-        target.textContent = phrases[phraseIndex].slice(0, charIndex);
+        renderTypedLines(target, linesByPhrase[phraseIndex], charIndex);
         if (charIndex < phrases[phraseIndex].length) {
             setTimeout(typeNextChar, typeSpeedMs);
         } else {
@@ -87,7 +148,7 @@ window.addEventListener('DOMContentLoaded', () => {
     function deletePhrase() {
         if (stopIfMotionNowReduced()) return;
         charIndex--;
-        target.textContent = phrases[phraseIndex].slice(0, charIndex);
+        renderTypedLines(target, linesByPhrase[phraseIndex], charIndex);
         if (charIndex > 0) {
             setTimeout(deletePhrase, deleteSpeedMs);
         } else {
