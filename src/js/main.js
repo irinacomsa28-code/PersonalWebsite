@@ -363,7 +363,7 @@ window.addEventListener('DOMContentLoaded', () => {
         rafId = requestAnimationFrame(loop);
     }
 
-    const hoverSelector = 'a, button';
+    const hoverSelector = 'a, button, [data-cursor-icon]';
     function onHoverIn(e) {
         if (!active) return;
         if (e.target.closest('[data-cursor-icon]')) cursor.classList.add('custom_cursor--icon');
@@ -415,6 +415,7 @@ window.addEventListener('DOMContentLoaded', () => {
     sync();
     new MutationObserver(sync).observe(root, { attributes: true, attributeFilter: ['class'] });
     if (dialog) new MutationObserver(sync).observe(dialog, { attributes: true, attributeFilter: ['open'] });
+    pointerFine.addEventListener('change', sync); //e.g. a mouse plugged into/unplugged from a touch device mid-session
 });
 
 

@@ -19,7 +19,6 @@
   --white: #ffffff;
   --black: #000000;
   --hover-color: #96B6A1;
-  --hover-color-rgb: 150, 182, 161;
   /*same hue as --hover-color, darkened for use as hover TEXT (vs. --hover-color's own use as a
     hover background fill in .btn-primary, which needs to stay light there) — #96B6A1 only
     reaches ~1.9:1 against --bg-page, well under WCAG AA's 4.5:1; this reaches ~6.4:1*/
@@ -360,6 +359,7 @@ p {
   :root {
     --space-3xl: 40px;
     --space-4xl: 64px;
+    --space-5xl: 88px;
   }
 }
 
@@ -369,6 +369,7 @@ p {
     /*wider than the side-nav/social-links footprint (layout.css) so they don't overlap body text*/
     --space-3xl: 36px;
     --space-4xl: 48px;
+    --space-5xl: 64px;
   }
 }
 
