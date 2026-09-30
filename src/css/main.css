@@ -20,6 +20,10 @@
   --black: #000000;
   --hover-color: #96B6A1;
   --hover-color-rgb: 150, 182, 161;
+  /*same hue as --hover-color, darkened for use as hover TEXT (vs. --hover-color's own use as a
+    hover background fill in .btn-primary, which needs to stay light there) — #96B6A1 only
+    reaches ~1.9:1 against --bg-page, well under WCAG AA's 4.5:1; this reaches ~6.4:1*/
+  --hover-text-color: #43604D;
 
   /*semantic tokens so dark mode only needs to override these few values*/
   --bg-page: var(--primary-color);
@@ -27,6 +31,7 @@
   --bg-surface: var(--white);
   --text-color: var(--black);
   --accent-color: var(--secondary-color);
+  --accent-color-rgb: var(--secondary-color-rgb);
 
   /* Layout */
   --max-width: 1280px;
@@ -62,6 +67,8 @@ html[data-theme="dark"] {
   --text-color: var(--white);
   --muted-olive: #C1F28F;
   --accent-color: var(--muted-olive); /*base hunter green is too low-contrast on a dark surface*/
+  --accent-color-rgb: 193, 242, 143;
+  --hover-text-color: var(--hover-color); /*the light-mode darkened value fails here; base --hover-color already passes against a dark surface*/
 }
 
 /*  FONTS  */
@@ -212,11 +219,11 @@ h1, h2, h3, p, a{
 }
 
 a:hover {
-  color: var(--hover-color);
+  color: var(--hover-text-color);
 }
 
 .navbar_nav a:hover { /*global a doesn t work for hover nav buttons*/
-  color: var(--hover-color);
+  color: var(--hover-text-color);
 }
 
 /*  BUTTONS  */
@@ -253,8 +260,8 @@ a:hover {
 }
 
 .btn-secondary:hover {
-  border-color: var(--hover-color);
-  color: var(--hover-color);
+  border-color: var(--hover-text-color);
+  color: var(--hover-text-color);
 }
 
 

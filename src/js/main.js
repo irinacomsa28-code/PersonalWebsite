@@ -235,6 +235,128 @@ if (!window.location.hash) {
 }
 
 
+//CUSTOM CURSOR: trailing dot that stretches along its direction of travel (same mechanic as
+//Cuberto's mouse-follower, reimplemented without GSAP): a tween lags behind the real cursor,
+//and the lag distance each frame drives a skew/scale/rotation on the dot. Off on touch/reduced
+//motion, and suspended while the a11y "Big Cursor" toggle or the a11y dialog is active — waits
+//for DOMContentLoaded since both of those live in accessibility.js, which runs after this file.
+window.addEventListener('DOMContentLoaded', () => {
+    const root = document.documentElement;
+    const dialog = document.getElementById('a11yPanel');
+    const pointerFine = window.matchMedia('(hover: hover) and (pointer: fine)');
+
+    const cursor = document.createElement('div');
+    cursor.className = 'custom_cursor';
+    cursor.setAttribute('aria-hidden', 'true');
+    cursor.innerHTML = '<div class="custom_cursor_inner"><div class="custom_cursor_icon"></div></div>';
+    document.body.appendChild(cursor);
+    const inner = cursor.querySelector('.custom_cursor_inner');
+
+    //tween-lag-driven skew, matching mouse-follower's render(): vel is how far behind the
+    //eased position still is, not raw mouse speed — big right after a flick, settles to 0
+    const EASE = 0.22; //~= their speed:0.5s expo.out, tuned for a per-frame lerp instead
+    const SKEWING = 1.5;
+    const SKEW_DELTA = 0.001;
+    const SKEW_DELTA_MAX = 0.15;
+
+    let active = false;
+    let hasMoved = false;
+    let targetX = 0, targetY = 0, posX = 0, posY = 0;
+    let rafId = null;
+
+    function isEligible() {
+        return pointerFine.matches
+            && !prefersReducedMotion()
+            && !root.classList.contains('a11y-big-cursor')
+            && !(dialog && dialog.open);
+    }
+
+    function onMouseMove(e) {
+        targetX = e.clientX;
+        targetY = e.clientY;
+        if (!hasMoved) {
+            hasMoved = true;
+            posX = targetX;
+            posY = targetY;
+            cursor.classList.add('custom_cursor--visible');
+        }
+    }
+
+    function onMouseLeaveWindow() {
+        cursor.classList.remove('custom_cursor--visible');
+    }
+    function onMouseEnterWindow() {
+        if (hasMoved) cursor.classList.add('custom_cursor--visible');
+    }
+
+    function loop() {
+        posX += (targetX - posX) * EASE;
+        posY += (targetY - posY) * EASE;
+        const velX = targetX - posX;
+        const velY = targetY - posY;
+        const speed = Math.sqrt(velX * velX + velY * velY);
+        const skew = Math.min(speed * SKEW_DELTA, SKEW_DELTA_MAX) * SKEWING;
+        const angle = Math.atan2(velY, velX) * (180 / Math.PI);
+        cursor.style.transform = `translate(${posX}px, ${posY}px) translate(-50%, -50%) rotate(${angle}deg) scale(${1 + skew}, ${1 - skew})`;
+        inner.style.transform = `rotate(${-angle}deg)`;
+        rafId = requestAnimationFrame(loop);
+    }
+
+    const hoverSelector = 'a, button';
+    function onHoverIn(e) {
+        if (!active) return;
+        if (e.target.closest('[data-cursor-icon]')) cursor.classList.add('custom_cursor--icon');
+        else if (e.target.closest(hoverSelector)) cursor.classList.add('custom_cursor--pointer');
+    }
+    function onHoverOut(e) {
+        if (active && e.target.closest(hoverSelector)) cursor.classList.remove('custom_cursor--pointer', 'custom_cursor--icon');
+    }
+    function onMouseDown() {
+        if (active) cursor.classList.add('custom_cursor--active');
+    }
+    function onMouseUp() {
+        if (active) cursor.classList.remove('custom_cursor--active');
+    }
+
+    function activate() {
+        if (active) return;
+        active = true;
+        root.classList.add('custom-cursor-active');
+        document.addEventListener('mousemove', onMouseMove);
+        document.documentElement.addEventListener('mouseleave', onMouseLeaveWindow);
+        document.documentElement.addEventListener('mouseenter', onMouseEnterWindow);
+        document.addEventListener('mousedown', onMouseDown);
+        document.addEventListener('mouseup', onMouseUp);
+        loop();
+    }
+
+    function deactivate() {
+        if (!active) return;
+        active = false;
+        hasMoved = false;
+        root.classList.remove('custom-cursor-active');
+        cursor.classList.remove('custom_cursor--visible', 'custom_cursor--pointer', 'custom_cursor--icon', 'custom_cursor--active');
+        document.removeEventListener('mousemove', onMouseMove);
+        document.documentElement.removeEventListener('mouseleave', onMouseLeaveWindow);
+        document.documentElement.removeEventListener('mouseenter', onMouseEnterWindow);
+        document.removeEventListener('mousedown', onMouseDown);
+        document.removeEventListener('mouseup', onMouseUp);
+        if (rafId) cancelAnimationFrame(rafId);
+    }
+
+    function sync() {
+        if (isEligible()) activate(); else deactivate();
+    }
+
+    document.addEventListener('mouseover', onHoverIn);
+    document.addEventListener('mouseout', onHoverOut);
+
+    sync();
+    new MutationObserver(sync).observe(root, { attributes: true, attributeFilter: ['class'] });
+    if (dialog) new MutationObserver(sync).observe(dialog, { attributes: true, attributeFilter: ['open'] });
+});
+
+
 
 
 

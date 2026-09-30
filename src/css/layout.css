@@ -90,7 +90,7 @@
 }
 
 .theme_toggle:hover {
-  color: var(--hover-color);
+  color: var(--hover-text-color);
   transform: scale(1.06);
 }
 
@@ -247,7 +247,7 @@
 }
 
 .side-nav a:hover {
-  color: var(--hover-color);
+  color: var(--hover-text-color);
   background-color: rgba(255, 255, 255, 0.38);
   border-color: rgba(255, 255, 255, 0.5);
 }
@@ -603,6 +603,81 @@ html.a11y-big-cursor * {
   cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40' viewBox='0 0 24 24'%3E%3Cpath d='M3 2 L3 20 L8 16 L11 22 L14 21 L11 15 L17 15 Z' fill='black' stroke='white' stroke-width='1.5' stroke-linejoin='round'/%3E%3C/svg%3E") 4 4, auto !important;
 }
 
+/*trailing cursor, see main.js — mutually exclusive with Big Cursor above, enforced there.
+  isolation+mix-blend-mode live on this outer element (not a descendant): it's the one that
+  gets a `transform` every frame, and a transformed element roots its own compositing layer —
+  a blend-mode one level deeper would only see its transparent siblings, not the real page,
+  and paint as flat opaque color instead of reading what's underneath.*/
+.custom_cursor {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 10px;
+  height: 10px;
+  pointer-events: none;
+  z-index: 2000;
+  opacity: 0;
+  isolation: isolate;
+  mix-blend-mode: difference;
+  transition: opacity 0.2s ease, width 0.2s ease, height 0.2s ease;
+}
+
+html.custom-cursor-active .custom_cursor.custom_cursor--visible {
+  opacity: 1;
+}
+
+/*white: diff-blended against this site's light bg it reads as near-black (matching the
+  reference site's look there); against a photo it reads as that photo's true negative*/
+.custom_cursor_inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background-color: var(--white);
+  transition: opacity 0.2s ease;
+}
+
+.custom_cursor_icon {
+  position: absolute;
+  inset: 0;
+  margin: auto;
+  width: 45%;
+  height: 45%;
+  background-color: var(--black);
+  -webkit-mask-image: url('../../public/assets/icons/arrow.svg');
+  mask-image: url('../../public/assets/icons/arrow.svg');
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+  mask-position: center;
+  -webkit-mask-size: contain;
+  mask-size: contain;
+  opacity: 0;
+}
+
+.custom_cursor--pointer {
+  width: 32px;
+  height: 32px;
+}
+
+.custom_cursor--icon {
+  width: 56px;
+  height: 56px;
+}
+
+.custom_cursor--icon .custom_cursor_icon {
+  opacity: 1;
+}
+
+.custom_cursor--active .custom_cursor_inner {
+  opacity: 0.6;
+}
+
+html.custom-cursor-active,
+html.custom-cursor-active * {
+  cursor: none;
+}
+
 /*color-vision correction filters join the same composed `filter` on <html> as contrast/grayscale — see applyFilters()*/
 
 /*tracks the mouse to keep a horizontal reading band clear while dimming the rest. z-index sits
@@ -697,7 +772,7 @@ html.a11y-text-2 {
   display: flex;
   flex-direction: column;
   gap: var(--space-lg);
-} 
+}
 
 .hero_content {
   display: flex;
@@ -1190,8 +1265,13 @@ html.touch .project_image img {
   font-size: calc(16px * var(--fs-scale));
   font-family: 'Jost-Medium';
   color: var(--white);
-  text-decoration: underline;
   width: fit-content;
+}
+
+/*footer sits on the dark green secondary-color regardless of theme — the global a:hover's
+  darkened text color would vanish here, so this keeps the original light hover-color instead*/
+.footer_home_email:hover {
+  color: var(--hover-color);
 }
 
 .footer_home_copyright {
