@@ -7,7 +7,7 @@
 .fintalo_content_row {
   display: flex;
   flex-direction: column;
-  gap: 24px;
+  gap: var(--space-lg);
 }
 
 /*keypoints column and photo column, side by side*/
@@ -15,12 +15,12 @@
   display: grid;
   grid-template-columns: minmax(0, 600px) minmax(240px, 1fr);
   align-items: start;
-  gap: 24px;
+  gap: var(--space-lg);
 }
 
 .fintalo_top_row .titled_description {
   max-width: none; /*was capped to fit the old 600px grid column; now it fills this grid's own column*/
-  gap: 16px; /*between each stacked keypoint div, overriding the shared --space-lg gap*/
+  gap: var(--space-md); /*between each stacked keypoint div, overriding the shared --space-3xl gap*/
 }
 
 .fintalo_top_row .fintalo_group_photo {
@@ -32,7 +32,7 @@
 /*Challenge and Solution side by side*/
 .fintalo_bottom_row {
   display: flex;
-  gap: 24px;
+  gap: var(--space-lg);
 }
 
 .fintalo_bottom_row .titled_keypoint {

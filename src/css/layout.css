@@ -2,18 +2,18 @@
   image; a dark hairline (not a light rim) reads consistently over both light and dark content
   below it, and it's a full border (not border-bottom) so it follows the rounded corners.
   Left/right inset uses the same two-step formula as .hero_container etc (fixed inset + widened
-  max-width), shifted in by --space-md, so it stays aligned with page content at every viewport
+  max-width), shifted in by --space-lg, so it stays aligned with page content at every viewport
   width instead of a flat-margin pill drifting apart from it above ~1280px.*/
 .navbar {
   position: fixed;
   top: 12px;
-  left: calc(var(--space-lg) - var(--space-md));
-  right: calc(var(--space-lg) - var(--space-md));
-  max-width: calc(var(--max-width) + 2 * var(--space-md));
+  left: calc(var(--space-3xl) - var(--space-lg));
+  right: calc(var(--space-3xl) - var(--space-lg));
+  max-width: calc(var(--max-width) + 2 * var(--space-lg));
   margin-inline: auto;
   height: 64px;
-  padding-left: var(--space-md);
-  padding-right: var(--space-md);
+  padding-left: var(--space-lg);
+  padding-right: var(--space-lg);
   /*higher than side-nav/social-links (both 1000) so the open mobile dropdown fully covers them*/
   z-index: 1100;
   /*no border-radius/clip-path/backdrop-filter directly on .navbar: any of those on an ancestor
@@ -62,7 +62,7 @@
 .navbar_brand {
   display: flex;
   align-items: center;
-  gap: 16px;
+  gap: var(--space-md);
 }
 
 .navbar_logo {
@@ -115,7 +115,7 @@
   flex-direction: row;
   /*default align-items:stretch is a no-op at desktop (items are already 64px tall) but lets mobile rows span full width*/
   /*shared spacing for nav items incl. .lang_switch, which isn't an <a> so can't use the link padding trick*/
-  gap: 4px;
+  gap: var(--space-2xs);
   height: auto;
   width: auto;
 }
@@ -125,7 +125,7 @@
   display: flex;
   font-family: 'Jost-Medium';
   height: 64px;
-  padding-inline: 20px;
+  padding-inline: var(--space-lg);
   align-items: center;
   color: var(--accent-color);
 
@@ -187,9 +187,9 @@
 .lang_switch {
   display: flex;
   align-items: center;
-  gap: 6px;
+  gap: var(--space-xs);
   height: 64px;
-  padding-inline: 20px;
+  padding-inline: var(--space-lg);
   font-family: 'Jost-Medium';
 }
 
@@ -197,7 +197,7 @@
   display: flex;
   align-items: center;
   height: 100%;
-  padding-inline: 4px;
+  padding-inline: var(--space-2xs);
   color: var(--accent-color);
 }
 
@@ -287,8 +287,8 @@
   position: fixed;
   left: 0;
   bottom: 0;
-  padding: 0px 8px 64px;
-  gap: 26px;
+  padding: 0 var(--space-xs) var(--space-3xl);
+  gap: var(--space-lg);
   z-index: 1000;
 }
 
@@ -394,7 +394,7 @@ html[data-theme="dark"] .social-links img {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 16px;
+  padding: var(--space-md);
   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 }
 
@@ -426,15 +426,15 @@ html[data-theme="dark"] .social-links img {
 .a11y_panel_body {
   display: flex;
   flex-direction: column;
-  gap: 16px;
-  padding: 16px;
+  gap: var(--space-md);
+  padding: var(--space-md);
 }
 
 .a11y_option_row {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 12px;
+  gap: var(--space-sm);
   flex-wrap: wrap;
   font-family: 'Jost-Light';
   font-size: 16px;
@@ -444,8 +444,8 @@ html[data-theme="dark"] .social-links img {
 /*negative margin cancels the padding so the hover highlight reaches full row width without shifting layout*/
 .a11y_toggle_row {
   cursor: pointer;
-  padding: 4px 8px;
-  margin: -4px -8px;
+  padding: var(--space-2xs) var(--space-xs);
+  margin: calc(-1 * var(--space-2xs)) calc(-1 * var(--space-xs));
   border-radius: 8px;
   transition: background-color 0.15s ease;
 }
@@ -456,7 +456,7 @@ html[data-theme="dark"] .social-links img {
 
 .a11y_stepper {
   display: flex;
-  gap: 8px;
+  gap: var(--space-xs);
 }
 
 .a11y_stepper_button {
@@ -499,7 +499,7 @@ html[data-theme="dark"] .social-links img {
 .a11y_select {
   border: 1px solid rgba(0, 0, 0, 0.2);
   border-radius: 8px;
-  padding: 4px 8px;
+  padding: var(--space-2xs) var(--space-xs);
   font-family: 'Jost-Light';
   font-size: 14px;
   background-color: var(--white);
@@ -517,7 +517,7 @@ html[data-theme="dark"] .social-links img {
   border: 1px solid rgba(0, 0, 0, 0.2);
   background-color: var(--white);
   border-radius: 100px;
-  padding: 8px 16px;
+  padding: var(--space-xs) var(--space-md);
   font-family: 'Jost-Medium';
   font-size: 14px;
   cursor: pointer;
@@ -672,7 +672,7 @@ html.a11y-text-2 {
   align-items: top center;
   display: flex;
   flex-direction: column;
-  gap: var(--space-md);
+  gap: var(--space-lg);
 } 
 
 .hero_content {
@@ -680,7 +680,7 @@ html.a11y-text-2 {
   justify-content: space-between;
   flex-direction: row;
   align-items: center;
-  gap: 20px;
+  gap: var(--space-lg);
 }
 
 .hero_text {
@@ -693,7 +693,7 @@ html.a11y-text-2 {
 .hero_buttons {
   display: flex;
   gap: var(--space-sm);
-  margin-top: calc(48px - var(--space-sm)); /*hero_text's own gap already adds var(--space-sm); this tops it up to 48px*/
+  margin-top: calc(var(--space-2xl) - var(--space-sm)); /*hero_text's own gap already adds var(--space-sm); this tops it up to 48px*/
 }
 
 .hero_buttons svg {
@@ -703,7 +703,7 @@ html.a11y-text-2 {
 
 .hero_attention {
   display: flex;
-  gap: 10px;
+  gap: var(--space-sm);
   align-items: center;
 }
 
@@ -732,7 +732,7 @@ html.a11y-text-2 {
   align-items: center;
   display: flex;
   flex-direction: column;
-  gap: var(--space-xl);
+  gap: var(--space-4xl);
   height: auto;
 }
 
@@ -741,14 +741,14 @@ html.a11y-text-2 {
   justify-content: space-between;
   align-items: top left;
   flex-direction: column;
-  gap: var(--space-md);
+  gap: var(--space-lg);
 }
 
 .about_imageAndText {
   display: flex;
   align-items: top left;
   flex-direction: row;
-  gap: var(--space-md);
+  gap: var(--space-2xl);
   /*animation on scroll:*/
   opacity: 0;
   transform: translateY(30px);
@@ -763,26 +763,26 @@ html.a11y-text-2 {
 .about_image {
   position: relative;
   width: 40%;
-  height: fit-content;      
+  flex-shrink: 0;
+  align-self: flex-start; /*keeps aspect-ratio from being stretched to the text height*/
   display: block;
-  aspect-ratio: 4 / 3;
+  aspect-ratio: 454 / 365; /*matches both photos, so they fill the box instead of overflowing it*/
 }
 
 .about_image img{
   position: absolute;
-  top: 0;
-  left: 0;
+  inset: 0;
+  height: 100%;
   display: block;
   transition: opacity 3s ease-in-out;
 }
 
 .imageAbout{
-  animation: imageSwap 14s infinite; 
+  animation: imageSwap 14s infinite;
   z-index: 2;
 }
 
 .imageAbout-other{
-  position: relative;
   z-index: 1;
 }
 
@@ -797,11 +797,7 @@ html.a11y-text-2 {
   display: flex;
   flex-direction: column;
   max-width: 60%;
-  gap: 20px;
-}
-
-.about_text h2 + p {
-  margin-top: -12px; /*tops down the 20px flex gap to 8px*/
+  gap: var(--space-md);
 }
 
 .logo_hover_link {
@@ -815,7 +811,7 @@ html.a11y-text-2 {
   left: 100%;
   top: 50%;
   transform: translateY(-50%);
-  margin-left: 4px;
+  margin-left: var(--space-2xs);
   width: 48px;
   height: 48px;
   background-color: var(--white);
@@ -853,8 +849,8 @@ html.a11y-text-2 {
   align-items: start;
   width: 100%;
   max-width: 1200px;
-  column-gap: var(--space-lg);
-  row-gap: 96px;
+  column-gap: var(--space-3xl);
+  row-gap: var(--space-4xl);
 }
 
 .skillsAndExperience, .educationAndLanguages {
@@ -866,7 +862,7 @@ html.a11y-text-2 {
   flex-direction: column;
   align-items: flex-start;
   justify-self: start;
-  gap: var(--space-md);
+  gap: var(--space-lg);
   width: 100%;
   /*min-width:0 lets this track shrink instead of a wide descendant (e.g. dyslexia font) overflowing the grid*/
   min-width: 0;
@@ -878,8 +874,8 @@ html.a11y-text-2 {
   display: grid;
   grid-template-columns: repeat(3, auto);
   justify-content: start;
-  column-gap: var(--space-lg);
-  row-gap: var(--space-md);
+  column-gap: var(--space-3xl);
+  row-gap: var(--space-lg);
   list-style: none;
   width: 100%;
 }
@@ -928,14 +924,14 @@ html.a11y-text-2 {
   list-style: none;
   display: flex;
   flex-direction: column;
-  gap: var(--space-md);
+  gap: var(--space-lg);
 }
 
 .language_item {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: var(--space-lg);
+  gap: var(--space-3xl);
 }
 
 .language_name {
@@ -950,7 +946,7 @@ html.a11y-text-2 {
 
 .language_dots {
   display: flex;
-  gap: 8px;
+  gap: var(--space-xs);
   flex-shrink: 0;
 }
 
@@ -1026,7 +1022,7 @@ html.a11y-text-2 {
 
 .timeline_content {
   grid-column: 3;
-  padding-bottom: var(--space-md);
+  padding-bottom: var(--space-lg);
   /*min-width:0 so a wide descendant (e.g. dyslexia font) can't force this column past its share*/
   min-width: 0;
 }
@@ -1037,15 +1033,15 @@ html.a11y-text-2 {
 }
 
 .timeline_content ul {
-  margin-top: 4px;
-  padding-left: 18px;
+  margin-top: var(--space-2xs);
+  padding-left: var(--space-md);
   font-family: 'Jost-Light';
   font-size: calc(14px * var(--fs-scale));
 }
 
 /*plain detail lines for timelines without a bulleted list, e.g. education*/
 .timeline_detail {
-  margin-top: 4px;
+  margin-top: var(--space-2xs);
   font-family: 'Jost-Light';
   font-size: calc(14px * var(--fs-scale));
 }
@@ -1059,14 +1055,14 @@ html.a11y-text-2 {
   width: 100%;
   max-width: var(--max-width);
   margin-inline: auto;
-  gap: var(--space-lg);
+  gap: var(--space-3xl);
   height: auto;
 }
 
 .projects_grid{
   display: flex;
   flex-direction: column;
-  gap: var(--space-xl);
+  gap: var(--space-4xl);
 }
 
 .project_card {
@@ -1147,7 +1143,7 @@ html.touch .project_image img {
 .footer_home_content {
   display: flex;
   align-items: center;
-  gap: var(--space-md);
+  gap: var(--space-lg);
 }
 
 .footer_home_icon {
@@ -1242,7 +1238,7 @@ html.touch .project_image img {
 .footer_home_backtotop:focus-visible .footer_home_backtotop_label {
   max-width: 200px;
   opacity: 1;
-  margin-right: 10px;
+  margin-right: var(--space-xs);
 }
 
 
@@ -1268,7 +1264,7 @@ html.touch .project_image img {
 
 @media (max-width: 1024px) {
   /*SIDE-NAV and SOCIAL-LINKS are position:fixed to the viewport edge, independent of the
-    container's own padding — shrink their footprint below var(--space-lg) at each tier below
+    container's own padding — shrink their footprint below var(--space-3xl) at each tier below
     so they never sit on top of section content*/
   .side-nav a {
     width: 40px;
@@ -1277,8 +1273,8 @@ html.touch .project_image img {
   }
 
   .social-links {
-    gap: 20px;
-    padding: 0 8px 48px;
+    gap: var(--space-md);
+    padding: 0 var(--space-xs) var(--space-2xl);
   }
 
   .social-links a,
@@ -1325,7 +1321,7 @@ html.touch .project_image img {
 
   .navbar_nav > a {
     height: auto;
-    padding: var(--space-md) var(--space-lg);
+    padding: var(--space-lg) var(--space-3xl);
     border-bottom: 1px solid rgba(0, 0, 0, 0.08);
   }
 
@@ -1334,14 +1330,14 @@ html.touch .project_image img {
   .lang_switch {
     order: 1;
     height: auto;
-    padding: 0 var(--space-lg);
+    padding: 0 var(--space-3xl);
     border-bottom: 1px solid rgba(0, 0, 0, 0.08);
   }
 
   .lang_link {
     flex: 1;
     justify-content: center;
-    padding-block: var(--space-md);
+    padding-block: var(--space-lg);
   }
 
   /*keeps the page from scrolling behind the open dropdown*/
@@ -1350,7 +1346,7 @@ html.touch .project_image img {
   }
 
   /*SIDE-NAV (project prev/next buttons): narrower than the section's own side padding
-    (--space-lg) so there's a visible gap instead of text butting right up against them*/
+    (--space-3xl) so there's a visible gap instead of text butting right up against them*/
   .side-nav a {
     width: 28px;
     height: 120px;
@@ -1360,8 +1356,8 @@ html.touch .project_image img {
 
   /*SOCIAL LINKS*/
   .social-links {
-    gap: 16px;
-    padding: 0 8px 32px;
+    gap: var(--space-md);
+    padding: 0 var(--space-xs) var(--space-xl);
   }
 
   .social-links a,
@@ -1389,7 +1385,7 @@ html.touch .project_image img {
   .hero_buttons {
     flex-wrap: wrap;
     justify-content: center;
-    margin-top: var(--space-md);
+    margin-top: var(--space-lg);
   }
 
   .hero_attention {
@@ -1400,7 +1396,7 @@ html.touch .project_image img {
   /*ABOUT*/
   .about_imageAndText {
     flex-direction: column;
-    gap: var(--space-md);
+    gap: var(--space-sm);
   }
 
   .about_image {
@@ -1413,7 +1409,7 @@ html.touch .project_image img {
 
   .about_skills {
     grid-template-columns: 1fr;
-    row-gap: var(--space-lg);
+    row-gap: var(--space-3xl);
   }
 
   .skillsGrid {
@@ -1431,7 +1427,7 @@ html.touch .project_image img {
   /*PROJECTS GRID*/
   .project_card {
     flex-direction: column;
-    gap: var(--space-md);
+    gap: var(--space-lg);
   }
 
   .project_text {
@@ -1449,12 +1445,12 @@ html.touch .project_image img {
   /*FOOTER*/
   .footer_section {
     height: auto;
-    padding-top: var(--space-xl);
-    padding-bottom: var(--space-lg);
+    padding-top: var(--space-4xl);
+    padding-bottom: var(--space-3xl);
   }
 
   .footer_home_container {
-    gap: var(--space-lg);
+    gap: var(--space-3xl);
   }
 
   .footer_home_content {
@@ -1481,7 +1477,7 @@ html.touch .project_image img {
   .footer_home_bottom {
     flex-wrap: wrap;
     align-items: center;
-    gap: var(--space-lg);
+    gap: var(--space-3xl);
   }
 
   /*PROJECT DETAIL PAGES (shared across fintalo/MUNTUM/wildCraftFoundry/semanticCanvas/storytellingGame)*/

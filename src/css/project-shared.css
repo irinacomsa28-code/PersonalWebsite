@@ -38,7 +38,7 @@
   margin-inline: auto; /*align to the center*/
   max-width: var(--max-width);
   
-  gap: var(--space-lg);
+  gap: var(--space-3xl);
  
 }
 
@@ -46,7 +46,7 @@
 .project_content{
     display: flex;
     flex-direction: column;
-    gap: var(--space-xl);
+    gap: var(--space-4xl);
     top: 0px;
     left: 0px;
 }
@@ -55,7 +55,7 @@
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  gap: 36px;
+  gap: var(--space-xl);
   top:0;
   left:0;
 }
@@ -68,7 +68,7 @@
     min-width: 0;
     max-width: 400px;
     height: auto;
-    gap: var(--space-md);
+    gap: var(--space-lg);
 }
 
 .keypoints ul{
@@ -86,7 +86,7 @@
 .keypoint{
     display:flex;
     flex-direction: column;
-    gap: 8px; /*between title ("What I Did") and the rest*/
+    gap: var(--space-xs); /*between title ("What I Did") and the rest*/
 }
 
 .collaborator_link {
@@ -100,7 +100,7 @@
     min-width: 0;
     max-width: 640px;
     justify-content: space-between;
-    gap: 20px;
+    gap: var(--space-lg);
 }
 
 /*end PROJECT DESCRIPTION*/
@@ -111,7 +111,7 @@
     flex-direction: column;
     width: 100%;
     justify-content: space-between;
-    gap: 36px;
+    gap: var(--space-xl);
 }
 
 /*grid (not flex) so mobile can drop to one column with no per-image sizing hack needed*/
@@ -121,7 +121,7 @@
     /*without this, row-stretch would force the shorter image to match its taller sibling's height*/
     align-items: start;
     width: 100%;
-    gap: 20px;
+    gap: var(--space-lg);
 }
 
 /*stacked titled blocks, e.g. "What I Did" / "The Challenge" / "The Solution".
@@ -131,13 +131,13 @@
   flex-direction: column;
   width: 100%;
   max-width: 600px;
-  gap: var(--space-lg);
+  gap: var(--space-3xl);
 }
 
 .titled_keypoint {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: var(--space-xs);
 }
 
 .titled_keypoint .title {
@@ -158,9 +158,9 @@
 
 /*full-width autoplay/loop video showcase, between description and photo sections*/
 .video_project_section {
-  padding-inline: var(--space-lg);
-  margin-top: var(--space-xl);
-  margin-bottom: var(--space-xl);
+  padding-inline: var(--space-3xl);
+  margin-top: var(--space-4xl);
+  margin-bottom: var(--space-4xl);
 }
 
 .video_project {

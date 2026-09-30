@@ -31,12 +31,16 @@
   /* Layout */
   --max-width: 1280px;
 
-  /* Spacing */
+  /* Spacing: 4px-based scale, use these instead of raw px */
+  --space-2xs: 4px;
   --space-xs: 8px;
   --space-sm: 12px;
-  --space-md: 24px;
-  --space-lg: 64px;
-  --space-xl: 96px;
+  --space-md: 16px;
+  --space-lg: 24px;
+  --space-xl: 32px;
+  --space-2xl: 48px;
+  --space-3xl: 64px;
+  --space-4xl: 96px;
 
   /*fluid type scale: clamp()'s vw term scales continuously instead of jumping at breakpoints;
     shared via variables so project-page CSS matches instead of hardcoding sizes*/
@@ -142,16 +146,16 @@ body {
 
 /* SECTION LAYOUT */
 .section {
-  padding: var(--space-xl) var(--space-lg) var(--space-xl);
+  padding: var(--space-4xl) var(--space-3xl) var(--space-4xl);
   width: 100%;
 }
 
 /*stacking-cards effect: About covers the hero on scroll*/
 .hero_section {
-  padding-top: var(--space-xl);
-  padding-left: var(--space-lg);
-  padding-right: var(--space-lg);
-  padding-bottom: var(--space-xl);
+  padding-top: var(--space-4xl);
+  padding-left: var(--space-3xl);
+  padding-right: var(--space-3xl);
+  padding-bottom: var(--space-4xl);
   height: 100%;
   width: 100%;
   position: sticky;
@@ -174,26 +178,26 @@ body {
 }
 
 .hero_section_project{
-  padding-top: var(--space-lg);
-  padding-left: var(--space-lg);
-  padding-right: var(--space-lg);
-  padding-bottom: 0px;
+  padding-top: var(--space-3xl);
+  padding-left: var(--space-3xl);
+  padding-right: var(--space-3xl);
+  padding-bottom: 0;
   height: 100%;
   width: 100%;
 }
 
 .section_project {
-  padding:  var(--space-lg) var(--space-lg) var(--space-xl);
+  padding:  var(--space-3xl) var(--space-3xl) var(--space-4xl);
   width: 100%;
 }
 
 
 .footer_section{
   margin-top: auto;
-  padding-top: 94px;
-  padding-left: var(--space-lg);
-  padding-right: var(--space-lg);
-  padding-bottom: 48px;
+  padding-top: var(--space-4xl);
+  padding-left: var(--space-3xl);
+  padding-right: var(--space-3xl);
+  padding-bottom: var(--space-2xl);
   height: 380px;
   width: 100%;
   background-color: var(--secondary-color);
@@ -345,17 +349,17 @@ p {
 /*shrinking these vars cascades through every section/nav/footer padding automatically*/
 @media (max-width: 1024px) {
   :root {
-    --space-lg: 40px;
-    --space-xl: 64px;
+    --space-3xl: 40px;
+    --space-4xl: 64px;
   }
 }
 
 @media (max-width: 640px) {
   :root {
-    --space-md: 16px;
+    --space-lg: 16px;
     /*wider than the side-nav/social-links footprint (layout.css) so they don't overlap body text*/
-    --space-lg: 36px;
-    --space-xl: 48px;
+    --space-3xl: 36px;
+    --space-4xl: 48px;
   }
 }
 

@@ -1,3 +1,7 @@
+improve scse studies: problem-solution-process: role, key deceisions
+
+
+
 - drop down menu projects
 - storytelling motion scroll
 -create animation inside-out for the unerlining
@@ -6,8 +10,6 @@ problem, solution, etc mrore about your projects
 - side button responsiveness
 
 - improve consistency
-
-- dark mode
 
 - keep it responsive
 
