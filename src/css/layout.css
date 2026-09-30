@@ -299,6 +299,18 @@
   height: 32px;
 }
 
+/*invisible 44x44 min tap target (WCAG 2.5.5) centered on the icon — the icon itself stays
+  small on purpose, this just pads the hit area without touching the visuals*/
+.social-links a::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: max(44px, 100%);
+  height: max(44px, 100%);
+  transform: translate(-50%, -50%);
+}
+
 .social-links img {
   position: absolute;
   top: 0;
@@ -329,6 +341,7 @@ html[data-theme="dark"] .social-links img {
 }
 
 .accessibility_button {
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -341,6 +354,17 @@ html[data-theme="dark"] .social-links img {
   background-color: black;
   cursor: pointer;
   transition: transform 0.2s ease;
+}
+
+/*same invisible 44x44 min tap target as the LinkedIn/Email icons above it*/
+.accessibility_button::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: max(44px, 100%);
+  height: max(44px, 100%);
+  transform: translate(-50%, -50%);
 }
 
 .accessibility_button:hover,
