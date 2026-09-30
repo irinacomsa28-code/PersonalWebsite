@@ -776,14 +776,16 @@ html.a11y-text-2 {
 
 .hero_content {
   display: flex;
-  justify-content: space-between;
   flex-direction: row;
   align-items: center;
-  gap: var(--space-lg);
+  gap: var(--space-md);
+  width: fit-content;
+  margin-inline: auto;
 }
 
 .hero_text {
   max-width: 705px;
+  flex: 0 0 705px; /*fixed box regardless of the typewriter's current (shorter) content, so its width can't shift the gap/image beside it*/
   display: flex;
   flex-direction: column;
   gap: var(--space-sm);
@@ -1353,6 +1355,8 @@ html.touch .project_image img {
     of content width; let them wrap/shrink instead of overflowing on tablet*/
   .hero_content {
     flex-wrap: wrap;
+    width: 100%; /*undo the desktop shrink-to-content sizing so wrapped items can use the full width*/
+    margin-inline: 0;
   }
 
   .hero_text {

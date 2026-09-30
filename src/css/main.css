@@ -46,6 +46,8 @@
   --space-2xl: 48px;
   --space-3xl: 64px;
   --space-4xl: 96px;
+  --space-5xl: 120px;
+
 
   /*fluid type scale: clamp()'s vw term scales continuously instead of jumping at breakpoints;
     shared via variables so project-page CSS matches instead of hardcoding sizes*/
@@ -159,7 +161,7 @@ body {
 
 /*stacking-cards effect: About covers the hero on scroll*/
 .hero_section {
-  padding-top: var(--space-4xl);
+  padding-top: var(--space-5xl);
   padding-left: var(--space-3xl);
   padding-right: var(--space-3xl);
   padding-bottom: var(--space-4xl);
